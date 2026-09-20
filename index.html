@@ -123,6 +123,27 @@
   }
   .content p { font-size:0.92rem; color:#555; }
 
+  /* ===== CLICKABLE LOCATION LINK ===== */
+  .loc-link {
+    color:#1a73e8;
+    text-decoration:none;
+    border-bottom:1.5px dotted #1a73e8;
+    cursor:pointer;
+    transition:0.2s;
+    display:inline-flex;
+    align-items:center;
+    gap:5px;
+  }
+  .loc-link:hover {
+    color:#0d47a1;
+    border-bottom:1.5px solid #0d47a1;
+    background:#e8f0fe;
+  }
+  .loc-link .pin { font-size:0.95rem; }
+  .no-link {
+    color:#222;
+  }
+
   /* ===== HIGHLIGHT INFOGRAPHIC CARD ===== */
   .highlight-box {
     margin:0 25px 25px;
@@ -263,6 +284,7 @@
   <h1>🐼 แพลนเที่ยวเฉิงตู - ฉงชิ่ง 5 วัน 5 คืน 🌉</h1>
   <p class="sub">Chengdu - Chongqing Trip Planner</p>
   <div class="budget">💰 งบประมาณโดยประมาณ 20,000 บาท</div>
+  <p style="margin-top:12px; font-size:0.85rem; opacity:0.9;">💡 คลิกที่ชื่อสถานที่ (มีเส้นใต้จุด) เพื่อเปิด Google Maps ทันที</p>
 </header>
 
 <nav>
@@ -280,16 +302,16 @@
   <section class="day-section day1" id="day1">
     <div class="day-header"><span class="day-badge">Day 1</span> ตะลุยเมืองเฉิงตู (Chengdu)</div>
     <div class="timeline">
-      <div class="item"><div class="time">02:00</div><div class="content"><h3>เดินทางถึงสนามบินเฉิงตู (TFU)</h3><p>ผ่าน ตม. แล้วนั่ง Airport Bus สาย 1 เพื่อเข้าเมืองไปลงแถวถนนชุนซี (Chunxi Road) ใช้เวลาประมาณ 45 นาที (สแกน Alipay จ่าย 25 หยวน)</p></div></div>
-      <div class="item"><div class="time">04:00</div><div class="content"><h3>Check-in โรงแรม</h3><p>พักที่ Meihao R Hotel (หรือ R Royalss Hotel) ทำเลดีใกล้ถนนชุนซีและรถไฟใต้ดิน</p></div></div>
-      <div class="item"><div class="time">12:00</div><div class="content"><h3>มื้อเที่ยงที่ Taode Casserole</h3><p>ร้านอาหารเสฉวนยอดฮิตที่ห้าง Taikoo Li แนะนำให้ไปช่วง 11:00 น. ก่อนคนจะเยอะ เมนูห้ามพลาดคือ กุ้งกระเทียมอบวุ้นเส้น (56 หยวน) และปลาต้มผักกาดดอง (41 หยวน) สั่งอาหารง่ายๆ ผ่านการสแกน QR Code</p></div></div>
-      <div class="item"><div class="time">13:00</div><div class="content"><h3>วัดต้าสือ (Daci Temple)</h3><p>วัดเก่าแก่ใจกลางเมือง เข้าฟรี บรรยากาศร่มรื่น แวะขอพรเรื่องโชคลาภ</p></div></div>
-      <div class="item"><div class="time">14:30</div><div class="content"><h3>จุดเช็คอินแพนด้ายักษ์ (IFS)</h3><p>แนะนำให้ขึ้นไปถ่ายรูปที่ดาดฟ้าก่อนเพื่อถ่ายกับหน้าแพนด้า จากนั้นค่อยลงมาถ่ายรูปด้านหน้าตึก</p></div></div>
-      <div class="item"><div class="time">15:00</div><div class="content"><h3>Tea Time ร้าน Li Shan Shan</h3><p>แวะกินชาชานมร้านดัง เมนูแนะนำคือ QingRu Milk Tea ที่มีโฟมนมนุ่มๆ ด้านบน (18 หยวน)</p></div></div>
-      <div class="item"><div class="time">15:30</div><div class="content"><h3>ช้อปปิ้ง MINISO LAND</h3><p>สาขาใหญ่ของเฉิงตู มีของใช้ ของสะสม และของฝากให้เลือกเยอะมาก</p></div></div>
-      <div class="item"><div class="time">16:30</div><div class="content"><h3>ถ่ายรูปย่าน Dongjiao Jiyi (Eastern Suburb Memory)</h3><p>ย่านฮิปๆ ที่รวมร้านค้า คาเฟ่ งานอาร์ต และจุดถ่ายรูปกับกำแพงคำว่า CHENGDU</p></div></div>
-      <div class="item"><div class="time">18:30</div><div class="content"><h3>ถนนโบราณซอยกว้างซอยแคบ (Kuanzhai Alley)</h3><p>เดินเล่นย่านเก่าแก่ที่มีทั้งร้านอาหาร ร้านขนม และของฝาก</p></div></div>
-      <div class="item"><div class="time">20:00</div><div class="content"><h3>ตลาดกลางคืน Fuqin Night Market</h3><p>นั่ง DiDi ไปกินสตรีทฟู้ดโลคอล ราคาไม่แพง มีของกินให้เลือกเยอะมาก</p></div></div>
+      <div class="item"><div class="time">02:00</div><div class="content"><h3><a class="loc-link" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Chengdu+Shuangliu+International+Airport"><span class="pin">📍</span>เดินทางถึงสนามบินเฉิงตู (TFU)</a></h3><p>ผ่าน ตม. แล้วนั่ง Airport Bus สาย 1 เพื่อเข้าเมืองไปลงแถวถนนชุนซี (Chunxi Road) ใช้เวลาประมาณ 45 นาที (สแกน Alipay จ่าย 25 หยวน)</p></div></div>
+      <div class="item"><div class="time">04:00</div><div class="content"><h3><a class="loc-link" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Meihao+R+Hotel+Chengdu"><span class="pin">📍</span>Check-in โรงแรม</a></h3><p>พักที่ Meihao R Hotel (หรือ R Royalss Hotel) ทำเลดีใกล้ถนนชุนซีและรถไฟใต้ดิน</p></div></div>
+      <div class="item"><div class="time">12:00</div><div class="content"><h3><a class="loc-link" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Taode+Casserole+Taikoo+Li+Chengdu"><span class="pin">📍</span>มื้อเที่ยงที่ Taode Casserole</a></h3><p>ร้านอาหารเสฉวนยอดฮิตที่ห้าง Taikoo Li แนะนำให้ไปช่วง 11:00 น. ก่อนคนจะเยอะ เมนูห้ามพลาดคือ กุ้งกระเทียมอบวุ้นเส้น (56 หยวน) และปลาต้มผักกาดดอง (41 หยวน) สั่งอาหารง่ายๆ ผ่านการสแกน QR Code</p></div></div>
+      <div class="item"><div class="time">13:00</div><div class="content"><h3><a class="loc-link" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Daci+Temple+Chengdu"><span class="pin">📍</span>วัดต้าสือ (Daci Temple)</a></h3><p>วัดเก่าแก่ใจกลางเมือง เข้าฟรี บรรยากาศร่มรื่น แวะขอพรเรื่องโชคลาภ</p></div></div>
+      <div class="item"><div class="time">14:30</div><div class="content"><h3><a class="loc-link" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Chengdu+IFS+Panda"><span class="pin">📍</span>จุดเช็คอินแพนด้ายักษ์ (IFS)</a></h3><p>แนะนำให้ขึ้นไปถ่ายรูปที่ดาดฟ้าก่อนเพื่อถ่ายกับหน้าแพนด้า จากนั้นค่อยลงมาถ่ายรูปด้านหน้าตึก</p></div></div>
+      <div class="item"><div class="time">15:00</div><div class="content"><h3><a class="loc-link" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Li+Shan+Shan+Tea+Chengdu"><span class="pin">📍</span>Tea Time ร้าน Li Shan Shan</a></h3><p>แวะกินชาชานมร้านดัง เมนูแนะนำคือ QingRu Milk Tea ที่มีโฟมนมนุ่มๆ ด้านบน (18 หยวน)</p></div></div>
+      <div class="item"><div class="time">15:30</div><div class="content"><h3><a class="loc-link" target="_blank" href="https://www.google.com/maps/search/?api=1&query=MINISO+LAND+Chengdu"><span class="pin">📍</span>ช้อปปิ้ง MINISO LAND</a></h3><p>สาขาใหญ่ของเฉิงตู มีของใช้ ของสะสม และของฝากให้เลือกเยอะมาก</p></div></div>
+      <div class="item"><div class="time">16:30</div><div class="content"><h3><a class="loc-link" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Eastern+Suburb+Memory+Chengdu"><span class="pin">📍</span>ถ่ายรูปย่าน Dongjiao Jiyi (Eastern Suburb Memory)</a></h3><p>ย่านฮิปๆ ที่รวมร้านค้า คาเฟ่ งานอาร์ต และจุดถ่ายรูปกับกำแพงคำว่า CHENGDU</p></div></div>
+      <div class="item"><div class="time">18:30</div><div class="content"><h3><a class="loc-link" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Kuanzhai+Alley+Chengdu"><span class="pin">📍</span>ถนนโบราณซอยกว้างซอยแคบ (Kuanzhai Alley)</a></h3><p>เดินเล่นย่านเก่าแก่ที่มีทั้งร้านอาหาร ร้านขนม และของฝาก</p></div></div>
+      <div class="item"><div class="time">20:00</div><div class="content"><h3><a class="loc-link" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Fuqin+Night+Market+Chengdu"><span class="pin">📍</span>ตลาดกลางคืน Fuqin Night Market</a></h3><p>นั่ง DiDi ไปกินสตรีทฟู้ดโลคอล ราคาไม่แพง มีของกินให้เลือกเยอะมาก</p></div></div>
     </div>
 
     <!-- HIGHLIGHT INFOGRAPHIC -->
@@ -328,19 +350,19 @@
   <section class="day-section day2" id="day2">
     <div class="day-header"><span class="day-badge">Day 2</span> One Day Trip อุทยานปี้เผิงโกว (Bipenggou)</div>
     <div class="timeline">
-      <div class="item"><div class="time">07:00</div><div class="content"><h3>ออกจากโรงแรม</h3><p>เดินไปขึ้นรถบัสที่จุดนัดพบ</p></div></div>
-      <div class="item"><div class="time">07:30</div><div class="content"><h3>ออกเดินทาง</h3><p>นั่งรถจากเฉิงตูไปปี้เผิงโกว ใช้เวลาประมาณ 3 ชั่วโมงกว่า (มีแวะจุดพักรถ 1 ครั้ง เข้าห้องน้ำและซื้อของกินได้)</p></div></div>
-      <div class="item"><div class="time">10:50</div><div class="content"><h3>ถึงอุทยาน Bipenggou</h3><p>สแกน QR Code เข้าอุทยาน แล้วเดินไปขึ้นรถบัส (นั่งรถประมาณ 15 นาที)</p></div></div>
-      <div class="item"><div class="time">11:20</div><div class="content"><h3>ทะเลสาบหลงหวังไห่ (Longwanghai)</h3><p>ทะเลสาบสีมรกตขนาดใหญ่ เดินเลียบทะเลสาบไปเรื่อยๆ เพื่อไปขึ้นรถบัสจุดที่ 2</p></div></div>
-      <div class="item"><div class="time">13:00</div><div class="content"><h3>จุดแวะพัก Shanghaizi</h3><p>มีลานจอดรถ ร้านอาหาร และห้องน้ำ แวะกินมื้อเที่ยงที่นี่ (แนะนำให้เตรียมมาม่าและขนมมากินเอง มีน้ำร้อนให้กด)</p></div></div>
-      <div class="item"><div class="time">13:40</div><div class="content"><h3>ซื้อตั๋วรถกอล์ฟ</h3><p>ซื้อตั๋วแบบไป-กลับสำหรับจุดที่ 3 และ 4 (ราคาประมาณ 300 บาท) แล้วขึ้นรถกอล์ฟไปจุดที่ 3</p></div></div>
-      <div class="item"><div class="time">14:00</div><div class="content"><h3>หาดจัวหม่านทาน (Zhuomatan)</h3><p>ระหว่างทางรถจะแวะจุดนี้ สามารถลงไปเดินเล่นได้ (ถ้าไม่ลง รถจะไปส่งที่จุด 3 เลย)</p></div></div>
-      <div class="item"><div class="time">14:45</div><div class="content"><h3>ทะเลสาบปันหยาง (Panyang Lake - จุดที่ 3)</h3><p>จุดนี้มีน้องแพะภูเขา น้ำตกเล็กๆ และวิวภูเขา เริ่มมีอาการอากาศเบาบาง แนะนำให้เตรียมกระป๋องออกซิเจนมาสูดดม</p></div></div>
-      <div class="item"><div class="time">15:20</div><div class="content"><h3>จุดชมวิว Yanziyan (จุดที่ 4)</h3><p>นั่งรถจากจุด 3 มายังจุดสูงสุดและเป็นไฮไลต์ของอุทยาน แนะนำให้เดินไปทางขวาจะถึงวิวภูเขาและลานทุ่งหญ้าอัลไพน์เร็วกว่าทางซ้าย</p></div></div>
-      <div class="item"><div class="time">16:00</div><div class="content"><h3>เดินทางลง</h3><p>นั่งรถกอล์ฟรวดเดียวจากจุด 4 ลงมาจุด 2 และเปลี่ยนเป็นรถบัสลงมาด้านล่างสุด (เผื่อเวลาเดินทางลงประมาณ 1 ชั่วโมง)</p></div></div>
-      <div class="item"><div class="time">17:00</div><div class="content"><h3>ขึ้นรถกลับเฉิงตู</h3><p>เดินทางกลับด้วยรถคันเดิม</p></div></div>
-      <div class="item"><div class="time">20:00</div><div class="content"><h3>ถึงสถานี Chadianzi</h3><p>นั่งรถไฟใต้ดินต่อไปยังถนนชุนซี (ประมาณ 45 นาที)</p></div></div>
-      <div class="item"><div class="time">21:30</div><div class="content"><h3>พักผ่อน</h3><p>ปิดท้ายวันด้วยการนั่งร้านชิลล์ใกล้ๆ โรงแรม</p></div></div>
+      <div class="item"><div class="time">07:00</div><div class="content"><h3 class="no-link">ออกจากโรงแรม</h3><p>เดินไปขึ้นรถบัสที่จุดนัดพบ</p></div></div>
+      <div class="item"><div class="time">07:30</div><div class="content"><h3 class="no-link">ออกเดินทาง</h3><p>นั่งรถจากเฉิงตูไปปี้เผิงโกว ใช้เวลาประมาณ 3 ชั่วโมงกว่า (มีแวะจุดพักรถ 1 ครั้ง เข้าห้องน้ำและซื้อของกินได้)</p></div></div>
+      <div class="item"><div class="time">10:50</div><div class="content"><h3><a class="loc-link" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Bipenggou+Scenic+Area"><span class="pin">📍</span>ถึงอุทยาน Bipenggou</a></h3><p>สแกน QR Code เข้าอุทยาน แล้วเดินไปขึ้นรถบัส (นั่งรถประมาณ 15 นาที)</p></div></div>
+      <div class="item"><div class="time">11:20</div><div class="content"><h3><a class="loc-link" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Longwanghai+Lake+Bipenggou"><span class="pin">📍</span>ทะเลสาบหลงหวังไห่ (Longwanghai)</a></h3><p>ทะเลสาบสีมรกตขนาดใหญ่ เดินเลียบทะเลสาบไปเรื่อยๆ เพื่อไปขึ้นรถบัสจุดที่ 2</p></div></div>
+      <div class="item"><div class="time">13:00</div><div class="content"><h3><a class="loc-link" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Shanghaizi+Bipenggou"><span class="pin">📍</span>จุดแวะพัก Shanghaizi</a></h3><p>มีลานจอดรถ ร้านอาหาร และห้องน้ำ แวะกินมื้อเที่ยงที่นี่ (แนะนำให้เตรียมมาม่าและขนมมากินเอง มีน้ำร้อนให้กด)</p></div></div>
+      <div class="item"><div class="time">13:40</div><div class="content"><h3 class="no-link">ซื้อตั๋วรถกอล์ฟ</h3><p>ซื้อตั๋วแบบไป-กลับสำหรับจุดที่ 3 และ 4 (ราคาประมาณ 300 บาท) แล้วขึ้นรถกอล์ฟไปจุดที่ 3</p></div></div>
+      <div class="item"><div class="time">14:00</div><div class="content"><h3><a class="loc-link" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Zhuomatan+Bipenggou"><span class="pin">📍</span>หาดจัวหม่านทาน (Zhuomatan)</a></h3><p>ระหว่างทางรถจะแวะจุดนี้ สามารถลงไปเดินเล่นได้ (ถ้าไม่ลง รถจะไปส่งที่จุด 3 เลย)</p></div></div>
+      <div class="item"><div class="time">14:45</div><div class="content"><h3><a class="loc-link" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Panyang+Lake+Bipenggou"><span class="pin">📍</span>ทะเลสาบปันหยาง (Panyang Lake - จุดที่ 3)</a></h3><p>จุดนี้มีน้องแพะภูเขา น้ำตกเล็กๆ และวิวภูเขา เริ่มมีอาการอากาศเบาบาง แนะนำให้เตรียมกระป๋องออกซิเจนมาสูดดม</p></div></div>
+      <div class="item"><div class="time">15:20</div><div class="content"><h3><a class="loc-link" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Yanziyan+Bipenggou"><span class="pin">📍</span>จุดชมวิว Yanziyan (จุดที่ 4)</a></h3><p>นั่งรถจากจุด 3 มายังจุดสูงสุดและเป็นไฮไลต์ของอุทยาน แนะนำให้เดินไปทางขวาจะถึงวิวภูเขาและลานทุ่งหญ้าอัลไพน์เร็วกว่าทางซ้าย</p></div></div>
+      <div class="item"><div class="time">16:00</div><div class="content"><h3 class="no-link">เดินทางลง</h3><p>นั่งรถกอล์ฟรวดเดียวจากจุด 4 ลงมาจุด 2 และเปลี่ยนเป็นรถบัสลงมาด้านล่างสุด (เผื่อเวลาเดินทางลงประมาณ 1 ชั่วโมง)</p></div></div>
+      <div class="item"><div class="time">17:00</div><div class="content"><h3 class="no-link">ขึ้นรถกลับเฉิงตู</h3><p>เดินทางกลับด้วยรถคันเดิม</p></div></div>
+      <div class="item"><div class="time">20:00</div><div class="content"><h3><a class="loc-link" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Chadianzi+Bus+Station+Chengdu"><span class="pin">📍</span>ถึงสถานี Chadianzi</a></h3><p>นั่งรถไฟใต้ดินต่อไปยังถนนชุนซี (ประมาณ 45 นาที)</p></div></div>
+      <div class="item"><div class="time">21:30</div><div class="content"><h3 class="no-link">พักผ่อน</h3><p>ปิดท้ายวันด้วยการนั่งร้านชิลล์ใกล้ๆ โรงแรม</p></div></div>
     </div>
 
     <!-- HIGHLIGHT INFOGRAPHIC -->
@@ -379,14 +401,14 @@
   <section class="day-section day3" id="day3">
     <div class="day-header"><span class="day-badge">Day 3</span> ตูเจียงเยี่ยน (Dujiangyan)</div>
     <div class="timeline">
-      <div class="item"><div class="time">10:00</div><div class="content"><h3>เดินทางไปตูเจียงเยี่ยน</h3><p>นั่งรถไฟความเร็วสูงจากสถานี Xipu ไป Dujiangyan (ใช้เวลาประมาณ 20 นาที)</p></div></div>
-      <div class="item"><div class="time">11:00</div><div class="content"><h3>ร้านหนังสือ Zhongshuge (Sunac Mall)</h3><p>แวะถ่ายรูปกับร้านหนังสือที่ตกแต่งอลังการเหมือนเวทมนตร์ (อยู่ใกล้สถานีรถไฟ)</p></div></div>
-      <div class="item"><div class="time">13:00</div><div class="content"><h3>หุบเขาแพนด้า (Panda Valley)</h3><p>ซื้อตั๋วหน้างาน (55 หยวน) ใช้เวลาเดินประมาณ 1.5 ชั่วโมง จุดนี้จะได้ดูทั้งแพนด้ายักษ์และแพนด้าแดงแบบใกล้ชิด</p></div></div>
-      <div class="item"><div class="time">15:30</div><div class="content"><h3>จัตุรัส Yangtianwo</h3><p>เช็คอินถ่ายรูปคู่กับรูปปั้นแพนด้ายักษ์เซลฟี่</p></div></div>
-      <div class="item"><div class="time">16:30</div><div class="content"><h3>เมืองโบราณก้วนเสี้ยน (Guanxian Ancient City)</h3><p>เดินเล่นหาของกินสตรีทฟู้ด และแวะกินข้าวมื้อเย็นที่นี่</p></div></div>
-      <div class="item"><div class="time">18:30</div><div class="content"><h3>สะพานหนานเฉียว (Nanqiao Bridge)</h3><p>รอเวลาเปิดไฟของสะพาน น้ำในแม่น้ำจะกลายเป็นสีฟ้าตัดกับแสงไฟสีส้มของสะพาน บรรยากาศดีมาก</p></div></div>
-      <div class="item"><div class="time">19:30</div><div class="content"><h3>เดินทางกลับ</h3><p>นั่งรถไฟความเร็วสูงกลับไปสถานี Xipu (แนะนำให้จองตั๋วล่วงหน้าเพราะขากลับคนเยอะมาก)</p></div></div>
-      <div class="item"><div class="time">20:30</div><div class="content"><h3>จุดเช็คอินน้ำพุไม้ไผ่ (Chengdu SKP)</h3><p>ไปดูโชว์ไฟและน้ำพุที่ห้าง SKP</p></div></div>
+      <div class="item"><div class="time">10:00</div><div class="content"><h3><a class="loc-link" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Dujiangyan+Railway+Station"><span class="pin">📍</span>เดินทางไปตูเจียงเยี่ยน</a></h3><p>นั่งรถไฟความเร็วสูงจากสถานี Xipu ไป Dujiangyan (ใช้เวลาประมาณ 20 นาที)</p></div></div>
+      <div class="item"><div class="time">11:00</div><div class="content"><h3><a class="loc-link" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Zhongshuge+Dujiangyan+Sunac+Mall"><span class="pin">📍</span>ร้านหนังสือ Zhongshuge (Sunac Mall)</a></h3><p>แวะถ่ายรูปกับร้านหนังสือที่ตกแต่งอลังการเหมือนเวทมนตร์ (อยู่ใกล้สถานีรถไฟ)</p></div></div>
+      <div class="item"><div class="time">13:00</div><div class="content"><h3><a class="loc-link" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Dujiangyan+Panda+Valley"><span class="pin">📍</span>หุบเขาแพนด้า (Panda Valley)</a></h3><p>ซื้อตั๋วหน้างาน (55 หยวน) ใช้เวลาเดินประมาณ 1.5 ชั่วโมง จุดนี้จะได้ดูทั้งแพนด้ายักษ์และแพนด้าแดงแบบใกล้ชิด</p></div></div>
+      <div class="item"><div class="time">15:30</div><div class="content"><h3><a class="loc-link" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Yangtianwo+Square+Dujiangyan"><span class="pin">📍</span>จัตุรัส Yangtianwo</a></h3><p>เช็คอินถ่ายรูปคู่กับรูปปั้นแพนด้ายักษ์เซลฟี่</p></div></div>
+      <div class="item"><div class="time">16:30</div><div class="content"><h3><a class="loc-link" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Guanxian+Ancient+City+Dujiangyan"><span class="pin">📍</span>เมืองโบราณก้วนเสี้ยน (Guanxian Ancient City)</a></h3><p>เดินเล่นหาของกินสตรีทฟู้ด และแวะกินข้าวมื้อเย็นที่นี่</p></div></div>
+      <div class="item"><div class="time">18:30</div><div class="content"><h3><a class="loc-link" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Nanqiao+Bridge+Dujiangyan"><span class="pin">📍</span>สะพานหนานเฉียว (Nanqiao Bridge)</a></h3><p>รอเวลาเปิดไฟของสะพาน น้ำในแม่น้ำจะกลายเป็นสีฟ้าตัดกับแสงไฟสีส้มของสะพาน บรรยากาศดีมาก</p></div></div>
+      <div class="item"><div class="time">19:30</div><div class="content"><h3 class="no-link">เดินทางกลับ</h3><p>นั่งรถไฟความเร็วสูงกลับไปสถานี Xipu (แนะนำให้จองตั๋วล่วงหน้าเพราะขากลับคนเยอะมาก)</p></div></div>
+      <div class="item"><div class="time">20:30</div><div class="content"><h3><a class="loc-link" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Chengdu+SKP"><span class="pin">📍</span>จุดเช็คอินน้ำพุไม้ไผ่ (Chengdu SKP)</a></h3><p>ไปดูโชว์ไฟและน้ำพุที่ห้าง SKP</p></div></div>
     </div>
 
     <!-- HIGHLIGHT INFOGRAPHIC -->
@@ -425,13 +447,13 @@
   <section class="day-section day4" id="day4">
     <div class="day-header"><span class="day-badge">Day 4</span> เดินทางสู่ฉงชิ่ง (Chongqing)</div>
     <div class="timeline">
-      <div class="item"><div class="time">08:30</div><div class="content"><h3>นั่งรถไฟไปฉงชิ่ง</h3><p>นั่งรถไฟความเร็วสูงจากสถานี Chengdu East Railway ไปลง Chongqing North Railway (ใช้เวลา 2 ชั่วโมง)</p></div></div>
-      <div class="item"><div class="time">12:00</div><div class="content"><h3>Check-in โรงแรม</h3><p>เก็บกระเป๋าเข้าที่พัก Saiya River View Hotel</p></div></div>
-      <div class="item"><div class="time">13:00</div><div class="content"><h3>ย่าน Guanyinqiao</h3><p>เดินเล่นย่านวัยรุ่น หาของกิน แวะชิมบะหมี่ฉงชิ่ง และถ่ายรูปกับป้ายไฟยอดฮิต "Wo Zai Chongqing" (ฉันอยู่ฉงชิ่ง)</p></div></div>
-      <div class="item"><div class="time">14:30</div><div class="content"><h3>สถานีหลีจื่อปา (Liziba Station)</h3><p>ดูรถไฟลอยฟ้าวิ่งทะลุเข้าไปในตึกที่พักอาศัยชั้น 19 โดยให้ลงมาถ่ายรูปมุมเสยจากด้านล่าง</p></div></div>
-      <div class="item"><div class="time">16:00</div><div class="content"><h3>ถนนโบราณหลงเหมินฮ่าว (Longmenhao Old Street)</h3><p>เดินเล่นย่านตึกเก่าริมแม่น้ำแยงซีเกียง ถ่ายรูปมุมไหนก็คลาสสิก</p></div></div>
-      <div class="item"><div class="time">18:30</div><div class="content"><h3>ปิ้งย่างบนเขา (Ding Laotou Barbecue)</h3><p>ไปกินปิ้งย่างบนเขาหนานซาน (Nanshan) ชมวิวพาโนรามาของเมือง แนะนำให้ไปถึงก่อน 5 โมงเย็นเพื่อจองโต๊ะวิวด้านบนสุดที่เห็นแสงไฟตึกสะท้อนแม่น้ำ (ถ้าเรียก DiDi รถจะส่งแค่ด้านล่าง ต้องเดินขึ้นเขาไปอีกนิด)</p></div></div>
-      <div class="item"><div class="time">21:00</div><div class="content"><h3>นั่งชิลล์ดาดฟ้า (Commune)</h3><p>บาร์กึ่งร้านอาหารยอดฮิตของวัยรุ่นริมแม่น้ำ แนะนำให้นั่งโซนดาดฟ้าเพื่อชมวิวตึก Raffles City แบบเต็มๆ</p></div></div>
+      <div class="item"><div class="time">08:30</div><div class="content"><h3><a class="loc-link" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Chongqing+North+Railway+Station"><span class="pin">📍</span>นั่งรถไฟไปฉงชิ่ง</a></h3><p>นั่งรถไฟความเร็วสูงจากสถานี Chengdu East Railway ไปลง Chongqing North Railway (ใช้เวลา 2 ชั่วโมง)</p></div></div>
+      <div class="item"><div class="time">12:00</div><div class="content"><h3><a class="loc-link" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Saiya+River+View+Hotel+Chongqing"><span class="pin">📍</span>Check-in โรงแรม</a></h3><p>เก็บกระเป๋าเข้าที่พัก Saiya River View Hotel</p></div></div>
+      <div class="item"><div class="time">13:00</div><div class="content"><h3><a class="loc-link" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Guanyinqiao+Chongqing"><span class="pin">📍</span>ย่าน Guanyinqiao</a></h3><p>เดินเล่นย่านวัยรุ่น หาของกิน แวะชิมบะหมี่ฉงชิ่ง และถ่ายรูปกับป้ายไฟยอดฮิต "Wo Zai Chongqing" (ฉันอยู่ฉงชิ่ง)</p></div></div>
+      <div class="item"><div class="time">14:30</div><div class="content"><h3><a class="loc-link" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Liziba+Station+Chongqing"><span class="pin">📍</span>สถานีหลีจื่อปา (Liziba Station)</a></h3><p>ดูรถไฟลอยฟ้าวิ่งทะลุเข้าไปในตึกที่พักอาศัยชั้น 19 โดยให้ลงมาถ่ายรูปมุมเสยจากด้านล่าง</p></div></div>
+      <div class="item"><div class="time">16:00</div><div class="content"><h3><a class="loc-link" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Longmenhao+Old+Street+Chongqing"><span class="pin">📍</span>ถนนโบราณหลงเหมินฮ่าว (Longmenhao Old Street)</a></h3><p>เดินเล่นย่านตึกเก่าริมแม่น้ำแยงซีเกียง ถ่ายรูปมุมไหนก็คลาสสิก</p></div></div>
+      <div class="item"><div class="time">18:30</div><div class="content"><h3><a class="loc-link" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Ding+Laotou+Barbecue+Nanshan+Chongqing"><span class="pin">📍</span>ปิ้งย่างบนเขา (Ding Laotou Barbecue)</a></h3><p>ไปกินปิ้งย่างบนเขาหนานซาน (Nanshan) ชมวิวพาโนรามาของเมือง แนะนำให้ไปถึงก่อน 5 โมงเย็นเพื่อจองโต๊ะวิวด้านบนสุดที่เห็นแสงไฟตึกสะท้อนแม่น้ำ (ถ้าเรียก DiDi รถจะส่งแค่ด้านล่าง ต้องเดินขึ้นเขาไปอีกนิด)</p></div></div>
+      <div class="item"><div class="time">21:00</div><div class="content"><h3><a class="loc-link" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Commune+Bar+Chongqing"><span class="pin">📍</span>นั่งชิลล์ดาดฟ้า (Commune)</a></h3><p>บาร์กึ่งร้านอาหารยอดฮิตของวัยรุ่นริมแม่น้ำ แนะนำให้นั่งโซนดาดฟ้าเพื่อชมวิวตึก Raffles City แบบเต็มๆ</p></div></div>
     </div>
 
     <!-- HIGHLIGHT INFOGRAPHIC -->
@@ -470,20 +492,20 @@
   <section class="day-section day5" id="day5">
     <div class="day-header"><span class="day-badge">Day 5</span> เก็บตกลานด์มาร์กฉงชิ่ง</div>
     <div class="timeline">
-      <div class="item"><div class="time">09:00</div><div class="content"><h3>คาเฟ่วิวกระเช้า (Chadianxia Coffee)</h3><p>คาเฟ่ซ่อนตัวอยู่ชั้น 15 ของตึกเก่า (ตึกไป๋เซียงจวี) นั่งจิบกาแฟชมวิวกระเช้าลอยฟ้าข้ามแม่น้ำแยงซีเกียง</p></div></div>
-      <div class="item"><div class="time">10:30</div><div class="content"><h3>วัดหลัวฮั่น (Arhat Temple)</h3><p>วัดเก่าแก่พันปีที่ซ่อนตัวอยู่กลางตึกสูงระฟ้า (ค่าเข้า 20 หยวน ซื้อหน้าวัดได้เลย)</p></div></div>
-      <div class="item"><div class="time">12:00</div><div class="content"><h3>บุฟเฟต์มื้อกลางวัน (Jing Li Seafood Buffet)</h3><p>กินบุฟเฟต์ซีฟู้ด ปิ้งย่าง และหม่าล่าหม้อไฟ ที่ชั้น 3 ของห้าง Raffles City ไลน์อาหารเยอะและคุ้มมาก</p></div></div>
-      <div class="item"><div class="time">13:30</div><div class="content"><h3>ถนนเจียฟางเป่ย (Jiefangbei)</h3><p>เดินเล่นย่อยอาหารใจกลางเมือง</p></div></div>
-      <div class="item"><div class="time">14:00</div><div class="content"><h3>MINISO LAND</h3><p>แวะช้อปปิ้งของฝาก</p></div></div>
-      <div class="item"><div class="time">15:00</div><div class="content"><h3>ร้านเค้กไก่หยอง (BSF Pastry)</h3><p>แวะต่อคิวซื้อเค้กไก่หยองร้านเด็ด เนื้อนุ่มอร่อยมาก ห้ามพลาด</p></div></div>
-      <div class="item"><div class="time">15:30</div><div class="content"><h3>หอศิลป์ฉงชิ่ง (Chongqing Art Gallery)</h3><p>ถ่ายรูปกับตึกแท่งตะเกียบสีแดง</p></div></div>
-      <div class="item"><div class="time">16:00</div><div class="content"><h3>ตึกสุดแปลก (Kuixing Building)</h3><p>ตึกที่มีดีไซน์ไม่เหมือนใคร ด้านหลังเป็นสะพานสูงชั้น 22 แต่อีกด้านกลับเป็นทางเดินริมถนนใหญ่ที่อยู่ชั้น 1</p></div></div>
-      <div class="item"><div class="time">17:00</div><div class="content"><h3>จิบชายามเย็น (Xiaobo Tea House)</h3><p>ร้านชาฟีลโรงเตี๊ยมจีนโบราณยุค 80 ซ่อนตัวอยู่ในตึกเก่า ทางเข้าค่อนข้างหายาก ให้ใช้ทางเข้าเดียวกับร้านบะหมี่ด้านหน้า</p></div></div>
-      <div class="item"><div class="time">19:00</div><div class="content"><h3>ตึกหงหยาต้ง (Hongyadong)</h3><p>ชมตึกเปิดไฟอลังการ (คนจะเยอะและทางเดินในตึกซับซ้อนมาก)</p></div></div>
-      <div class="item"><div class="time">20:00</div><div class="content"><h3>หม่าล่าหม้อไฟ (Dadao Zhang Hot Pot)</h3><p>ร้านหม้อไฟใหญ่คนไม่เยอะ รสชาติเผ็ดชาสะใจ ให้นั่งริมกระจกเพื่อมองวิวสะพานและแม่น้ำ</p></div></div>
-      <div class="item"><div class="time">21:00</div><div class="content"><h3>ถ่ายรูปวิวสะพาน (Chongqing Grand Theatre)</h3><p>ข้ามฝั่งมาที่ลานกว้างริมน้ำ เพื่อถ่ายรูปตึกหงหยาต้งแบบมุมไกล เห็นทั้งสะพานและตึกเปิดไฟ (ถ่ายเปิดแฟลชปังมากและคนไม่เยอะ)</p></div></div>
-      <div class="item"><div class="time">22:00</div><div class="content"><h3>ซื้อของฝาก (Busy For You)</h3><p>แวะร้านสีเหลือง ขนมเยอะและราคาถูกมาก</p></div></div>
-      <div class="item"><div class="time">23:00</div><div class="content"><h3>นั่งชิลล์ย่าน 9th Street</h3><p>ย่านรวมร้านกลางคืนที่วัยรุ่นจีนนิยมมาแฮงเอาต์กัน ปิดทริปวันสุดท้ายแบบสมบูรณ์</p></div></div>
+      <div class="item"><div class="time">09:00</div><div class="content"><h3><a class="loc-link" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Chadianxia+Coffee+Chongqing"><span class="pin">📍</span>คาเฟ่วิวกระเช้า (Chadianxia Coffee)</a></h3><p>คาเฟ่ซ่อนตัวอยู่ชั้น 15 ของตึกเก่า (ตึกไป๋เซียงจวี) นั่งจิบกาแฟชมวิวกระเช้าลอยฟ้าข้ามแม่น้ำแยงซีเกียง</p></div></div>
+      <div class="item"><div class="time">10:30</div><div class="content"><h3><a class="loc-link" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Arhat+Temple+Luohan+Temple+Chongqing"><span class="pin">📍</span>วัดหลัวฮั่น (Arhat Temple)</a></h3><p>วัดเก่าแก่พันปีที่ซ่อนตัวอยู่กลางตึกสูงระฟ้า (ค่าเข้า 20 หยวน ซื้อหน้าวัดได้เลย)</p></div></div>
+      <div class="item"><div class="time">12:00</div><div class="content"><h3><a class="loc-link" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Jing+Li+Seafood+Buffet+Raffles+City+Chongqing"><span class="pin">📍</span>บุฟเฟต์มื้อกลางวัน (Jing Li Seafood Buffet)</a></h3><p>กินบุฟเฟต์ซีฟู้ด ปิ้งย่าง และหม่าล่าหม้อไฟ ที่ชั้น 3 ของห้าง Raffles City ไลน์อาหารเยอะและคุ้มมาก</p></div></div>
+      <div class="item"><div class="time">13:30</div><div class="content"><h3><a class="loc-link" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Jiefangbei+Chongqing"><span class="pin">📍</span>ถนนเจียฟางเป่ย (Jiefangbei)</a></h3><p>เดินเล่นย่อยอาหารใจกลางเมือง</p></div></div>
+      <div class="item"><div class="time">14:00</div><div class="content"><h3><a class="loc-link" target="_blank" href="https://www.google.com/maps/search/?api=1&query=MINISO+LAND+Chongqing"><span class="pin">📍</span>MINISO LAND</a></h3><p>แวะช้อปปิ้งของฝาก</p></div></div>
+      <div class="item"><div class="time">15:00</div><div class="content"><h3><a class="loc-link" target="_blank" href="https://www.google.com/maps/search/?api=1&query=BSF+Pastry+Chongqing"><span class="pin">📍</span>ร้านเค้กไก่หยอง (BSF Pastry)</a></h3><p>แวะต่อคิวซื้อเค้กไก่หยองร้านเด็ด เนื้อนุ่มอร่อยมาก ห้ามพลาด</p></div></div>
+      <div class="item"><div class="time">15:30</div><div class="content"><h3><a class="loc-link" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Chongqing+Art+Gallery"><span class="pin">📍</span>หอศิลป์ฉงชิ่ง (Chongqing Art Gallery)</a></h3><p>ถ่ายรูปกับตึกแท่งตะเกียบสีแดง</p></div></div>
+      <div class="item"><div class="time">16:00</div><div class="content"><h3><a class="loc-link" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Kuixing+Building+Chongqing"><span class="pin">📍</span>ตึกสุดแปลก (Kuixing Building)</a></h3><p>ตึกที่มีดีไซน์ไม่เหมือนใคร ด้านหลังเป็นสะพานสูงชั้น 22 แต่อีกด้านกลับเป็นทางเดินริมถนนใหญ่ที่อยู่ชั้น 1</p></div></div>
+      <div class="item"><div class="time">17:00</div><div class="content"><h3><a class="loc-link" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Xiaobo+Tea+House+Chongqing"><span class="pin">📍</span>จิบชายามเย็น (Xiaobo Tea House)</a></h3><p>ร้านชาฟีลโรงเตี๊ยมจีนโบราณยุค 80 ซ่อนตัวอยู่ในตึกเก่า ทางเข้าค่อนข้างหายาก ให้ใช้ทางเข้าเดียวกับร้านบะหมี่ด้านหน้า</p></div></div>
+      <div class="item"><div class="time">19:00</div><div class="content"><h3><a class="loc-link" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Hongyadong+Chongqing"><span class="pin">📍</span>ตึกหงหยาต้ง (Hongyadong)</a></h3><p>ชมตึกเปิดไฟอลังการ (คนจะเยอะและทางเดินในตึกซับซ้อนมาก)</p></div></div>
+      <div class="item"><div class="time">20:00</div><div class="content"><h3><a class="loc-link" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Dadao+Zhang+Hot+Pot+Chongqing"><span class="pin">📍</span>หม่าล่าหม้อไฟ (Dadao Zhang Hot Pot)</a></h3><p>ร้านหม้อไฟใหญ่คนไม่เยอะ รสชาติเผ็ดชาสะใจ ให้นั่งริมกระจกเพื่อมองวิวสะพานและแม่น้ำ</p></div></div>
+      <div class="item"><div class="time">21:00</div><div class="content"><h3><a class="loc-link" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Chongqing+Grand+Theatre"><span class="pin">📍</span>ถ่ายรูปวิวสะพาน (Chongqing Grand Theatre)</a></h3><p>ข้ามฝั่งมาที่ลานกว้างริมน้ำ เพื่อถ่ายรูปตึกหงหยาต้งแบบมุมไกล เห็นทั้งสะพานและตึกเปิดไฟ (ถ่ายเปิดแฟลชปังมากและคนไม่เยอะ)</p></div></div>
+      <div class="item"><div class="time">22:00</div><div class="content"><h3><a class="loc-link" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Busy+For+You+Chongqing"><span class="pin">📍</span>ซื้อของฝาก (Busy For You)</a></h3><p>แวะร้านสีเหลือง ขนมเยอะและราคาถูกมาก</p></div></div>
+      <div class="item"><div class="time">23:00</div><div class="content"><h3><a class="loc-link" target="_blank" href="https://www.google.com/maps/search/?api=1&query=9th+Street+Chongqing"><span class="pin">📍</span>นั่งชิลล์ย่าน 9th Street</a></h3><p>ย่านรวมร้านกลางคืนที่วัยรุ่นจีนนิยมมาแฮงเอาต์กัน ปิดทริปวันสุดท้ายแบบสมบูรณ์</p></div></div>
     </div>
 
     <!-- HIGHLIGHT INFOGRAPHIC -->
