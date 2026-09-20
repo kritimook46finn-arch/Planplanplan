@@ -82,6 +82,18 @@
   .day4 .day-header { background:linear-gradient(90deg,#7209b7,#b5179e); }
   .day5 .day-header { background:linear-gradient(90deg,#f4a261,#ee9b00); }
 
+  .day1 .accent { color:#e63946; border-color:#e63946; }
+  .day2 .accent { color:#2a9d8f; border-color:#2a9d8f; }
+  .day3 .accent { color:#4361ee; border-color:#4361ee; }
+  .day4 .accent { color:#7209b7; border-color:#7209b7; }
+  .day5 .accent { color:#ee9b00; border-color:#ee9b00; }
+
+  .day1 .accent-bg { background:linear-gradient(135deg,#e63946,#ff6b6b); }
+  .day2 .accent-bg { background:linear-gradient(135deg,#2a9d8f,#57cc99); }
+  .day3 .accent-bg { background:linear-gradient(135deg,#4361ee,#4895ef); }
+  .day4 .accent-bg { background:linear-gradient(135deg,#7209b7,#b5179e); }
+  .day5 .accent-bg { background:linear-gradient(135deg,#f4a261,#ee9b00); }
+
   .day-badge {
     background:rgba(255,255,255,0.25);
     padding:4px 14px;
@@ -110,6 +122,98 @@
     color:#222;
   }
   .content p { font-size:0.92rem; color:#555; }
+
+  /* ===== HIGHLIGHT INFOGRAPHIC CARD ===== */
+  .highlight-box {
+    margin:0 25px 25px;
+    padding:22px;
+    border-radius:14px;
+    background:#fafafa;
+    border:2px dashed #e0e0e0;
+  }
+  .highlight-title {
+    font-size:1.05rem;
+    font-weight:bold;
+    margin-bottom:15px;
+    display:flex;
+    align-items:center;
+    gap:8px;
+  }
+  .stat-grid {
+    display:grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px,1fr));
+    gap:12px;
+    margin-bottom:15px;
+  }
+  .stat-card {
+    background:#fff;
+    border-radius:12px;
+    padding:14px 10px;
+    text-align:center;
+    box-shadow:0 3px 8px rgba(0,0,0,0.06);
+    border-top:4px solid #ddd;
+  }
+  .stat-card .icon { font-size:1.6rem; margin-bottom:6px; }
+  .stat-card .num { font-size:1.15rem; font-weight:bold; color:#222; }
+  .stat-card .label { font-size:0.75rem; color:#888; margin-top:2px; }
+
+  .highlight-tags {
+    display:flex;
+    flex-wrap:wrap;
+    gap:8px;
+    margin-bottom:15px;
+  }
+  .tag {
+    background:#fff;
+    border:1.5px solid;
+    padding:5px 12px;
+    border-radius:20px;
+    font-size:0.8rem;
+    font-weight:600;
+  }
+
+  .must-try {
+    background:#fff;
+    border-radius:12px;
+    padding:14px 16px;
+    box-shadow:0 3px 8px rgba(0,0,0,0.06);
+  }
+  .must-try h4 { font-size:0.9rem; margin-bottom:8px; color:#444; }
+  .must-try ul { list-style:none; padding:0; margin:0; }
+  .must-try li {
+    font-size:0.85rem;
+    color:#555;
+    padding:4px 0 4px 20px;
+    position:relative;
+  }
+  .must-try li::before {
+    content:"🔥";
+    position:absolute;
+    left:0;
+  }
+
+  /* ===== MAP ===== */
+  .map-box {
+    margin:0 25px 25px;
+    border-radius:14px;
+    overflow:hidden;
+    box-shadow:0 4px 12px rgba(0,0,0,0.1);
+  }
+  .map-box .map-label {
+    padding:10px 16px;
+    color:#fff;
+    font-size:0.9rem;
+    font-weight:600;
+    display:flex;
+    align-items:center;
+    gap:6px;
+  }
+  .map-box iframe {
+    width:100%;
+    height:280px;
+    border:0;
+    display:block;
+  }
 
   .tips {
     background:#fff8e1;
@@ -149,6 +253,7 @@
     header h1{font-size:1.6rem;}
     .day-header{font-size:1.15rem;}
     nav a{font-size:0.8rem;padding:6px 12px;}
+    .highlight-box, .map-box { margin-left:15px; margin-right:15px; }
   }
 </style>
 </head>
@@ -186,6 +291,37 @@
       <div class="item"><div class="time">18:30</div><div class="content"><h3>ถนนโบราณซอยกว้างซอยแคบ (Kuanzhai Alley)</h3><p>เดินเล่นย่านเก่าแก่ที่มีทั้งร้านอาหาร ร้านขนม และของฝาก</p></div></div>
       <div class="item"><div class="time">20:00</div><div class="content"><h3>ตลาดกลางคืน Fuqin Night Market</h3><p>นั่ง DiDi ไปกินสตรีทฟู้ดโลคอล ราคาไม่แพง มีของกินให้เลือกเยอะมาก</p></div></div>
     </div>
+
+    <!-- HIGHLIGHT INFOGRAPHIC -->
+    <div class="highlight-box">
+      <div class="highlight-title accent">📊 สรุปไฮไลต์ Day 1</div>
+      <div class="stat-grid">
+        <div class="stat-card" style="border-top-color:#e63946;"><div class="icon">📍</div><div class="num">10</div><div class="label">จุดเช็คอิน</div></div>
+        <div class="stat-card" style="border-top-color:#e63946;"><div class="icon">🍜</div><div class="num">3</div><div class="label">มื้ออาหาร/ของกิน</div></div>
+        <div class="stat-card" style="border-top-color:#e63946;"><div class="icon">🚌</div><div class="num">Bus+เดิน</div><div class="label">การเดินทางหลัก</div></div>
+        <div class="stat-card" style="border-top-color:#e63946;"><div class="icon">⏱️</div><div class="num">~18 ชม.</div><div class="label">ระยะเวลารวม</div></div>
+      </div>
+      <div class="highlight-tags">
+        <span class="tag accent">🐼 แพนด้ายักษ์ IFS</span>
+        <span class="tag accent">🍲 เสฉวนแท้</span>
+        <span class="tag accent">🏮 ซอยกว้างซอยแคบ</span>
+        <span class="tag accent">🌃 ตลาดกลางคืน</span>
+      </div>
+      <div class="must-try">
+        <h4>🍽️ ห้ามพลาด!</h4>
+        <ul>
+          <li>กุ้งกระเทียมอบวุ้นเส้น + ปลาต้มผักกาดดอง ที่ Taode Casserole</li>
+          <li>QingRu Milk Tea ร้าน Li Shan Shan</li>
+          <li>สตรีทฟู้ดที่ Fuqin Night Market</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- MAP -->
+    <div class="map-box">
+      <div class="map-label accent-bg">🗺️ พื้นที่หลัก Day 1 — ถนนชุนซี & ใจกลางเฉิงตู</div>
+      <iframe src="https://www.google.com/maps?q=Chunxi+Road,+Chengdu&output=embed" loading="lazy" allowfullscreen></iframe>
+    </div>
   </section>
 
   <!-- DAY 2 -->
@@ -206,6 +342,37 @@
       <div class="item"><div class="time">20:00</div><div class="content"><h3>ถึงสถานี Chadianzi</h3><p>นั่งรถไฟใต้ดินต่อไปยังถนนชุนซี (ประมาณ 45 นาที)</p></div></div>
       <div class="item"><div class="time">21:30</div><div class="content"><h3>พักผ่อน</h3><p>ปิดท้ายวันด้วยการนั่งร้านชิลล์ใกล้ๆ โรงแรม</p></div></div>
     </div>
+
+    <!-- HIGHLIGHT INFOGRAPHIC -->
+    <div class="highlight-box">
+      <div class="highlight-title accent">📊 สรุปไฮไลต์ Day 2</div>
+      <div class="stat-grid">
+        <div class="stat-card" style="border-top-color:#2a9d8f;"><div class="icon">🏔️</div><div class="num">4</div><div class="label">จุดชมวิวในอุทยาน</div></div>
+        <div class="stat-card" style="border-top-color:#2a9d8f;"><div class="icon">🚐</div><div class="num">~3 ชม.</div><div class="label">เดินทางไป-กลับ/เที่ยว</div></div>
+        <div class="stat-card" style="border-top-color:#2a9d8f;"><div class="icon">💵</div><div class="num">~300฿</div><div class="label">ค่ารถกอล์ฟ</div></div>
+        <div class="stat-card" style="border-top-color:#2a9d8f;"><div class="icon">🫁</div><div class="num">ต้องเตรียม</div><div class="label">กระป๋องออกซิเจน</div></div>
+      </div>
+      <div class="highlight-tags">
+        <span class="tag accent">🟢 ทะเลสาบมรกต</span>
+        <span class="tag accent">🐐 แพะภูเขา</span>
+        <span class="tag accent">🌿 ทุ่งหญ้าอัลไพน์</span>
+        <span class="tag accent">⛰️ อากาศเบาบาง</span>
+      </div>
+      <div class="must-try">
+        <h4>🎒 เตรียมตัวก่อนไป</h4>
+        <ul>
+          <li>มาม่า/ขนม สำหรับมื้อเที่ยงที่ Shanghaizi (มีน้ำร้อนให้กด)</li>
+          <li>กระป๋องออกซิเจน สำหรับจุด 3-4 ที่อากาศเบาบาง</li>
+          <li>รองเท้าเดินป่า เพราะต้องเดินเลียบทะเลสาบเยอะ</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- MAP -->
+    <div class="map-box">
+      <div class="map-label accent-bg">🗺️ พื้นที่หลัก Day 2 — อุทยาน Bipenggou</div>
+      <iframe src="https://www.google.com/maps?q=Bipenggou+Scenic+Area&output=embed" loading="lazy" allowfullscreen></iframe>
+    </div>
   </section>
 
   <!-- DAY 3 -->
@@ -221,6 +388,37 @@
       <div class="item"><div class="time">19:30</div><div class="content"><h3>เดินทางกลับ</h3><p>นั่งรถไฟความเร็วสูงกลับไปสถานี Xipu (แนะนำให้จองตั๋วล่วงหน้าเพราะขากลับคนเยอะมาก)</p></div></div>
       <div class="item"><div class="time">20:30</div><div class="content"><h3>จุดเช็คอินน้ำพุไม้ไผ่ (Chengdu SKP)</h3><p>ไปดูโชว์ไฟและน้ำพุที่ห้าง SKP</p></div></div>
     </div>
+
+    <!-- HIGHLIGHT INFOGRAPHIC -->
+    <div class="highlight-box">
+      <div class="highlight-title accent">📊 สรุปไฮไลต์ Day 3</div>
+      <div class="stat-grid">
+        <div class="stat-card" style="border-top-color:#4361ee;"><div class="icon">🚄</div><div class="num">2 เที่ยว</div><div class="label">รถไฟความเร็วสูง</div></div>
+        <div class="stat-card" style="border-top-color:#4361ee;"><div class="icon">🐼</div><div class="num">55฿</div><div class="label">ตั๋ว Panda Valley</div></div>
+        <div class="stat-card" style="border-top-color:#4361ee;"><div class="icon">📸</div><div class="num">7</div><div class="label">จุดเช็คอิน</div></div>
+        <div class="stat-card" style="border-top-color:#4361ee;"><div class="icon">🌉</div><div class="num">18:30</div><div class="label">เปิดไฟสะพาน</div></div>
+      </div>
+      <div class="highlight-tags">
+        <span class="tag accent">📚 ร้านหนังสือมนตรา</span>
+        <span class="tag accent">🐼 แพนด้าแดง</span>
+        <span class="tag accent">🌆 เมืองโบราณ</span>
+        <span class="tag accent">💦 น้ำพุไม้ไผ่</span>
+      </div>
+      <div class="must-try">
+        <h4>💡 ทริคสำคัญ</h4>
+        <ul>
+          <li>จองตั๋วรถไฟขากลับล่วงหน้า เพราะช่วงเย็นคนเยอะมาก</li>
+          <li>ไปให้ทันเวลาเปิดไฟสะพาน Nanqiao เพื่อถ่ายรูปสวยสุด</li>
+          <li>เผื่อเวลาเดินหุบเขาแพนด้าอย่างน้อย 1.5 ชม.</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- MAP -->
+    <div class="map-box">
+      <div class="map-label accent-bg">🗺️ พื้นที่หลัก Day 3 — Dujiangyan Panda Valley</div>
+      <iframe src="https://www.google.com/maps?q=Dujiangyan+Panda+Valley&output=embed" loading="lazy" allowfullscreen></iframe>
+    </div>
   </section>
 
   <!-- DAY 4 -->
@@ -234,6 +432,37 @@
       <div class="item"><div class="time">16:00</div><div class="content"><h3>ถนนโบราณหลงเหมินฮ่าว (Longmenhao Old Street)</h3><p>เดินเล่นย่านตึกเก่าริมแม่น้ำแยงซีเกียง ถ่ายรูปมุมไหนก็คลาสสิก</p></div></div>
       <div class="item"><div class="time">18:30</div><div class="content"><h3>ปิ้งย่างบนเขา (Ding Laotou Barbecue)</h3><p>ไปกินปิ้งย่างบนเขาหนานซาน (Nanshan) ชมวิวพาโนรามาของเมือง แนะนำให้ไปถึงก่อน 5 โมงเย็นเพื่อจองโต๊ะวิวด้านบนสุดที่เห็นแสงไฟตึกสะท้อนแม่น้ำ (ถ้าเรียก DiDi รถจะส่งแค่ด้านล่าง ต้องเดินขึ้นเขาไปอีกนิด)</p></div></div>
       <div class="item"><div class="time">21:00</div><div class="content"><h3>นั่งชิลล์ดาดฟ้า (Commune)</h3><p>บาร์กึ่งร้านอาหารยอดฮิตของวัยรุ่นริมแม่น้ำ แนะนำให้นั่งโซนดาดฟ้าเพื่อชมวิวตึก Raffles City แบบเต็มๆ</p></div></div>
+    </div>
+
+    <!-- HIGHLIGHT INFOGRAPHIC -->
+    <div class="highlight-box">
+      <div class="highlight-title accent">📊 สรุปไฮไลต์ Day 4</div>
+      <div class="stat-grid">
+        <div class="stat-card" style="border-top-color:#7209b7;"><div class="icon">🚄</div><div class="num">2 ชม.</div><div class="label">เฉิงตู → ฉงชิ่ง</div></div>
+        <div class="stat-card" style="border-top-color:#7209b7;"><div class="icon">🚇</div><div class="num">Liziba</div><div class="label">รถไฟทะลุตึก</div></div>
+        <div class="stat-card" style="border-top-color:#7209b7;"><div class="icon">🍢</div><div class="num">ก่อน 17:00</div><div class="label">ไปจองโต๊ะ BBQ</div></div>
+        <div class="stat-card" style="border-top-color:#7209b7;"><div class="icon">🌃</div><div class="num">Nanshan</div><div class="label">วิวเมืองยามค่ำ</div></div>
+      </div>
+      <div class="highlight-tags">
+        <span class="tag accent">🏙️ เมืองแห่งภูเขา</span>
+        <span class="tag accent">🚆 รถไฟทะลุตึก</span>
+        <span class="tag accent">🥩 ปิ้งย่างวิวเมือง</span>
+        <span class="tag accent">🍹 บาร์ดาดฟ้า</span>
+      </div>
+      <div class="must-try">
+        <h4>💡 ทริคสำคัญ</h4>
+        <ul>
+          <li>ไปถึง Ding Laotou BBQ ก่อน 17:00 น. เพื่อจองโต๊ะวิวด้านบนสุด</li>
+          <li>DiDi ไปหนานซานจะส่งแค่ด้านล่าง ต้องเดินขึ้นเขาต่ออีกนิด</li>
+          <li>ถ่ายรูป Liziba Station มุมเงยจากด้านล่างสวยสุด</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- MAP -->
+    <div class="map-box">
+      <div class="map-label accent-bg">🗺️ พื้นที่หลัก Day 4 — Guanyinqiao & Nanshan</div>
+      <iframe src="https://www.google.com/maps?q=Guanyinqiao,+Chongqing&output=embed" loading="lazy" allowfullscreen></iframe>
     </div>
   </section>
 
@@ -255,6 +484,39 @@
       <div class="item"><div class="time">21:00</div><div class="content"><h3>ถ่ายรูปวิวสะพาน (Chongqing Grand Theatre)</h3><p>ข้ามฝั่งมาที่ลานกว้างริมน้ำ เพื่อถ่ายรูปตึกหงหยาต้งแบบมุมไกล เห็นทั้งสะพานและตึกเปิดไฟ (ถ่ายเปิดแฟลชปังมากและคนไม่เยอะ)</p></div></div>
       <div class="item"><div class="time">22:00</div><div class="content"><h3>ซื้อของฝาก (Busy For You)</h3><p>แวะร้านสีเหลือง ขนมเยอะและราคาถูกมาก</p></div></div>
       <div class="item"><div class="time">23:00</div><div class="content"><h3>นั่งชิลล์ย่าน 9th Street</h3><p>ย่านรวมร้านกลางคืนที่วัยรุ่นจีนนิยมมาแฮงเอาต์กัน ปิดทริปวันสุดท้ายแบบสมบูรณ์</p></div></div>
+    </div>
+
+    <!-- HIGHLIGHT INFOGRAPHIC -->
+    <div class="highlight-box">
+      <div class="highlight-title accent">📊 สรุปไฮไลต์ Day 5</div>
+      <div class="stat-grid">
+        <div class="stat-card" style="border-top-color:#ee9b00;"><div class="icon">📍</div><div class="num">14</div><div class="label">จุดเช็คอิน (มากสุด!)</div></div>
+        <div class="stat-card" style="border-top-color:#ee9b00;"><div class="icon">🍲</div><div class="num">3</div><div class="label">มื้ออาหารหลัก</div></div>
+        <div class="stat-card" style="border-top-color:#ee9b00;"><div class="icon">🌉</div><div class="num">Hongyadong</div><div class="label">ไฮไลต์สุดท้าย</div></div>
+        <div class="stat-card" style="border-top-color:#ee9b00;"><div class="icon">🕐</div><div class="num">14 ชม.</div><div class="label">ยาวที่สุดในทริป</div></div>
+      </div>
+      <div class="highlight-tags">
+        <span class="tag accent">☕ คาเฟ่ลับ</span>
+        <span class="tag accent">🛕 วัดกลางตึก</span>
+        <span class="tag accent">🎂 เค้กไก่หยอง</span>
+        <span class="tag accent">🏮 หงหยาต้ง</span>
+        <span class="tag accent">🍲 หม่าล่าหม้อไฟ</span>
+      </div>
+      <div class="must-try">
+        <h4>💡 ทริคสำคัญ</h4>
+        <ul>
+          <li>วัน Full Day ที่มีจุดเช็คอินเยอะสุด ควรออกเดินทางแต่เช้าตามแผน</li>
+          <li>ร้านชา Xiaobo Tea House ทางเข้าซ่อน ให้เดินผ่านร้านบะหมี่ด้านหน้า</li>
+          <li>ไป Hongyadong ช่วงหัวค่ำจะสวยสุดแต่คนเยอะ เตรียมใจเรื่องความแน่น</li>
+          <li>ถ่ายรูปหงหยาต้งมุมไกลที่ Chongqing Grand Theatre คนน้อยกว่าและเปิดแฟลชได้สวย</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- MAP -->
+    <div class="map-box">
+      <div class="map-label accent-bg">🗺️ พื้นที่หลัก Day 5 — Hongyadong & Jiefangbei</div>
+      <iframe src="https://www.google.com/maps?q=Hongyadong,+Chongqing&output=embed" loading="lazy" allowfullscreen></iframe>
     </div>
   </section>
 
