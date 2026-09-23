@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>แพลนเที่ยวเฉิงตู - ฉงชิ่ง 5 วัน 5 คืน</title>
+<title>แพลนท่องเที่ยว 3 สไตล์: จีน | ญี่ปุ่น | โอกินาว่า</title>
 <style>
   * { margin:0; padding:0; box-sizing:border-box; }
   body {
@@ -16,33 +16,81 @@
     background: linear-gradient(135deg,#e63946,#f77f00);
     color:#fff;
     text-align:center;
-    padding:50px 20px 60px;
+    padding:50px 20px 40px;
     position:relative;
     overflow:hidden;
   }
   header h1 { font-size:2.2rem; margin-bottom:10px; }
   header p.sub { font-size:1.1rem; opacity:0.95; }
-  header .budget {
+  
+  /* ===== TABS ===== */
+  .tab-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 15px;
+    padding: 20px;
+    background: #fff;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+    position: sticky;
+    top: 0;
+    z-index: 200;
+  }
+  .tab-btn {
+    padding: 12px 24px;
+    font-size: 1.05rem;
+    font-weight: bold;
+    border: 2px solid #e63946;
+    border-radius: 30px;
+    background: #fff;
+    color: #e63946;
+    cursor: pointer;
+    transition: 0.3s;
+    font-family: inherit;
+  }
+  .tab-btn:hover {
+    background: #fff3e0;
+  }
+  .tab-btn.active {
+    background: #e63946;
+    color: #fff;
+    box-shadow: 0 4px 10px rgba(230,57,70,0.3);
+  }
+  .tab-content {
+    display: none;
+    animation: fadeIn 0.5s;
+  }
+  .tab-content.active {
+    display: block;
+  }
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .plan-title {
+    text-align: center;
+    padding: 30px 20px 10px;
+  }
+  .plan-title h2 { font-size: 1.8rem; color: #222; margin-bottom: 10px; }
+  .budget {
     display:inline-block;
     background:#fff;
     color:#e63946;
     font-weight:bold;
     padding:8px 20px;
     border-radius:30px;
-    margin-top:15px;
-    box-shadow:0 4px 10px rgba(0,0,0,0.15);
+    border: 2px solid #e63946;
+    box-shadow:0 4px 10px rgba(0,0,0,0.08);
   }
+
   nav {
     display:flex;
     flex-wrap:wrap;
     justify-content:center;
     gap:10px;
-    background:#fff;
+    background:transparent;
     padding:15px;
-    position:sticky;
-    top:0;
-    z-index:100;
-    box-shadow:0 2px 8px rgba(0,0,0,0.1);
   }
   nav a {
     text-decoration:none;
@@ -57,7 +105,7 @@
   }
   nav a:hover { background:#f77f00; color:#fff; }
 
-  .container { max-width:1000px; margin:0 auto; padding:30px 20px; }
+  .container { max-width:1000px; margin:0 auto; padding:10px 20px 30px; }
 
   .day-section {
     background:#fff;
@@ -65,7 +113,7 @@
     box-shadow:0 6px 20px rgba(0,0,0,0.08);
     margin-bottom:40px;
     overflow:hidden;
-    scroll-margin-top:80px;
+    scroll-margin-top:140px;
   }
   .day-header {
     color:#fff;
@@ -81,18 +129,24 @@
   .day3 .day-header { background:linear-gradient(90deg,#4361ee,#4895ef); }
   .day4 .day-header { background:linear-gradient(90deg,#7209b7,#b5179e); }
   .day5 .day-header { background:linear-gradient(90deg,#f4a261,#ee9b00); }
+  .day6 .day-header { background:linear-gradient(90deg,#0077b6,#00b4d8); }
+  .oki-theme .day-header { background:linear-gradient(90deg,#ff007f,#ff758c); }
 
   .day1 .accent { color:#e63946; border-color:#e63946; }
   .day2 .accent { color:#2a9d8f; border-color:#2a9d8f; }
   .day3 .accent { color:#4361ee; border-color:#4361ee; }
   .day4 .accent { color:#7209b7; border-color:#7209b7; }
   .day5 .accent { color:#ee9b00; border-color:#ee9b00; }
+  .day6 .accent { color:#0077b6; border-color:#0077b6; }
+  .oki-theme .accent { color:#ff007f; border-color:#ff007f; }
 
   .day1 .accent-bg { background:linear-gradient(135deg,#e63946,#ff6b6b); }
   .day2 .accent-bg { background:linear-gradient(135deg,#2a9d8f,#57cc99); }
   .day3 .accent-bg { background:linear-gradient(135deg,#4361ee,#4895ef); }
   .day4 .accent-bg { background:linear-gradient(135deg,#7209b7,#b5179e); }
   .day5 .accent-bg { background:linear-gradient(135deg,#f4a261,#ee9b00); }
+  .day6 .accent-bg { background:linear-gradient(135deg,#0077b6,#00b4d8); }
+  .oki-theme .accent-bg { background:linear-gradient(135deg,#ff007f,#ff758c); }
 
   .day-badge {
     background:rgba(255,255,255,0.25);
@@ -242,7 +296,7 @@
     padding:25px;
     margin-bottom:40px;
     box-shadow:0 6px 20px rgba(0,0,0,0.08);
-    scroll-margin-top:80px;
+    scroll-margin-top:140px;
   }
   .tips h2 {
     color:#e65100;
@@ -271,8 +325,9 @@
   }
 
   @media(max-width:600px){
-    header h1{font-size:1.6rem;}
+    header h1{font-size:1.8rem;}
     .day-header{font-size:1.15rem;}
+    .tab-btn { font-size: 0.95rem; padding: 10px 20px; width: 100%; }
     nav a{font-size:0.8rem;padding:6px 12px;}
     .highlight-box, .map-box { margin-left:15px; margin-right:15px; }
   }
@@ -281,336 +336,417 @@
 <body>
 
 <header>
-  <h1>🐼 แพลนเที่ยวเฉิงตู - ฉงชิ่ง 5 วัน 5 คืน 🌉</h1>
-  <p class="sub">Chengdu - Chongqing Trip Planner</p>
-  <div class="budget">💰 งบประมาณรวมสุทธิ 20,236 บาท</div>
+  <h1>✈️ แพลนท่องเที่ยว (Trip Planner) 🗺️</h1>
+  <p class="sub">China | Japan | Okinawa</p>
   <p style="margin-top:12px; font-size:0.85rem; opacity:0.9;">💡 คลิกที่ชื่อสถานที่ (มีเส้นใต้จุด) เพื่อเปิด Google Maps ทันที</p>
 </header>
 
-<nav>
-  <a href="#day1">Day 1</a>
-  <a href="#day2">Day 2</a>
-  <a href="#day3">Day 3</a>
-  <a href="#day4">Day 4</a>
-  <a href="#day5">Day 5</a>
-  <a href="#tips">ทริค & ข้อควรระวัง</a>
-</nav>
+<div class="tab-container">
+  <button class="tab-btn active" onclick="openTab(event, 'china-plan')">🇨🇳 จีน (เฉิงตู - ฉงชิ่ง)</button>
+  <button class="tab-btn" onclick="openTab(event, 'japan-plan')">🇯🇵 ญี่ปุ่น (โตเกียว - ฮาคุบะ)</button>
+  <button class="tab-btn" onclick="openTab(event, 'okinawa-plan')">🎆 โอกินาว่า (เทศกาลดอกไม้ไฟ)</button>
+</div>
 
-<div class="container">
+<!-- ==================== CHINA PLAN ==================== -->
+<div id="china-plan" class="tab-content active">
+  <div class="plan-title">
+    <h2>🐼 แพลนเที่ยวเฉิงตู - ฉงชิ่ง 5 วัน 5 คืน 🌉</h2>
+    <div class="budget">💰 งบประมาณรวมสุทธิ 20,236 บาท / ท่าน</div>
+  </div>
 
-  <!-- DAY 1 -->
-  <section class="day-section day1" id="day1">
-    <div class="day-header"><span class="day-badge">Day 1</span> ตะลุยเมืองเฉิงตู (Chengdu)</div>
-    <div class="timeline">
-      <div class="item">
-        <div class="time" style="font-size: 0.85rem;">เที่ยวบิน</div>
-        <div class="content"><p style="color:#e63946; font-weight:bold;">✈️ ค่าใช้จ่ายในการเดินทาง: ตั๋วเครื่องบินขาไป ดอนเมือง → เฉิงตู (AirAsia FD562) 2,795 บาท</p></div>
-      </div>
-      <div class="item"><div class="time">02:00</div><div class="content"><h3><a class="loc-link" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Chengdu+Shuangliu+International+Airport"><span class="pin">📍</span>เดินทางถึงสนามบินเฉิงตู (TFU)</a></h3><p>ผ่าน ตม. แล้วนั่ง Airport Bus สาย 1 เพื่อเข้าเมืองไปลงแถวถนนชุนซี (Chunxi Road) ใช้เวลาประมาณ 45 นาที (สแกน Alipay จ่าย 25 หยวน)<br><span style="color:#e63946; font-weight:bold;">💰 ค่าใช้จ่ายสถานที่: ฟรี (เข้าสนามบิน)</span></p></div></div>
-      <div class="item">
-        <div class="time" style="font-size: 0.85rem;">เดินทาง</div>
-        <div class="content"><p style="color:#e63946; font-weight:bold;">🚌 ค่าใช้จ่ายในการเดินทาง: รถ Airport Bus สาย 1 (สนามบินเทียนฟู่ → ถนนชุนซี) 112 บาท (สแกน Alipay จ่าย 25 หยวน)</p></div>
-      </div>
-      <div class="item"><div class="time">04:00</div><div class="content"><h3><a class="loc-link" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Meihao+R+Hotel+Chengdu"><span class="pin">📍</span>Check-in โรงแรม</a></h3><p>พักที่ Meihao R Hotel (หรือ R Royalss Hotel) ทำเลดีใกล้ถนนชุนซีและรถไฟใต้ดิน<br><span style="color:#e63946; font-weight:bold;">💰 ค่าใช้จ่ายสถานที่: ค่าที่พักเฉิงตู 4 คืน คนละ 2,384 บาท (จากราคาห้องรวม 4,769.60 บาท หารเพื่อน)</span></p></div></div>
-      <div class="item">
-        <div class="time" style="font-size: 0.85rem;">เดินทาง</div>
-        <div class="content"><p style="color:#e63946; font-weight:bold;">🚇 ค่าใช้จ่ายในการเดินทาง: รถไฟใต้ดิน และ DiDi (หักจากงบ Metro 80 บาท และ DiDi 240 บาท/คน ตลอดทริปในเฉิงตู)</p></div>
-      </div>
-      <div class="item"><div class="time">12:00</div><div class="content"><h3><a class="loc-link" target="_blank" href="https://maps.app.goo.gl/NMBJMDrop7gi97iYA"><span class="pin">📍</span>มื้อเที่ยงที่ Taode Casserole (Yingmenkou Branch)</a></h3><p>ร้านอาหารเสฉวนยอดฮิตที่ห้าง Taikoo Li แนะนำให้ไปช่วง 11:00 น. ก่อนคนจะเยอะ เมนูห้ามพลาดคือ กุ้งกระเทียมอบวุ้นเส้น (56 หยวน) และปลาต้มผักกาดดอง (41 หยวน) สั่งอาหารง่ายๆ ผ่านการสแกน QR Code<br><span style="color:#e63946; font-weight:bold;">💰 ค่าใช้จ่ายสถานที่: ค่าอาหารเฉลี่ยคนละ ~200 บาท (กุ้งกระเทียม 56¥, ปลาต้ม 41¥, ไก่ผัดพริก 38¥, ถั่วลันเตา 25¥, หมูทอด 23¥, ผักกวางตุ้ง 13¥, น้ำชา/ทิชชู่ 1.5¥/คน)</span></p></div></div>
-      <div class="item"><div class="time">13:00</div><div class="content"><h3><a class="loc-link" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Daci+Temple+Chengdu"><span class="pin">📍</span>วัดต้าสือ (Daci Temple)</a></h3><p>วัดเก่าแก่ใจกลางเมือง เข้าฟรี บรรยากาศร่มรื่น แวะขอพรเรื่องโชคลาภ<br><span style="color:#e63946; font-weight:bold;">💰 ค่าใช้จ่ายสถานที่: เข้าชมฟรี</span></p></div></div>
-      <div class="item"><div class="time">14:30</div><div class="content"><h3><a class="loc-link" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Chengdu+IFS+Panda"><span class="pin">📍</span>จุดเช็คอินแพนด้ายักษ์ (IFS)</a></h3><p>แนะนำให้ขึ้นไปถ่ายรูปที่ดาดฟ้าก่อนเพื่อถ่ายกับหน้าแพนด้า จากนั้นค่อยลงมาถ่ายรูปด้านหน้าตึก<br><span style="color:#e63946; font-weight:bold;">💰 ค่าใช้จ่ายสถานที่: เข้าชมและถ่ายรูปฟรี</span></p></div></div>
-      <div class="item"><div class="time">15:00</div><div class="content"><h3><a class="loc-link" target="_blank" href="https://maps.app.goo.gl/9Y8rC5V6WHCrr42QA"><span class="pin">📍</span>ช้อปปิ้ง MINISO LAND</a></h3><p>สาขาใหญ่ของเฉิงตู มีของใช้ ของสะสม และของฝากให้เลือกเยอะมาก<br><span style="color:#e63946; font-weight:bold;">💰 ค่าใช้จ่ายสถานที่: หักจากงบช้อปปิ้งและของฝาก (รวม 2,000 บาทตลอดทริป)</span></p></div></div>
-      <div class="item"><div class="time">15:30</div><div class="content"><h3><a class="loc-link" target="_blank" href="https://maps.app.goo.gl/AVYdh5SjA3zT1hSX6"><span class="pin">📍</span>Tea Time ร้าน Li Shan Shan</a></h3><p>แวะกินชาชานมร้านดัง เมนูแนะนำคือ QingRu Milk Tea ที่มีโฟมนมนุ่มๆ ด้านบน (18 หยวน)<br><span style="color:#e63946; font-weight:bold;">💰 ค่าใช้จ่ายสถานที่: ชานม QingRu Milk Tea 18 หยวน (~90 บาท)</span></p></div></div>
-      <div class="item"><div class="time">16:30</div><div class="content"><h3><a class="loc-link" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Eastern+Suburb+Memory+Chengdu"><span class="pin">📍</span>ถ่ายรูปย่าน Dongjiao Jiyi (Eastern Suburb Memory)</a></h3><p>ย่านฮิปๆ ที่รวมร้านค้า คาเฟ่ งานอาร์ต และจุดถ่ายรูปกับกำแพงคำว่า CHENGDU<br><span style="color:#e63946; font-weight:bold;">💰 ค่าใช้จ่ายสถานที่: เข้าชมฟรี</span></p></div></div>
-      <div class="item"><div class="time">18:30</div><div class="content"><h3><a class="loc-link" target="_blank" href="https://maps.app.goo.gl/JwcMhZyKS9D6W9Ga6"><span class="pin">📍</span>ถนนโบราณซอยกว้างซอยแคบ (Kuanzhai Alley)</a></h3><p>เดินเล่นย่านเก่าแก่ที่มีทั้งร้านอาหาร ร้านขนม และของฝาก<br><span style="color:#e63946; font-weight:bold;">💰 ค่าใช้จ่ายสถานที่: เข้าชมฟรี (ค่าอาหารสตรีทฟู้ดรวมในงบอาหาร 2,400 บาท ฝั่งเฉิงตู)</span></p></div></div>
-      <div class="item">
-        <div class="time" style="font-size: 0.85rem;">เดินทาง</div>
-        <div class="content"><p style="color:#e63946; font-weight:bold;">🚕 ค่าใช้จ่ายในการเดินทาง: ค่าเรียกรถ DiDi ไปตลาดกลางคืน (หักจากงบ DiDi 240 บาท/คน)</p></div>
-      </div>
-      <div class="item"><div class="time">20:00</div><div class="content"><h3><a class="loc-link" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Fuqin+Night+Market+Chengdu"><span class="pin">📍</span>ตลาดกลางคืน Fuqin Night Market</a></h3><p>นั่ง DiDi ไปกินสตรีทฟู้ดโลคอล ราคาไม่แพง มีของกินให้เลือกเยอะมาก<br><span style="color:#e63946; font-weight:bold;">💰 ค่าใช้จ่ายสถานที่: อาหารสตรีทฟู้ด (หักจากงบอาหารฝั่งเฉิงตู 2,400 บาท)</span></p></div></div>
-    </div>
+  <nav>
+    <a href="#day1">Day 1</a>
+    <a href="#day2">Day 2</a>
+    <a href="#day3">Day 3</a>
+    <a href="#day4">Day 4</a>
+    <a href="#day5">Day 5</a>
+    <a href="#tips">ทริค & ข้อควรระวัง</a>
+  </nav>
 
-    <!-- HIGHLIGHT INFOGRAPHIC -->
-    <div class="highlight-box">
-      <div class="highlight-title accent">📊 สรุปไฮไลต์ Day 1</div>
-      <div class="stat-grid">
-        <div class="stat-card" style="border-top-color:#e63946;"><div class="icon">📍</div><div class="num">10</div><div class="label">จุดเช็คอิน</div></div>
-        <div class="stat-card" style="border-top-color:#e63946;"><div class="icon">🍜</div><div class="num">3</div><div class="label">มื้ออาหาร/ของกิน</div></div>
-        <div class="stat-card" style="border-top-color:#e63946;"><div class="icon">🚌</div><div class="num">Bus+เดิน</div><div class="label">การเดินทางหลัก</div></div>
-        <div class="stat-card" style="border-top-color:#e63946;"><div class="icon">⏱️</div><div class="num">~18 ชม.</div><div class="label">ระยะเวลารวม</div></div>
+  <div class="container">
+    <!-- CHINA DAY 1 -->
+    <section class="day-section day1" id="day1">
+      <div class="day-header"><span class="day-badge">Day 1</span> ตะลุยเมืองเฉิงตู (Chengdu)</div>
+      <div class="timeline">
+        <div class="item">
+          <div class="time" style="font-size: 0.85rem;">เที่ยวบิน</div>
+          <div class="content"><p style="color:#e63946; font-weight:bold;">✈️ ค่าใช้จ่ายในการเดินทาง: ตั๋วเครื่องบินขาไป ดอนเมือง → เฉิงตู (AirAsia FD562) 2,795 บาท</p></div>
+        </div>
+        <div class="item"><div class="time">02:00</div><div class="content"><h3><a class="loc-link" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Chengdu+Shuangliu+International+Airport"><span class="pin">📍</span>เดินทางถึงสนามบินเฉิงตู (TFU)</a></h3><p>ผ่าน ตม. แล้วนั่ง Airport Bus สาย 1 เพื่อเข้าเมืองไปลงแถวถนนชุนซี (Chunxi Road) ใช้เวลาประมาณ 45 นาที (สแกน Alipay จ่าย 25 หยวน)<br><span style="color:#e63946; font-weight:bold;">💰 ค่าใช้จ่ายสถานที่: ฟรี (เข้าสนามบิน)</span></p></div></div>
+        <div class="item">
+          <div class="time" style="font-size: 0.85rem;">เดินทาง</div>
+          <div class="content"><p style="color:#e63946; font-weight:bold;">🚌 ค่าใช้จ่ายในการเดินทาง: รถ Airport Bus สาย 1 (สนามบินเทียนฟู่ → ถนนชุนซี) 112 บาท (สแกน Alipay จ่าย 25 หยวน)</p></div>
+        </div>
+        <div class="item"><div class="time">04:00</div><div class="content"><h3><a class="loc-link" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Meihao+R+Hotel+Chengdu"><span class="pin">📍</span>Check-in โรงแรม</a></h3><p>พักที่ Meihao R Hotel (หรือ R Royalss Hotel) ทำเลดีใกล้ถนนชุนซีและรถไฟใต้ดิน<br><span style="color:#e63946; font-weight:bold;">💰 ค่าใช้จ่ายสถานที่: ค่าที่พักเฉิงตู 4 คืน คนละ 2,384 บาท (จากราคาห้องรวม 4,769.60 บาท หารเพื่อน)</span></p></div></div>
+        <div class="item">
+          <div class="time" style="font-size: 0.85rem;">เดินทาง</div>
+          <div class="content"><p style="color:#e63946; font-weight:bold;">🚇 ค่าใช้จ่ายในการเดินทาง: รถไฟใต้ดิน และ DiDi (หักจากงบ Metro 80 บาท และ DiDi 240 บาท/คน ตลอดทริปในเฉิงตู)</p></div>
+        </div>
+        <div class="item"><div class="time">12:00</div><div class="content"><h3><a class="loc-link" target="_blank" href="https://maps.app.goo.gl/NMBJMDrop7gi97iYA"><span class="pin">📍</span>มื้อเที่ยงที่ Taode Casserole (Yingmenkou Branch)</a></h3><p>ร้านอาหารเสฉวนยอดฮิตที่ห้าง Taikoo Li แนะนำให้ไปช่วง 11:00 น. ก่อนคนจะเยอะ เมนูห้ามพลาดคือ กุ้งกระเทียมอบวุ้นเส้น (56 หยวน) และปลาต้มผักกาดดอง (41 หยวน) สั่งอาหารง่ายๆ ผ่านการสแกน QR Code<br><span style="color:#e63946; font-weight:bold;">💰 ค่าใช้จ่ายสถานที่: ค่าอาหารเฉลี่ยคนละ ~200 บาท (กุ้งกระเทียม 56¥, ปลาต้ม 41¥, ไก่ผัดพริก 38¥, ถั่วลันเตา 25¥, หมูทอด 23¥, ผักกวางตุ้ง 13¥, น้ำชา/ทิชชู่ 1.5¥/คน)</span></p></div></div>
+        <div class="item"><div class="time">13:00</div><div class="content"><h3><a class="loc-link" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Daci+Temple+Chengdu"><span class="pin">📍</span>วัดต้าสือ (Daci Temple)</a></h3><p>วัดเก่าแก่ใจกลางเมือง เข้าฟรี บรรยากาศร่มรื่น แวะขอพรเรื่องโชคลาภ<br><span style="color:#e63946; font-weight:bold;">💰 ค่าใช้จ่ายสถานที่: เข้าชมฟรี</span></p></div></div>
+        <div class="item"><div class="time">14:30</div><div class="content"><h3><a class="loc-link" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Chengdu+IFS+Panda"><span class="pin">📍</span>จุดเช็คอินแพนด้ายักษ์ (IFS)</a></h3><p>แนะนำให้ขึ้นไปถ่ายรูปที่ดาดฟ้าก่อนเพื่อถ่ายกับหน้าแพนด้า จากนั้นค่อยลงมาถ่ายรูปด้านหน้าตึก<br><span style="color:#e63946; font-weight:bold;">💰 ค่าใช้จ่ายสถานที่: เข้าชมและถ่ายรูปฟรี</span></p></div></div>
+        <div class="item"><div class="time">15:00</div><div class="content"><h3><a class="loc-link" target="_blank" href="https://maps.app.goo.gl/9Y8rC5V6WHCrr42QA"><span class="pin">📍</span>ช้อปปิ้ง MINISO LAND</a></h3><p>สาขาใหญ่ของเฉิงตู มีของใช้ ของสะสม และของฝากให้เลือกเยอะมาก<br><span style="color:#e63946; font-weight:bold;">💰 ค่าใช้จ่ายสถานที่: หักจากงบช้อปปิ้งและของฝาก (รวม 2,000 บาทตลอดทริป)</span></p></div></div>
+        <div class="item"><div class="time">15:30</div><div class="content"><h3><a class="loc-link" target="_blank" href="https://maps.app.goo.gl/AVYdh5SjA3zT1hSX6"><span class="pin">📍</span>Tea Time ร้าน Li Shan Shan</a></h3><p>แวะกินชาชานมร้านดัง เมนูแนะนำคือ QingRu Milk Tea ที่มีโฟมนมนุ่มๆ ด้านบน (18 หยวน)<br><span style="color:#e63946; font-weight:bold;">💰 ค่าใช้จ่ายสถานที่: ชานม QingRu Milk Tea 18 หยวน (~90 บาท)</span></p></div></div>
+        <div class="item"><div class="time">16:30</div><div class="content"><h3><a class="loc-link" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Eastern+Suburb+Memory+Chengdu"><span class="pin">📍</span>ถ่ายรูปย่าน Dongjiao Jiyi (Eastern Suburb Memory)</a></h3><p>ย่านฮิปๆ ที่รวมร้านค้า คาเฟ่ งานอาร์ต และจุดถ่ายรูปกับกำแพงคำว่า CHENGDU<br><span style="color:#e63946; font-weight:bold;">💰 ค่าใช้จ่ายสถานที่: เข้าชมฟรี</span></p></div></div>
+        <div class="item"><div class="time">18:30</div><div class="content"><h3><a class="loc-link" target="_blank" href="https://maps.app.goo.gl/JwcMhZyKS9D6W9Ga6"><span class="pin">📍</span>ถนนโบราณซอยกว้างซอยแคบ (Kuanzhai Alley)</a></h3><p>เดินเล่นย่านเก่าแก่ที่มีทั้งร้านอาหาร ร้านขนม และของฝาก<br><span style="color:#e63946; font-weight:bold;">💰 ค่าใช้จ่ายสถานที่: เข้าชมฟรี (ค่าอาหารสตรีทฟู้ดรวมในงบอาหาร 2,400 บาท ฝั่งเฉิงตู)</span></p></div></div>
+        <div class="item">
+          <div class="time" style="font-size: 0.85rem;">เดินทาง</div>
+          <div class="content"><p style="color:#e63946; font-weight:bold;">🚕 ค่าใช้จ่ายในการเดินทาง: ค่าเรียกรถ DiDi ไปตลาดกลางคืน (หักจากงบ DiDi 240 บาท/คน)</p></div>
+        </div>
+        <div class="item"><div class="time">20:00</div><div class="content"><h3><a class="loc-link" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Fuqin+Night+Market+Chengdu"><span class="pin">📍</span>ตลาดกลางคืน Fuqin Night Market</a></h3><p>นั่ง DiDi ไปกินสตรีทฟู้ดโลคอล ราคาไม่แพง มีของกินให้เลือกเยอะมาก<br><span style="color:#e63946; font-weight:bold;">💰 ค่าใช้จ่ายสถานที่: อาหารสตรีทฟู้ด (หักจากงบอาหารฝั่งเฉิงตู 2,400 บาท)</span></p></div></div>
       </div>
-      <div class="highlight-tags">
-        <span class="tag accent">🐼 แพนด้ายักษ์ IFS</span>
-        <span class="tag accent">🍲 เสฉวนแท้</span>
-        <span class="tag accent">🏮 ซอยกว้างซอยแคบ</span>
-        <span class="tag accent">🌃 ตลาดกลางคืน</span>
-      </div>
-      <div class="must-try">
-        <h4>🍽️ ห้ามพลาด!</h4>
-        <ul>
-          <li>กุ้งกระเทียมอบวุ้นเส้น + ปลาต้มผักกาดดอง ที่ Taode Casserole</li>
-          <li>QingRu Milk Tea ร้าน Li Shan Shan</li>
-          <li>สตรีทฟู้ดที่ Fuqin Night Market</li>
-        </ul>
-      </div>
-    </div>
+    </section>
 
-    <!-- MAP -->
-    <div class="map-box">
-      <div class="map-label accent-bg">🗺️ พื้นที่หลัก Day 1 — ถนนชุนซี & ใจกลางเฉิงตู</div>
-      <iframe src="https://www.google.com/maps?q=Chunxi+Road,+Chengdu&output=embed" loading="lazy" allowfullscreen></iframe>
-    </div>
-  </section>
+    <!-- CHINA DAY 2 -->
+    <section class="day-section day2" id="day2">
+      <div class="day-header"><span class="day-badge">Day 2</span> One Day Trip อุทยานปี้เผิงโกว (Bipenggou)</div>
+      <div class="timeline">
+        <div class="item"><div class="time">07:00</div><div class="content"><h3 class="no-link">ออกจากโรงแรม</h3><p>เดินไปขึ้นรถบัสที่จุดนัดพบ<br><span style="color:#e63946; font-weight:bold;">💰 ค่าใช้จ่ายสถานที่: วันเดย์ทริปอุทยานปี้เผิงโกว 2,272 บาท/คน (รวมค่าเข้า+รถรับส่ง+รถบัส+รถกอล์ฟ+อาหาร/ของใช้)</span></p></div></div>
+        <div class="item"><div class="time">07:30</div><div class="content"><h3 class="no-link">ออกเดินทาง</h3><p>นั่งรถจากเฉิงตูไปปี้เผิงโกว ใช้เวลาประมาณ 3 ชั่วโมงกว่า (มีแวะจุดพักรถ 1 ครั้ง เข้าห้องน้ำและซื้อของกินได้)<br><span style="color:#e63946; font-weight:bold;">💰 ค่าใช้จ่ายสถานที่: ค่ารถบัสไป-กลับ (ครอบคลุมในแพ็กเกจแล้ว)</span></p></div></div>
+        <div class="item"><div class="time">10:50</div><div class="content"><h3><a class="loc-link" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Bipenggou+Scenic+Area"><span class="pin">📍</span>ถึงอุทยาน Bipenggou</a></h3><p>สแกน QR Code เข้าอุทยาน แล้วเดินไปขึ้นรถบัส (นั่งรถประมาณ 15 นาที)<br><span style="color:#e63946; font-weight:bold;">💰 ค่าใช้จ่ายสถานที่: ค่าเข้าอุทยาน (ครอบคลุมในแพ็กเกจแล้ว)</span></p></div></div>
+        <div class="item"><div class="time">11:20</div><div class="content"><h3><a class="loc-link" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Longwanghai+Lake+Bipenggou"><span class="pin">📍</span>ทะเลสาบหลงหวังไห่ (Longwanghai)</a></h3><p>ทะเลสาบสีมรกตขนาดใหญ่ เดินเลียบทะเลสาบไปเรื่อยๆ เพื่อไปขึ้นรถบัสจุดที่ 2<br><span style="color:#e63946; font-weight:bold;">💰 ค่าใช้จ่ายสถานที่: เข้าชมฟรี (ครอบคลุมในแพ็กเกจแล้ว)</span></p></div></div>
+        <div class="item"><div class="time">13:00</div><div class="content"><h3><a class="loc-link" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Shanghaizi+Bipenggou"><span class="pin">📍</span>จุดแวะพัก Shanghaizi</a></h3><p>มีลานจอดรถ ร้านอาหาร และห้องน้ำ แวะกินมื้อเที่ยงที่นี่ (แนะนำให้เตรียมมาม่าและขนมมากินเอง มีน้ำร้อนให้กด)<br><span style="color:#e63946; font-weight:bold;">💰 ค่าใช้จ่ายสถานที่: ค่าอาหารมื้อเที่ยง (ครอบคลุมในแพ็กเกจแล้ว)</span></p></div></div>
+        <div class="item"><div class="time">13:40</div><div class="content"><h3 class="no-link">ซื้อตั๋วรถกอล์ฟ</h3><p>ซื้อตั๋วแบบไป-กลับสำหรับจุดที่ 3 และ 4 (ราคาประมาณ 300 บาท) แล้วขึ้นรถกอล์ฟไปจุดที่ 3<br><span style="color:#e63946; font-weight:bold;">💰 ค่าใช้จ่ายสถานที่: ค่าตั๋วรถกอล์ฟไป-กลับจุด 3-4 ประมาณ 300 บาท (ครอบคลุมในแพ็กเกจ 2,272 บาทแล้ว)</span></p></div></div>
+        <div class="item">
+          <div class="time" style="font-size: 0.85rem;">เดินทาง</div>
+          <div class="content"><p style="color:#e63946; font-weight:bold;">🛺 ค่าใช้จ่ายในการเดินทาง: นั่งรถกอล์ฟไปจุดที่ 3 (ใช้ตั๋ว 300 บาทที่ซื้อมา ซึ่งรวมในแพ็กเกจแล้ว)</p></div>
+        </div>
+        <div class="item"><div class="time">14:00</div><div class="content"><h3><a class="loc-link" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Zhuomatan+Bipenggou"><span class="pin">📍</span>หาดจัวหม่านทาน (Zhuomatan)</a></h3><p>ระหว่างทางรถจะแวะจุดนี้ สามารถลงไปเดินเล่นได้ (ถ้าไม่ลง รถจะไปส่งที่จุด 3 เลย)<br><span style="color:#e63946; font-weight:bold;">💰 ค่าใช้จ่ายสถานที่: เข้าชมฟรี</span></p></div></div>
+        <div class="item"><div class="time">14:45</div><div class="content"><h3><a class="loc-link" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Panyang+Lake+Bipenggou"><span class="pin">📍</span>ทะเลสาบปันหยาง (Panyang Lake - จุดที่ 3)</a></h3><p>จุดนี้มีน้องแพะภูเขา น้ำตกเล็กๆ และวิวภูเขา เริ่มมีอาการอากาศเบาบาง แนะนำให้เตรียมกระป๋องออกซิเจนมาสูดดม<br><span style="color:#e63946; font-weight:bold;">💰 ค่าใช้จ่ายสถานที่: เข้าชมฟรี</span></p></div></div>
+        <div class="item"><div class="time">15:20</div><div class="content"><h3><a class="loc-link" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Yanziyan+Bipenggou"><span class="pin">📍</span>จุดชมวิว Yanziyan (จุดที่ 4)</a></h3><p>นั่งรถจากจุด 3 มายังจุดสูงสุดและเป็นไฮไลต์ของอุทยาน แนะนำให้เดินไปทางขวาจะถึงวิวภูเขาและลานทุ่งหญ้าอัลไพน์เร็วกว่าทางซ้าย<br><span style="color:#e63946; font-weight:bold;">💰 ค่าใช้จ่ายสถานที่: เข้าชมฟรี</span></p></div></div>
+        <div class="item"><div class="time">16:00</div><div class="content"><h3 class="no-link">เดินทางลง</h3><p>นั่งรถกอล์ฟรวดเดียวจากจุด 4 ลงมาจุด 2 และเปลี่ยนเป็นรถบัสลงมาด้านล่างสุด (เผื่อเวลาเดินทางลงประมาณ 1 ชั่วโมง)<br><span style="color:#e63946; font-weight:bold;">💰 ค่าใช้จ่ายสถานที่: รวมอยู่ในตั๋วรถกอล์ฟและรถบัสอุทยานแล้ว</span></p></div></div>
+        <div class="item"><div class="time">17:00</div><div class="content"><h3 class="no-link">ขึ้นรถกลับเฉิงตู</h3><p>เดินทางกลับด้วยรถคันเดิม<br><span style="color:#e63946; font-weight:bold;">💰 ค่าใช้จ่ายสถานที่: ครอบคลุมในแพ็กเกจรถรับส่ง</span></p></div></div>
+        <div class="item">
+          <div class="time" style="font-size: 0.85rem;">เดินทาง</div>
+          <div class="content"><p style="color:#e63946; font-weight:bold;">🚇 ค่าใช้จ่ายในการเดินทาง: รถไฟใต้ดินกลับที่พัก (หักจากงบ Metro 80 บาทตลอดทริป)</p></div>
+        </div>
+        <div class="item"><div class="time">20:00</div><div class="content"><h3><a class="loc-link" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Chadianzi+Bus+Station+Chengdu"><span class="pin">📍</span>ถึงสถานี Chadianzi</a></h3><p>นั่งรถไฟใต้ดินต่อไปยังถนนชุนซี (ประมาณ 45 นาที)<br><span style="color:#e63946; font-weight:bold;">💰 ค่าใช้จ่ายสถานที่: รวมในงบเดินทางแล้ว</span></p></div></div>
+        <div class="item"><div class="time">21:30</div><div class="content"><h3 class="no-link">พักผ่อน</h3><p>ปิดท้ายวันด้วยการนั่งร้านชิลล์ใกล้ๆ โรงแรม<br><span style="color:#e63946; font-weight:bold;">💰 ค่าใช้จ่ายสถานที่: หักจากงบอาหารฝั่งเฉิงตู</span></p></div></div>
+      </div>
+    </section>
 
-  <!-- DAY 2 -->
-  <section class="day-section day2" id="day2">
-    <div class="day-header"><span class="day-badge">Day 2</span> One Day Trip อุทยานปี้เผิงโกว (Bipenggou)</div>
-    <div class="timeline">
-      <div class="item"><div class="time">07:00</div><div class="content"><h3 class="no-link">ออกจากโรงแรม</h3><p>เดินไปขึ้นรถบัสที่จุดนัดพบ<br><span style="color:#e63946; font-weight:bold;">💰 ค่าใช้จ่ายสถานที่: วันเดย์ทริปอุทยานปี้เผิงโกว 2,272 บาท/คน (รวมค่าเข้า+รถรับส่ง+รถบัส+รถกอล์ฟ+อาหาร/ของใช้)</span></p></div></div>
-      <div class="item"><div class="time">07:30</div><div class="content"><h3 class="no-link">ออกเดินทาง</h3><p>นั่งรถจากเฉิงตูไปปี้เผิงโกว ใช้เวลาประมาณ 3 ชั่วโมงกว่า (มีแวะจุดพักรถ 1 ครั้ง เข้าห้องน้ำและซื้อของกินได้)<br><span style="color:#e63946; font-weight:bold;">💰 ค่าใช้จ่ายสถานที่: ค่ารถบัสไป-กลับ (ครอบคลุมในแพ็กเกจแล้ว)</span></p></div></div>
-      <div class="item"><div class="time">10:50</div><div class="content"><h3><a class="loc-link" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Bipenggou+Scenic+Area"><span class="pin">📍</span>ถึงอุทยาน Bipenggou</a></h3><p>สแกน QR Code เข้าอุทยาน แล้วเดินไปขึ้นรถบัส (นั่งรถประมาณ 15 นาที)<br><span style="color:#e63946; font-weight:bold;">💰 ค่าใช้จ่ายสถานที่: ค่าเข้าอุทยาน (ครอบคลุมในแพ็กเกจแล้ว)</span></p></div></div>
-      <div class="item"><div class="time">11:20</div><div class="content"><h3><a class="loc-link" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Longwanghai+Lake+Bipenggou"><span class="pin">📍</span>ทะเลสาบหลงหวังไห่ (Longwanghai)</a></h3><p>ทะเลสาบสีมรกตขนาดใหญ่ เดินเลียบทะเลสาบไปเรื่อยๆ เพื่อไปขึ้นรถบัสจุดที่ 2<br><span style="color:#e63946; font-weight:bold;">💰 ค่าใช้จ่ายสถานที่: เข้าชมฟรี (ครอบคลุมในแพ็กเกจแล้ว)</span></p></div></div>
-      <div class="item"><div class="time">13:00</div><div class="content"><h3><a class="loc-link" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Shanghaizi+Bipenggou"><span class="pin">📍</span>จุดแวะพัก Shanghaizi</a></h3><p>มีลานจอดรถ ร้านอาหาร และห้องน้ำ แวะกินมื้อเที่ยงที่นี่ (แนะนำให้เตรียมมาม่าและขนมมากินเอง มีน้ำร้อนให้กด)<br><span style="color:#e63946; font-weight:bold;">💰 ค่าใช้จ่ายสถานที่: ค่าอาหารมื้อเที่ยง (ครอบคลุมในแพ็กเกจแล้ว)</span></p></div></div>
-      <div class="item"><div class="time">13:40</div><div class="content"><h3 class="no-link">ซื้อตั๋วรถกอล์ฟ</h3><p>ซื้อตั๋วแบบไป-กลับสำหรับจุดที่ 3 และ 4 (ราคาประมาณ 300 บาท) แล้วขึ้นรถกอล์ฟไปจุดที่ 3<br><span style="color:#e63946; font-weight:bold;">💰 ค่าใช้จ่ายสถานที่: ค่าตั๋วรถกอล์ฟไป-กลับจุด 3-4 ประมาณ 300 บาท (ครอบคลุมในแพ็กเกจ 2,272 บาทแล้ว)</span></p></div></div>
-      <div class="item">
-        <div class="time" style="font-size: 0.85rem;">เดินทาง</div>
-        <div class="content"><p style="color:#e63946; font-weight:bold;">🛺 ค่าใช้จ่ายในการเดินทาง: นั่งรถกอล์ฟไปจุดที่ 3 (ใช้ตั๋ว 300 บาทที่ซื้อมา ซึ่งรวมในแพ็กเกจแล้ว)</p></div>
+    <!-- CHINA DAY 3 -->
+    <section class="day-section day3" id="day3">
+      <div class="day-header"><span class="day-badge">Day 3</span> ตูเจียงเยี่ยน (Dujiangyan)</div>
+      <div class="timeline">
+        <div class="item">
+          <div class="time" style="font-size: 0.85rem;">เดินทาง</div>
+          <div class="content"><p style="color:#e63946; font-weight:bold;">🚄 ค่าใช้จ่ายในการเดินทาง: รถไฟความเร็วสูง (สถานี Xipu → Dujiangyan) 10 หยวน (รถไฟไป-กลับรวม 90 บาท/คน)</p></div>
+        </div>
+        <div class="item"><div class="time">10:00</div><div class="content"><h3><a class="loc-link" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Dujiangyan+Railway+Station"><span class="pin">📍</span>เดินทางไปตูเจียงเยี่ยน</a></h3><p>นั่งรถไฟความเร็วสูงจากสถานี Xipu ไป Dujiangyan (ใช้เวลาประมาณ 20 นาที)<br><span style="color:#e63946; font-weight:bold;">💰 ค่าใช้จ่ายสถานที่: ตั๋วรถไฟขาไป 10 หยวน</span></p></div></div>
+        <div class="item"><div class="time">11:00</div><div class="content"><h3><a class="loc-link" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Zhongshuge+Dujiangyan+Sunac+Mall"><span class="pin">📍</span>ร้านหนังสือ Zhongshuge (Sunac Mall)</a></h3><p>แวะถ่ายรูปกับร้านหนังสือที่ตกแต่งอลังการเหมือนเวทมนตร์ (อยู่ใกล้สถานีรถไฟ)<br><span style="color:#e63946; font-weight:bold;">💰 ค่าใช้จ่ายสถานที่: เข้าชมฟรี</span></p></div></div>
+        <div class="item">
+          <div class="time" style="font-size: 0.85rem;">เดินทาง</div>
+          <div class="content"><p style="color:#e63946; font-weight:bold;">🚕 ค่าใช้จ่ายในการเดินทาง: นั่งรถ DiDi ไปหุบเขาแพนด้า (หักจากงบ DiDi 240 บาท/คน ในเฉิงตู)</p></div>
+        </div>
+        <div class="item"><div class="time">13:00</div><div class="content"><h3><a class="loc-link" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Dujiangyan+Panda+Valley"><span class="pin">📍</span>หุบเขาแพนด้า (Panda Valley)</a></h3><p>ซื้อตั๋วหน้างาน (55 หยวน) ใช้เวลาเดินประมาณ 1.5 ชั่วโมง จุดนี้จะได้ดูทั้งแพนด้ายักษ์และแพนด้าแดงแบบใกล้ชิด<br><span style="color:#e63946; font-weight:bold;">💰 ค่าใช้จ่ายสถานที่: ซื้อตั๋วหน้างาน 55 หยวน (250 บาท)</span></p></div></div>
+        <div class="item"><div class="time">15:30</div><div class="content"><h3><a class="loc-link" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Yangtianwo+Square+Dujiangyan"><span class="pin">📍</span>จัตุรัส Yangtianwo</a></h3><p>เช็คอินถ่ายรูปคู่กับรูปปั้นแพนด้ายักษ์เซลฟี่<br><span style="color:#e63946; font-weight:bold;">💰 ค่าใช้จ่ายสถานที่: ถ่ายรูปฟรี</span></p></div></div>
+        <div class="item"><div class="time">16:30</div><div class="content"><h3><a class="loc-link" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Guanxian+Ancient+City+Dujiangyan"><span class="pin">📍</span>เมืองโบราณก้วนเสี้ยน (Guanxian Ancient City)</a></h3><p>เดินเล่นหาของกินสตรีทฟู้ด และแวะกินข้าวมื้อเย็นที่นี่<br><span style="color:#e63946; font-weight:bold;">💰 ค่าใช้จ่ายสถานที่: เดินเล่นฟรี (อาหารสตรีทฟู้ดรวมในงบอาหารฝั่งเฉิงตู 2,400 บาท)</span></p></div></div>
+        <div class="item"><div class="time">18:30</div><div class="content"><h3><a class="loc-link" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Nanqiao+Bridge+Dujiangyan"><span class="pin">📍</span>สะพานหนานเฉียว (Nanqiao Bridge)</a></h3><p>รอเวลาเปิดไฟของสะพาน น้ำในแม่น้ำจะกลายเป็นสีฟ้าตัดกับแสงไฟสีส้มของสะพาน บรรยากาศดีมาก<br><span style="color:#e63946; font-weight:bold;">💰 ค่าใช้จ่ายสถานที่: ชมวิวฟรี</span></p></div></div>
+        <div class="item">
+          <div class="time" style="font-size: 0.85rem;">เดินทาง</div>
+          <div class="content"><p style="color:#e63946; font-weight:bold;">🚄 ค่าใช้จ่ายในการเดินทาง: รถไฟความเร็วสูงกลับสถานี Xipu ราคา 10 หยวน</p></div>
+        </div>
+        <div class="item"><div class="time">19:30</div><div class="content"><h3 class="no-link">เดินทางกลับ</h3><p>นั่งรถไฟความเร็วสูงกลับไปสถานี Xipu (แนะนำให้จองตั๋วล่วงหน้าเพราะขากลับคนเยอะมาก)<br><span style="color:#e63946; font-weight:bold;">💰 ค่าใช้จ่ายสถานที่: ตั๋วรถไฟขากลับ 10 หยวน</span></p></div></div>
+        <div class="item"><div class="time">20:30</div><div class="content"><h3><a class="loc-link" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Chengdu+SKP"><span class="pin">📍</span>จุดเช็คอินน้ำพุไม้ไผ่ (Chengdu SKP)</a></h3><p>ไปดูโชว์ไฟและน้ำพุที่ห้าง SKP<br><span style="color:#e63946; font-weight:bold;">💰 ค่าใช้จ่ายสถานที่: ชมฟรี</span></p></div></div>
       </div>
-      <div class="item"><div class="time">14:00</div><div class="content"><h3><a class="loc-link" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Zhuomatan+Bipenggou"><span class="pin">📍</span>หาดจัวหม่านทาน (Zhuomatan)</a></h3><p>ระหว่างทางรถจะแวะจุดนี้ สามารถลงไปเดินเล่นได้ (ถ้าไม่ลง รถจะไปส่งที่จุด 3 เลย)<br><span style="color:#e63946; font-weight:bold;">💰 ค่าใช้จ่ายสถานที่: เข้าชมฟรี</span></p></div></div>
-      <div class="item"><div class="time">14:45</div><div class="content"><h3><a class="loc-link" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Panyang+Lake+Bipenggou"><span class="pin">📍</span>ทะเลสาบปันหยาง (Panyang Lake - จุดที่ 3)</a></h3><p>จุดนี้มีน้องแพะภูเขา น้ำตกเล็กๆ และวิวภูเขา เริ่มมีอาการอากาศเบาบาง แนะนำให้เตรียมกระป๋องออกซิเจนมาสูดดม<br><span style="color:#e63946; font-weight:bold;">💰 ค่าใช้จ่ายสถานที่: เข้าชมฟรี</span></p></div></div>
-      <div class="item"><div class="time">15:20</div><div class="content"><h3><a class="loc-link" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Yanziyan+Bipenggou"><span class="pin">📍</span>จุดชมวิว Yanziyan (จุดที่ 4)</a></h3><p>นั่งรถจากจุด 3 มายังจุดสูงสุดและเป็นไฮไลต์ของอุทยาน แนะนำให้เดินไปทางขวาจะถึงวิวภูเขาและลานทุ่งหญ้าอัลไพน์เร็วกว่าทางซ้าย<br><span style="color:#e63946; font-weight:bold;">💰 ค่าใช้จ่ายสถานที่: เข้าชมฟรี</span></p></div></div>
-      <div class="item"><div class="time">16:00</div><div class="content"><h3 class="no-link">เดินทางลง</h3><p>นั่งรถกอล์ฟรวดเดียวจากจุด 4 ลงมาจุด 2 และเปลี่ยนเป็นรถบัสลงมาด้านล่างสุด (เผื่อเวลาเดินทางลงประมาณ 1 ชั่วโมง)<br><span style="color:#e63946; font-weight:bold;">💰 ค่าใช้จ่ายสถานที่: รวมอยู่ในตั๋วรถกอล์ฟและรถบัสอุทยานแล้ว</span></p></div></div>
-      <div class="item"><div class="time">17:00</div><div class="content"><h3 class="no-link">ขึ้นรถกลับเฉิงตู</h3><p>เดินทางกลับด้วยรถคันเดิม<br><span style="color:#e63946; font-weight:bold;">💰 ค่าใช้จ่ายสถานที่: ครอบคลุมในแพ็กเกจรถรับส่ง</span></p></div></div>
-      <div class="item">
-        <div class="time" style="font-size: 0.85rem;">เดินทาง</div>
-        <div class="content"><p style="color:#e63946; font-weight:bold;">🚇 ค่าใช้จ่ายในการเดินทาง: รถไฟใต้ดินกลับที่พัก (หักจากงบ Metro 80 บาทตลอดทริป)</p></div>
-      </div>
-      <div class="item"><div class="time">20:00</div><div class="content"><h3><a class="loc-link" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Chadianzi+Bus+Station+Chengdu"><span class="pin">📍</span>ถึงสถานี Chadianzi</a></h3><p>นั่งรถไฟใต้ดินต่อไปยังถนนชุนซี (ประมาณ 45 นาที)<br><span style="color:#e63946; font-weight:bold;">💰 ค่าใช้จ่ายสถานที่: รวมในงบเดินทางแล้ว</span></p></div></div>
-      <div class="item"><div class="time">21:30</div><div class="content"><h3 class="no-link">พักผ่อน</h3><p>ปิดท้ายวันด้วยการนั่งร้านชิลล์ใกล้ๆ โรงแรม<br><span style="color:#e63946; font-weight:bold;">💰 ค่าใช้จ่ายสถานที่: หักจากงบอาหารฝั่งเฉิงตู</span></p></div></div>
-    </div>
+    </section>
 
-    <!-- HIGHLIGHT INFOGRAPHIC -->
-    <div class="highlight-box">
-      <div class="highlight-title accent">📊 สรุปไฮไลต์ Day 2</div>
-      <div class="stat-grid">
-        <div class="stat-card" style="border-top-color:#2a9d8f;"><div class="icon">🏔️</div><div class="num">4</div><div class="label">จุดชมวิวในอุทยาน</div></div>
-        <div class="stat-card" style="border-top-color:#2a9d8f;"><div class="icon">🚐</div><div class="num">~3 ชม.</div><div class="label">เดินทางไป-กลับ/เที่ยว</div></div>
-        <div class="stat-card" style="border-top-color:#2a9d8f;"><div class="icon">💵</div><div class="num">~300฿</div><div class="label">ค่ารถกอล์ฟ</div></div>
-        <div class="stat-card" style="border-top-color:#2a9d8f;"><div class="icon">🫁</div><div class="num">ต้องเตรียม</div><div class="label">กระป๋องออกซิเจน</div></div>
+    <!-- CHINA DAY 4 -->
+    <section class="day-section day4" id="day4">
+      <div class="day-header"><span class="day-badge">Day 4</span> เดินทางสู่ฉงชิ่ง (Chongqing)</div>
+      <div class="timeline">
+        <div class="item">
+          <div class="time" style="font-size: 0.85rem;">เดินทาง</div>
+          <div class="content"><p style="color:#e63946; font-weight:bold;">🚄 ค่าใช้จ่ายในการเดินทาง: รถไฟความเร็วสูงข้ามเมือง (Chengdu East → Chongqing North) 450 บาท</p></div>
+        </div>
+        <div class="item"><div class="time">08:30</div><div class="content"><h3><a class="loc-link" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Chongqing+North+Railway+Station"><span class="pin">📍</span>นั่งรถไฟไปฉงชิ่ง</a></h3><p>นั่งรถไฟความเร็วสูงจากสถานี Chengdu East Railway ไปลง Chongqing North Railway (ใช้เวลา 2 ชั่วโมง)<br><span style="color:#e63946; font-weight:bold;">💰 ค่าใช้จ่ายสถานที่: ค่าตั๋วรถไฟ 450 บาท</span></p></div></div>
+        <div class="item">
+          <div class="time" style="font-size: 0.85rem;">เดินทาง</div>
+          <div class="content"><p style="color:#e63946; font-weight:bold;">🚕 ค่าใช้จ่ายในการเดินทาง: ค่าเรียกรถ DiDi ในฉงชิ่ง (หักจากงบรวม 422 บาท/คน ตลอดทริปในฉงชิ่ง)</p></div>
+        </div>
+        <div class="item"><div class="time">12:00</div><div class="content"><h3><a class="loc-link" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Saiya+River+View+Hotel+Chongqing"><span class="pin">📍</span>Check-in โรงแรม</a></h3><p>เก็บกระเป๋าเข้าที่พัก Saiya River View Hotel<br><span style="color:#e63946; font-weight:bold;">💰 ค่าใช้จ่ายสถานที่: ค่าที่พักฉงชิ่ง 2 คืน คนละ 1,080 บาท (จากราคาห้อง 2,159.92 บาท หารเพื่อน)</span></p></div></div>
+        <div class="item"><div class="time">13:00</div><div class="content"><h3><a class="loc-link" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Guanyinqiao+Chongqing"><span class="pin">📍</span>ย่าน Guanyinqiao</a></h3><p>เดินเล่นย่านวัยรุ่น หาของกิน แวะชิมบะหมี่ฉงชิ่ง และถ่ายรูปกับป้ายไฟยอดฮิต "Wo Zai Chongqing" (ฉันอยู่ฉงชิ่ง)<br><span style="color:#e63946; font-weight:bold;">💰 ค่าใช้จ่ายสถานที่: เดินเล่นฟรี และบะหมี่ฉงชิ่ง (รวมในงบอาหารฝั่งฉงชิ่ง 2,225 บาท)</span></p></div></div>
+        <div class="item"><div class="time">14:30</div><div class="content"><h3><a class="loc-link" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Liziba+Station+Chongqing"><span class="pin">📍</span>สถานีหลีจื่อปา (Liziba Station)</a></h3><p>ดูรถไฟลอยฟ้าวิ่งทะลุเข้าไปในตึกที่พักอาศัยชั้น 19 โดยให้ลงมาถ่ายรูปมุมเสยจากด้านล่าง<br><span style="color:#e63946; font-weight:bold;">💰 ค่าใช้จ่ายสถานที่: ชมฟรี</span></p></div></div>
+        <div class="item"><div class="time">16:00</div><div class="content"><h3><a class="loc-link" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Longmenhao+Old+Street+Chongqing"><span class="pin">📍</span>ถนนโบราณหลงเหมินฮ่าว (Longmenhao Old Street)</a></h3><p>เดินเล่นย่านตึกเก่าริมแม่น้ำแยงซีเกียง ถ่ายรูปมุมไหนก็คลาสสิก<br><span style="color:#e63946; font-weight:bold;">💰 ค่าใช้จ่ายสถานที่: เข้าชมฟรี</span></p></div></div>
+        <div class="item">
+          <div class="time" style="font-size: 0.85rem;">เดินทาง</div>
+          <div class="content"><p style="color:#e63946; font-weight:bold;">🚕 ค่าใช้จ่ายในการเดินทาง: นั่ง DiDi ขึ้นเขา Nanshan (หักจากงบรวม 422 บาท/คน ในฉงชิ่ง)</p></div>
+        </div>
+        <div class="item"><div class="time">18:30</div><div class="content"><h3><a class="loc-link" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Ding+Laotou+Barbecue+Nanshan+Chongqing"><span class="pin">📍</span>ปิ้งย่างบนเขา (Ding Laotou Barbecue)</a></h3><p>ไปกินปิ้งย่างบนเขาหนานซาน (Nanshan) ชมวิวพาโนรามาของเมือง แนะนำให้ไปถึงก่อน 5 โมงเย็นเพื่อจองโต๊ะวิวด้านบนสุดที่เห็นแสงไฟตึกสะท้อนแม่น้ำ (ถ้าเรียก DiDi รถจะส่งแค่ด้านล่าง ต้องเดินขึ้นเขาไปอีกนิด)<br><span style="color:#e63946; font-weight:bold;">💰 ค่าใช้จ่ายสถานที่: ปิ้งย่างเตาถ่าน (รวมในงบอาหารฝั่งฉงชิ่ง)</span></p></div></div>
+        <div class="item"><div class="time">21:00</div><div class="content"><h3><a class="loc-link" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Commune+Bar+Chongqing"><span class="pin">📍</span>นั่งชิลล์ดาดฟ้า (Commune)</a></h3><p>บาร์กึ่งร้านอาหารยอดฮิตของวัยรุ่นริมแม่น้ำ แนะนำให้นั่งโซนดาดฟ้าเพื่อชมวิวตึก Raffles City แบบเต็มๆ<br><span style="color:#e63946; font-weight:bold;">💰 ค่าใช้จ่ายสถานที่: เครื่องดื่มบาร์ (รวมในงบอาหารฝั่งฉงชิ่ง)</span></p></div></div>
       </div>
-      <div class="highlight-tags">
-        <span class="tag accent">🟢 ทะเลสาบมรกต</span>
-        <span class="tag accent">🐐 แพะภูเขา</span>
-        <span class="tag accent">🌿 ทุ่งหญ้าอัลไพน์</span>
-        <span class="tag accent">⛰️ อากาศเบาบาง</span>
-      </div>
-      <div class="must-try">
-        <h4>🎒 เตรียมตัวก่อนไป</h4>
-        <ul>
-          <li>มาม่า/ขนม สำหรับมื้อเที่ยงที่ Shanghaizi (มีน้ำร้อนให้กด)</li>
-          <li>กระป๋องออกซิเจน สำหรับจุด 3-4 ที่อากาศเบาบาง</li>
-          <li>รองเท้าเดินป่า เพราะต้องเดินเลียบทะเลสาบเยอะ</li>
-        </ul>
-      </div>
-    </div>
+    </section>
 
-    <!-- MAP -->
-    <div class="map-box">
-      <div class="map-label accent-bg">🗺️ พื้นที่หลัก Day 2 — อุทยาน Bipenggou</div>
-      <iframe src="https://www.google.com/maps?q=Bipenggou+Scenic+Area&output=embed" loading="lazy" allowfullscreen></iframe>
-    </div>
-  </section>
+    <!-- CHINA DAY 5 -->
+    <section class="day-section day5" id="day5">
+      <div class="day-header"><span class="day-badge">Day 5</span> เก็บตกลานด์มาร์กฉงชิ่ง</div>
+      <div class="timeline">
+        <div class="item"><div class="time">09:00</div><div class="content"><h3><a class="loc-link" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Chadianxia+Coffee+Chongqing"><span class="pin">📍</span>คาเฟ่วิวกระเช้า (Chadianxia Coffee)</a></h3><p>คาเฟ่ซ่อนตัวอยู่ชั้น 15 ของตึกเก่า (ตึกไป๋เซียงจวี) นั่งจิบกาแฟชมวิวกระเช้าลอยฟ้าข้ามแม่น้ำแยงซีเกียง<br><span style="color:#e63946; font-weight:bold;">💰 ค่าใช้จ่ายสถานที่: กาแฟคาเฟ่ (รวมในงบอาหารฝั่งฉงชิ่ง 2,225 บาท)</span></p></div></div>
+        <div class="item"><div class="time">10:30</div><div class="content"><h3><a class="loc-link" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Arhat+Temple+Luohan+Temple+Chongqing"><span class="pin">📍</span>วัดหลัวฮั่น (Arhat Temple)</a></h3><p>วัดเก่าแก่พันปีที่ซ่อนตัวอยู่กลางตึกสูงระฟ้า (ค่าเข้า 20 หยวน ซื้อหน้าวัดได้เลย)<br><span style="color:#e63946; font-weight:bold;">💰 ค่าใช้จ่ายสถานที่: ซื้อตั๋วหน้าวัด 20 หยวน (90 บาท)</span></p></div></div>
+        <div class="item"><div class="time">12:00</div><div class="content"><h3><a class="loc-link" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Jing+Li+Seafood+Buffet+Raffles+City+Chongqing"><span class="pin">📍</span>บุฟเฟต์มื้อกลางวัน (Jing Li Seafood Buffet)</a></h3><p>กินบุฟเฟต์ซีฟู้ด ปิ้งย่าง และหม่าล่าหม้อไฟ ที่ชั้น 3 ของห้าง Raffles City ไลน์อาหารเยอะและคุ้มมาก<br><span style="color:#e63946; font-weight:bold;">💰 ค่าใช้จ่ายสถานที่: บุฟเฟต์ซีฟู้ด (รวมในงบอาหารฝั่งฉงชิ่ง)</span></p></div></div>
+        <div class="item"><div class="time">13:30</div><div class="content"><h3><a class="loc-link" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Jiefangbei+Chongqing"><span class="pin">📍</span>ถนนเจียฟางเป่ย (Jiefangbei)</a></h3><p>เดินเล่นย่อยอาหารใจกลางเมือง<br><span style="color:#e63946; font-weight:bold;">💰 ค่าใช้จ่ายสถานที่: ฟรี</span></p></div></div>
+        <div class="item"><div class="time">14:00</div><div class="content"><h3><a class="loc-link" target="_blank" href="https://www.google.com/maps/search/?api=1&query=MINISO+LAND+Chongqing"><span class="pin">📍</span>MINISO LAND</a></h3><p>แวะช้อปปิ้งของฝาก<br><span style="color:#e63946; font-weight:bold;">💰 ค่าใช้จ่ายสถานที่: หักจากงบช้อปปิ้งและของฝาก (รวม 2,000 บาท)</span></p></div></div>
+        <div class="item"><div class="time">15:00</div><div class="content"><h3><a class="loc-link" target="_blank" href="https://www.google.com/maps/search/?api=1&query=BSF+Pastry+Chongqing"><span class="pin">📍</span>ร้านเค้กไก่หยอง (BSF Pastry)</a></h3><p>แวะต่อคิวซื้อเค้กไก่หยองร้านเด็ด เนื้อนุ่มอร่อยมาก ห้ามพลาด<br><span style="color:#e63946; font-weight:bold;">💰 ค่าใช้จ่ายสถานที่: เค้กไก่หยอง (รวมในงบอาหารฝั่งฉงชิ่ง)</span></p></div></div>
+        <div class="item"><div class="time">15:30</div><div class="content"><h3><a class="loc-link" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Chongqing+Art+Gallery"><span class="pin">📍</span>หอศิลป์ฉงชิ่ง (Chongqing Art Gallery)</a></h3><p>ถ่ายรูปกับตึกแท่งตะเกียบสีแดง<br><span style="color:#e63946; font-weight:bold;">💰 ค่าใช้จ่ายสถานที่: ถ่ายรูปฟรี</span></p></div></div>
+        <div class="item"><div class="time">16:00</div><div class="content"><h3><a class="loc-link" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Kuixing+Building+Chongqing"><span class="pin">📍</span>ตึกสุดแปลก (Kuixing Building)</a></h3><p>ตึกที่มีดีไซน์ไม่เหมือนใคร ด้านหลังเป็นสะพานสูงชั้น 22 แต่อีกด้านกลับเป็นทางเดินริมถนนใหญ่ที่อยู่ชั้น 1<br><span style="color:#e63946; font-weight:bold;">💰 ค่าใช้จ่ายสถานที่: เข้าชมฟรี</span></p></div></div>
+        <div class="item"><div class="time">17:00</div><div class="content"><h3><a class="loc-link" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Xiaobo+Tea+House+Chongqing"><span class="pin">📍</span>จิบชายามเย็น (Xiaobo Tea House)</a></h3><p>ร้านชาฟีลโรงเตี๊ยมจีนโบราณยุค 80 ซ่อนตัวอยู่ในตึกเก่า ทางเข้าค่อนข้างหายาก ให้ใช้ทางเข้าเดียวกับร้านบะหมี่ด้านหน้า<br><span style="color:#e63946; font-weight:bold;">💰 ค่าใช้จ่ายสถานที่: ชาโรงเตี๊ยม (รวมในงบอาหารฝั่งฉงชิ่ง)</span></p></div></div>
+        <div class="item"><div class="time">19:00</div><div class="content"><h3><a class="loc-link" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Hongyadong+Chongqing"><span class="pin">📍</span>ตึกหงหยาต้ง (Hongyadong)</a></h3><p>ชมตึกเปิดไฟอลังการ (คนจะเยอะและทางเดินในตึกซับซ้อนมาก)<br><span style="color:#e63946; font-weight:bold;">💰 ค่าใช้จ่ายสถานที่: ชมวิวฟรี</span></p></div></div>
+        <div class="item"><div class="time">20:00</div><div class="content"><h3><a class="loc-link" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Dadao+Zhang+Hot+Pot+Chongqing"><span class="pin">📍</span>หม่าล่าหม้อไฟ (Dadao Zhang Hot Pot)</a></h3><p>ร้านหม้อไฟใหญ่คนไม่เยอะ รสชาติเผ็ดชาสะใจ ให้นั่งริมกระจกเพื่อมองวิวสะพานและแม่น้ำ<br><span style="color:#e63946; font-weight:bold;">💰 ค่าใช้จ่ายสถานที่: หม่าล่าหม้อไฟ (รวมในงบอาหารฝั่งฉงชิ่ง)</span></p></div></div>
+        <div class="item"><div class="time">21:00</div><div class="content"><h3><a class="loc-link" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Chongqing+Grand+Theatre"><span class="pin">📍</span>ถ่ายรูปวิวสะพาน (Chongqing Grand Theatre)</a></h3><p>ข้ามฝั่งมาที่ลานกว้างริมน้ำ เพื่อถ่ายรูปตึกหงหยาต้งแบบมุมไกล เห็นทั้งสะพานและตึกเปิดไฟ (ถ่ายเปิดแฟลชปังมากและคนไม่เยอะ)<br><span style="color:#e63946; font-weight:bold;">💰 ค่าใช้จ่ายสถานที่: ถ่ายรูปฟรี</span></p></div></div>
+        <div class="item"><div class="time">22:00</div><div class="content"><h3><a class="loc-link" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Busy+For+You+Chongqing"><span class="pin">📍</span>ซื้อของฝาก (Busy For You)</a></h3><p>แวะร้านสีเหลือง ขนมเยอะและราคาถูกมาก<br><span style="color:#e63946; font-weight:bold;">💰 ค่าใช้จ่ายสถานที่: ขนมของฝาก (หักจากงบช้อปปิ้งและของฝาก 2,000 บาท)</span></p></div></div>
+        <div class="item"><div class="time">23:00</div><div class="content"><h3><a class="loc-link" target="_blank" href="https://www.google.com/maps/search/?api=1&query=9th+Street+Chongqing"><span class="pin">📍</span>นั่งชิลล์ย่าน 9th Street</a></h3><p>ย่านรวมร้านกลางคืนที่วัยรุ่นจีนนิยมมาแฮงเอาต์กัน ปิดทริปวันสุดท้ายแบบสมบูรณ์<br><span style="color:#e63946; font-weight:bold;">💰 ค่าใช้จ่ายสถานที่: หักจากงบอาหารฝั่งฉงชิ่ง หรือตามอัธยาศัย</span></p></div></div>
+        <div class="item">
+          <div class="time" style="font-size: 0.85rem;">เที่ยวบิน</div>
+          <div class="content"><p style="color:#e63946; font-weight:bold;">✈️ ค่าใช้จ่ายในการเดินทาง: ตั๋วเครื่องบินขากลับ ฉงชิ่ง → ดอนเมือง (AirAsia FD557) 3,230 บาท</p></div>
+        </div>
+      </div>
+    </section>
 
-  <!-- DAY 3 -->
-  <section class="day-section day3" id="day3">
-    <div class="day-header"><span class="day-badge">Day 3</span> ตูเจียงเยี่ยน (Dujiangyan)</div>
-    <div class="timeline">
-      <div class="item">
-        <div class="time" style="font-size: 0.85rem;">เดินทาง</div>
-        <div class="content"><p style="color:#e63946; font-weight:bold;">🚄 ค่าใช้จ่ายในการเดินทาง: รถไฟความเร็วสูง (สถานี Xipu → Dujiangyan) 10 หยวน (รถไฟไป-กลับรวม 90 บาท/คน)</p></div>
+    <!-- CHINA TIPS -->
+    <section class="tips" id="tips">
+      <h2>⚠️ ข้อควรระวังและทริคสำหรับการเที่ยวฉงชิ่ง</h2>
+      <div class="tip-grid">
+        <div class="tip-card"><h4>🪜 บันไดเยอะมาก</h4><p>ฉงชิ่งเป็นเมืองภูเขา แนะนำให้เตรียมรองเท้าผ้าใบที่ใส่สบาย เพราะต้องเดินขึ้นลงบันไดตลอดเวลา</p></div>
+        <div class="tip-card"><h4>🗺️ แอปแผนที่อาจหลอกตา</h4><p>เนื่องจากเมืองเป็นแบบ 3 มิติ แผนที่อาจพาไปถูกพิกัดแต่ดันอยู่คนละชั้น หรือไปโผล่หลังตึก หากหาทางเข้าไม่เจอให้มองหาบันไดหรือลิฟต์</p></div>
+        <div class="tip-card"><h4>☕ การหาร้านลับ</h4><p>ร้านคาเฟ่หรือร้านชาในฉงชิ่งมักซ่อนอยู่ในตึกเก่า ควรหารีวิวพิกัดทางเข้าที่ชัดเจนมาก่อน</p></div>
+        <div class="tip-card"><h4>🚗 การเรียก DiDi</h4><p>ตรวจสอบระยะทางเดินเท้าก่อนเรียก DiDi เสมอ เพราะบางครั้งการเดิน 10 นาที อาจเร็วกว่าการนั่งรถที่ต้องไปอ้อมและรถติด</p></div>
+        <div class="tip-card"><h4>💰 เช็คราคาให้ละเอียด</h4><p>ควรถามราคาอาหารและบริการให้ชัดเจนว่าราคาที่แสดงคือ "ต่อคน" หรือ "ต่อชิ้น" หรือ "ต่อชุด" เพื่อป้องกันการเข้าใจผิดจากการสื่อสาร</p></div>
       </div>
-      <div class="item"><div class="time">10:00</div><div class="content"><h3><a class="loc-link" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Dujiangyan+Railway+Station"><span class="pin">📍</span>เดินทางไปตูเจียงเยี่ยน</a></h3><p>นั่งรถไฟความเร็วสูงจากสถานี Xipu ไป Dujiangyan (ใช้เวลาประมาณ 20 นาที)<br><span style="color:#e63946; font-weight:bold;">💰 ค่าใช้จ่ายสถานที่: ตั๋วรถไฟขาไป 10 หยวน</span></p></div></div>
-      <div class="item"><div class="time">11:00</div><div class="content"><h3><a class="loc-link" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Zhongshuge+Dujiangyan+Sunac+Mall"><span class="pin">📍</span>ร้านหนังสือ Zhongshuge (Sunac Mall)</a></h3><p>แวะถ่ายรูปกับร้านหนังสือที่ตกแต่งอลังการเหมือนเวทมนตร์ (อยู่ใกล้สถานีรถไฟ)<br><span style="color:#e63946; font-weight:bold;">💰 ค่าใช้จ่ายสถานที่: เข้าชมฟรี</span></p></div></div>
-      <div class="item">
-        <div class="time" style="font-size: 0.85rem;">เดินทาง</div>
-        <div class="content"><p style="color:#e63946; font-weight:bold;">🚕 ค่าใช้จ่ายในการเดินทาง: นั่งรถ DiDi ไปหุบเขาแพนด้า (หักจากงบ DiDi 240 บาท/คน ในเฉิงตู)</p></div>
-      </div>
-      <div class="item"><div class="time">13:00</div><div class="content"><h3><a class="loc-link" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Dujiangyan+Panda+Valley"><span class="pin">📍</span>หุบเขาแพนด้า (Panda Valley)</a></h3><p>ซื้อตั๋วหน้างาน (55 หยวน) ใช้เวลาเดินประมาณ 1.5 ชั่วโมง จุดนี้จะได้ดูทั้งแพนด้ายักษ์และแพนด้าแดงแบบใกล้ชิด<br><span style="color:#e63946; font-weight:bold;">💰 ค่าใช้จ่ายสถานที่: ซื้อตั๋วหน้างาน 55 หยวน (250 บาท)</span></p></div></div>
-      <div class="item"><div class="time">15:30</div><div class="content"><h3><a class="loc-link" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Yangtianwo+Square+Dujiangyan"><span class="pin">📍</span>จัตุรัส Yangtianwo</a></h3><p>เช็คอินถ่ายรูปคู่กับรูปปั้นแพนด้ายักษ์เซลฟี่<br><span style="color:#e63946; font-weight:bold;">💰 ค่าใช้จ่ายสถานที่: ถ่ายรูปฟรี</span></p></div></div>
-      <div class="item"><div class="time">16:30</div><div class="content"><h3><a class="loc-link" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Guanxian+Ancient+City+Dujiangyan"><span class="pin">📍</span>เมืองโบราณก้วนเสี้ยน (Guanxian Ancient City)</a></h3><p>เดินเล่นหาของกินสตรีทฟู้ด และแวะกินข้าวมื้อเย็นที่นี่<br><span style="color:#e63946; font-weight:bold;">💰 ค่าใช้จ่ายสถานที่: เดินเล่นฟรี (อาหารสตรีทฟู้ดรวมในงบอาหารฝั่งเฉิงตู 2,400 บาท)</span></p></div></div>
-      <div class="item"><div class="time">18:30</div><div class="content"><h3><a class="loc-link" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Nanqiao+Bridge+Dujiangyan"><span class="pin">📍</span>สะพานหนานเฉียว (Nanqiao Bridge)</a></h3><p>รอเวลาเปิดไฟของสะพาน น้ำในแม่น้ำจะกลายเป็นสีฟ้าตัดกับแสงไฟสีส้มของสะพาน บรรยากาศดีมาก<br><span style="color:#e63946; font-weight:bold;">💰 ค่าใช้จ่ายสถานที่: ชมวิวฟรี</span></p></div></div>
-      <div class="item">
-        <div class="time" style="font-size: 0.85rem;">เดินทาง</div>
-        <div class="content"><p style="color:#e63946; font-weight:bold;">🚄 ค่าใช้จ่ายในการเดินทาง: รถไฟความเร็วสูงกลับสถานี Xipu ราคา 10 หยวน</p></div>
-      </div>
-      <div class="item"><div class="time">19:30</div><div class="content"><h3 class="no-link">เดินทางกลับ</h3><p>นั่งรถไฟความเร็วสูงกลับไปสถานี Xipu (แนะนำให้จองตั๋วล่วงหน้าเพราะขากลับคนเยอะมาก)<br><span style="color:#e63946; font-weight:bold;">💰 ค่าใช้จ่ายสถานที่: ตั๋วรถไฟขากลับ 10 หยวน</span></p></div></div>
-      <div class="item"><div class="time">20:30</div><div class="content"><h3><a class="loc-link" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Chengdu+SKP"><span class="pin">📍</span>จุดเช็คอินน้ำพุไม้ไผ่ (Chengdu SKP)</a></h3><p>ไปดูโชว์ไฟและน้ำพุที่ห้าง SKP<br><span style="color:#e63946; font-weight:bold;">💰 ค่าใช้จ่ายสถานที่: ชมฟรี</span></p></div></div>
-    </div>
+    </section>
+  </div>
+</div>
 
-    <!-- HIGHLIGHT INFOGRAPHIC -->
-    <div class="highlight-box">
-      <div class="highlight-title accent">📊 สรุปไฮไลต์ Day 3</div>
-      <div class="stat-grid">
-        <div class="stat-card" style="border-top-color:#4361ee;"><div class="icon">🚄</div><div class="num">2 เที่ยว</div><div class="label">รถไฟความเร็วสูง</div></div>
-        <div class="stat-card" style="border-top-color:#4361ee;"><div class="icon">🐼</div><div class="num">55฿</div><div class="label">ตั๋ว Panda Valley</div></div>
-        <div class="stat-card" style="border-top-color:#4361ee;"><div class="icon">📸</div><div class="num">7</div><div class="label">จุดเช็คอิน</div></div>
-        <div class="stat-card" style="border-top-color:#4361ee;"><div class="icon">🌉</div><div class="num">18:30</div><div class="label">เปิดไฟสะพาน</div></div>
-      </div>
-      <div class="highlight-tags">
-        <span class="tag accent">📚 ร้านหนังสือมนตรา</span>
-        <span class="tag accent">🐼 แพนด้าแดง</span>
-        <span class="tag accent">🌆 เมืองโบราณ</span>
-        <span class="tag accent">💦 น้ำพุไม้ไผ่</span>
-      </div>
-      <div class="must-try">
-        <h4>💡 ทริคสำคัญ</h4>
-        <ul>
-          <li>จองตั๋วรถไฟขากลับล่วงหน้า เพราะช่วงเย็นคนเยอะมาก</li>
-          <li>ไปให้ทันเวลาเปิดไฟสะพาน Nanqiao เพื่อถ่ายรูปสวยสุด</li>
-          <li>เผื่อเวลาเดินหุบเขาแพนด้าอย่างน้อย 1.5 ชม.</li>
-        </ul>
-      </div>
-    </div>
 
-    <!-- MAP -->
-    <div class="map-box">
-      <div class="map-label accent-bg">🗺️ พื้นที่หลัก Day 3 — Dujiangyan Panda Valley</div>
-      <iframe src="https://www.google.com/maps?q=Dujiangyan+Panda+Valley&output=embed" loading="lazy" allowfullscreen></iframe>
-    </div>
-  </section>
+<!-- ==================== JAPAN PLAN ==================== -->
+<div id="japan-plan" class="tab-content">
+  <div class="plan-title">
+    <h2>🗻 ญี่ปุ่น (โตเกียว - ฮาคุบะ - คาวากุจิโกะ) 7 วัน 6 คืน 🗼</h2>
+    <div class="budget">💰 งบประมาณรวมสุทธิ 36,398 บาท / ท่าน</div>
+  </div>
 
-  <!-- DAY 4 -->
-  <section class="day-section day4" id="day4">
-    <div class="day-header"><span class="day-badge">Day 4</span> เดินทางสู่ฉงชิ่ง (Chongqing)</div>
-    <div class="timeline">
-      <div class="item">
-        <div class="time" style="font-size: 0.85rem;">เดินทาง</div>
-        <div class="content"><p style="color:#e63946; font-weight:bold;">🚄 ค่าใช้จ่ายในการเดินทาง: รถไฟความเร็วสูงข้ามเมือง (Chengdu East → Chongqing North) 450 บาท</p></div>
-      </div>
-      <div class="item"><div class="time">08:30</div><div class="content"><h3><a class="loc-link" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Chongqing+North+Railway+Station"><span class="pin">📍</span>นั่งรถไฟไปฉงชิ่ง</a></h3><p>นั่งรถไฟความเร็วสูงจากสถานี Chengdu East Railway ไปลง Chongqing North Railway (ใช้เวลา 2 ชั่วโมง)<br><span style="color:#e63946; font-weight:bold;">💰 ค่าใช้จ่ายสถานที่: ค่าตั๋วรถไฟ 450 บาท</span></p></div></div>
-      <div class="item">
-        <div class="time" style="font-size: 0.85rem;">เดินทาง</div>
-        <div class="content"><p style="color:#e63946; font-weight:bold;">🚕 ค่าใช้จ่ายในการเดินทาง: ค่าเรียกรถ DiDi ในฉงชิ่ง (หักจากงบรวม 422 บาท/คน ตลอดทริปในฉงชิ่ง)</p></div>
-      </div>
-      <div class="item"><div class="time">12:00</div><div class="content"><h3><a class="loc-link" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Saiya+River+View+Hotel+Chongqing"><span class="pin">📍</span>Check-in โรงแรม</a></h3><p>เก็บกระเป๋าเข้าที่พัก Saiya River View Hotel<br><span style="color:#e63946; font-weight:bold;">💰 ค่าใช้จ่ายสถานที่: ค่าที่พักฉงชิ่ง 2 คืน คนละ 1,080 บาท (จากราคาห้อง 2,159.92 บาท หารเพื่อน)</span></p></div></div>
-      <div class="item"><div class="time">13:00</div><div class="content"><h3><a class="loc-link" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Guanyinqiao+Chongqing"><span class="pin">📍</span>ย่าน Guanyinqiao</a></h3><p>เดินเล่นย่านวัยรุ่น หาของกิน แวะชิมบะหมี่ฉงชิ่ง และถ่ายรูปกับป้ายไฟยอดฮิต "Wo Zai Chongqing" (ฉันอยู่ฉงชิ่ง)<br><span style="color:#e63946; font-weight:bold;">💰 ค่าใช้จ่ายสถานที่: เดินเล่นฟรี และบะหมี่ฉงชิ่ง (รวมในงบอาหารฝั่งฉงชิ่ง 2,225 บาท)</span></p></div></div>
-      <div class="item"><div class="time">14:30</div><div class="content"><h3><a class="loc-link" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Liziba+Station+Chongqing"><span class="pin">📍</span>สถานีหลีจื่อปา (Liziba Station)</a></h3><p>ดูรถไฟลอยฟ้าวิ่งทะลุเข้าไปในตึกที่พักอาศัยชั้น 19 โดยให้ลงมาถ่ายรูปมุมเสยจากด้านล่าง<br><span style="color:#e63946; font-weight:bold;">💰 ค่าใช้จ่ายสถานที่: ชมฟรี</span></p></div></div>
-      <div class="item"><div class="time">16:00</div><div class="content"><h3><a class="loc-link" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Longmenhao+Old+Street+Chongqing"><span class="pin">📍</span>ถนนโบราณหลงเหมินฮ่าว (Longmenhao Old Street)</a></h3><p>เดินเล่นย่านตึกเก่าริมแม่น้ำแยงซีเกียง ถ่ายรูปมุมไหนก็คลาสสิก<br><span style="color:#e63946; font-weight:bold;">💰 ค่าใช้จ่ายสถานที่: เข้าชมฟรี</span></p></div></div>
-      <div class="item">
-        <div class="time" style="font-size: 0.85rem;">เดินทาง</div>
-        <div class="content"><p style="color:#e63946; font-weight:bold;">🚕 ค่าใช้จ่ายในการเดินทาง: นั่ง DiDi ขึ้นเขา Nanshan (หักจากงบรวม 422 บาท/คน ในฉงชิ่ง)</p></div>
-      </div>
-      <div class="item"><div class="time">18:30</div><div class="content"><h3><a class="loc-link" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Ding+Laotou+Barbecue+Nanshan+Chongqing"><span class="pin">📍</span>ปิ้งย่างบนเขา (Ding Laotou Barbecue)</a></h3><p>ไปกินปิ้งย่างบนเขาหนานซาน (Nanshan) ชมวิวพาโนรามาของเมือง แนะนำให้ไปถึงก่อน 5 โมงเย็นเพื่อจองโต๊ะวิวด้านบนสุดที่เห็นแสงไฟตึกสะท้อนแม่น้ำ (ถ้าเรียก DiDi รถจะส่งแค่ด้านล่าง ต้องเดินขึ้นเขาไปอีกนิด)<br><span style="color:#e63946; font-weight:bold;">💰 ค่าใช้จ่ายสถานที่: ปิ้งย่างเตาถ่าน (รวมในงบอาหารฝั่งฉงชิ่ง)</span></p></div></div>
-      <div class="item"><div class="time">21:00</div><div class="content"><h3><a class="loc-link" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Commune+Bar+Chongqing"><span class="pin">📍</span>นั่งชิลล์ดาดฟ้า (Commune)</a></h3><p>บาร์กึ่งร้านอาหารยอดฮิตของวัยรุ่นริมแม่น้ำ แนะนำให้นั่งโซนดาดฟ้าเพื่อชมวิวตึก Raffles City แบบเต็มๆ<br><span style="color:#e63946; font-weight:bold;">💰 ค่าใช้จ่ายสถานที่: เครื่องดื่มบาร์ (รวมในงบอาหารฝั่งฉงชิ่ง)</span></p></div></div>
-    </div>
+  <nav>
+    <a href="#jp-day12">Day 1-2</a>
+    <a href="#jp-day3">Day 3</a>
+    <a href="#jp-day4">Day 4</a>
+    <a href="#jp-day5">Day 5</a>
+    <a href="#jp-day6">Day 6</a>
+    <a href="#jp-day7">Day 7</a>
+  </nav>
 
-    <!-- HIGHLIGHT INFOGRAPHIC -->
-    <div class="highlight-box">
-      <div class="highlight-title accent">📊 สรุปไฮไลต์ Day 4</div>
-      <div class="stat-grid">
-        <div class="stat-card" style="border-top-color:#7209b7;"><div class="icon">🚄</div><div class="num">2 ชม.</div><div class="label">เฉิงตู → ฉงชิ่ง</div></div>
-        <div class="stat-card" style="border-top-color:#7209b7;"><div class="icon">🚇</div><div class="num">Liziba</div><div class="label">รถไฟทะลุตึก</div></div>
-        <div class="stat-card" style="border-top-color:#7209b7;"><div class="icon">🍢</div><div class="num">ก่อน 17:00</div><div class="label">ไปจองโต๊ะ BBQ</div></div>
-        <div class="stat-card" style="border-top-color:#7209b7;"><div class="icon">🌃</div><div class="num">Nanshan</div><div class="label">วิวเมืองยามค่ำ</div></div>
+  <div class="container">
+    <!-- JAPAN DAY 1 & 2 -->
+    <section class="day-section day1" id="jp-day12">
+      <div class="day-header"><span class="day-badge">Day 1 & 2</span> โตเกียว (Tokyo) เที่ยวในเมือง</div>
+      <div class="timeline">
+        <div class="item">
+          <div class="time" style="font-size: 0.85rem;">เที่ยวบิน</div>
+          <div class="content"><p style="color:#e63946; font-weight:bold;">✈️ ค่าใช้จ่ายในการเดินทาง: ตั๋วเครื่องบินไป-กลับ (AirAsia X) 15,000 บาท</p></div>
+        </div>
+        <div class="item"><div class="time">Day 1</div><div class="content"><h3><a class="loc-link" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Narita+International+Airport"><span class="pin">📍</span>สนามบินนาริตะ (Narita)</a></h3><p>เดินทางถึงประเทศญี่ปุ่น ผ่านตม.และรับกระเป๋า<br><span style="color:#e63946; font-weight:bold;">💰 ค่าใช้จ่ายสถานที่: ฟรี</span></p></div></div>
+        <div class="item">
+          <div class="time" style="font-size: 0.85rem;">เดินทาง</div>
+          <div class="content"><p style="color:#e63946; font-weight:bold;">🚆 ค่าใช้จ่ายในการเดินทาง: รถไฟด่วน Skyliner เข้าโตเกียว (ไป-กลับรวม 923 บาท)</p></div>
+        </div>
+        <div class="item"><div class="time">Check-in</div><div class="content"><h3><a class="loc-link" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Hotel+Comfact+Tokyo"><span class="pin">📍</span>Hotel Comfact (ใกล้ Ueno)</a></h3><p>เช็คอินเข้าที่พัก เดินจากสถานี Ueno ประมาณ 15 นาที<br><span style="color:#e63946; font-weight:bold;">💰 ค่าใช้จ่ายสถานที่: ค่าที่พัก 2 คืนแรก 3,342 บาท/คน</span></p></div></div>
+        <div class="item"><div class="time">Day 1-2</div><div class="content"><h3><a class="loc-link" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Ueno+Tokyo"><span class="pin">📍</span>ย่าน Ueno</a></h3><p>เดินเล่นหาของกินและช้อปปิ้งย่านอุเอโนะ<br><span style="color:#e63946; font-weight:bold;">💰 ค่าใช้จ่ายสถานที่: ตามอัธยาศัย</span></p></div></div>
+        <div class="item"><div class="time">Day 1-2</div><div class="content"><h3><a class="loc-link" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Meiji+Jingu+Gaien+Christmas+Market"><span class="pin">📍</span>ตลาดคริสต์มาส (Meiji Jingu Gaien)</a></h3><p>เดินเล่นสัมผัสบรรยากาศคริสต์มาสที่ตลาด<br><span style="color:#e63946; font-weight:bold;">💰 ค่าใช้จ่ายสถานที่: ตามอัธยาศัย</span></p></div></div>
+        <div class="item"><div class="time">Day 1-2</div><div class="content"><h3><a class="loc-link" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Tsukiji+Fish+Market"><span class="pin">📍</span>ตลาดปลาซึกิจิ (Fish Market Tsukiji)</a></h3><p>แวะกินอาหารทะเลสดๆ และสตรีทฟู้ด<br><span style="color:#e63946; font-weight:bold;">💰 ค่าใช้จ่ายสถานที่: ตามอัธยาศัย</span></p></div></div>
+        <div class="item"><div class="time">Day 1-2</div><div class="content"><h3><a class="loc-link" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Shibuya+Tokyo"><span class="pin">📍</span>ย่านชิบูย่า (Shibuya)</a></h3><p>เดินเล่นย่านวัยรุ่นและห้าแยกชิบูย่าอันโด่งดัง<br><span style="color:#e63946; font-weight:bold;">💰 ค่าใช้จ่ายสถานที่: ตามอัธยาศัย</span></p></div></div>
+        <div class="item"><div class="time">Day 1-2</div><div class="content"><h3><a class="loc-link" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Yoyogi+Sendagaya"><span class="pin">📍</span>ถ่ายรูปมุมรถไฟ Yoyogi Sendagaya</a></h3><p>มุมถ่ายรูปสุดฮิตกับขบวนรถไฟที่วิ่งผ่าน (ต้องใช้ดวงกะจังหวะให้พอดี)<br><span style="color:#e63946; font-weight:bold;">💰 ค่าใช้จ่ายสถานที่: ถ่ายรูปฟรี</span></p></div></div>
       </div>
-      <div class="highlight-tags">
-        <span class="tag accent">🏙️ เมืองแห่งภูเขา</span>
-        <span class="tag accent">🚆 รถไฟทะลุตึก</span>
-        <span class="tag accent">🥩 ปิ้งย่างวิวเมือง</span>
-        <span class="tag accent">🍹 บาร์ดาดฟ้า</span>
-      </div>
-      <div class="must-try">
-        <h4>💡 ทริคสำคัญ</h4>
-        <ul>
-          <li>ไปถึง Ding Laotou BBQ ก่อน 17:00 น. เพื่อจองโต๊ะวิวด้านบนสุด</li>
-          <li>DiDi ไปหนานซานจะส่งแค่ด้านล่าง ต้องเดินขึ้นเขาต่ออีกนิด</li>
-          <li>ถ่ายรูป Liziba Station มุมเงยจากด้านล่างสวยสุด</li>
-        </ul>
-      </div>
-    </div>
+    </section>
 
-    <!-- MAP -->
-    <div class="map-box">
-      <div class="map-label accent-bg">🗺️ พื้นที่หลัก Day 4 — Guanyinqiao & Nanshan</div>
-      <iframe src="https://www.google.com/maps?q=Guanyinqiao,+Chongqing&output=embed" loading="lazy" allowfullscreen></iframe>
-    </div>
-  </section>
-
-  <!-- DAY 5 -->
-  <section class="day-section day5" id="day5">
-    <div class="day-header"><span class="day-badge">Day 5</span> เก็บตกลานด์มาร์กฉงชิ่ง</div>
-    <div class="timeline">
-      <div class="item"><div class="time">09:00</div><div class="content"><h3><a class="loc-link" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Chadianxia+Coffee+Chongqing"><span class="pin">📍</span>คาเฟ่วิวกระเช้า (Chadianxia Coffee)</a></h3><p>คาเฟ่ซ่อนตัวอยู่ชั้น 15 ของตึกเก่า (ตึกไป๋เซียงจวี) นั่งจิบกาแฟชมวิวกระเช้าลอยฟ้าข้ามแม่น้ำแยงซีเกียง<br><span style="color:#e63946; font-weight:bold;">💰 ค่าใช้จ่ายสถานที่: กาแฟคาเฟ่ (รวมในงบอาหารฝั่งฉงชิ่ง 2,225 บาท)</span></p></div></div>
-      <div class="item"><div class="time">10:30</div><div class="content"><h3><a class="loc-link" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Arhat+Temple+Luohan+Temple+Chongqing"><span class="pin">📍</span>วัดหลัวฮั่น (Arhat Temple)</a></h3><p>วัดเก่าแก่พันปีที่ซ่อนตัวอยู่กลางตึกสูงระฟ้า (ค่าเข้า 20 หยวน ซื้อหน้าวัดได้เลย)<br><span style="color:#e63946; font-weight:bold;">💰 ค่าใช้จ่ายสถานที่: ซื้อตั๋วหน้าวัด 20 หยวน (90 บาท)</span></p></div></div>
-      <div class="item"><div class="time">12:00</div><div class="content"><h3><a class="loc-link" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Jing+Li+Seafood+Buffet+Raffles+City+Chongqing"><span class="pin">📍</span>บุฟเฟต์มื้อกลางวัน (Jing Li Seafood Buffet)</a></h3><p>กินบุฟเฟต์ซีฟู้ด ปิ้งย่าง และหม่าล่าหม้อไฟ ที่ชั้น 3 ของห้าง Raffles City ไลน์อาหารเยอะและคุ้มมาก<br><span style="color:#e63946; font-weight:bold;">💰 ค่าใช้จ่ายสถานที่: บุฟเฟต์ซีฟู้ด (รวมในงบอาหารฝั่งฉงชิ่ง)</span></p></div></div>
-      <div class="item"><div class="time">13:30</div><div class="content"><h3><a class="loc-link" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Jiefangbei+Chongqing"><span class="pin">📍</span>ถนนเจียฟางเป่ย (Jiefangbei)</a></h3><p>เดินเล่นย่อยอาหารใจกลางเมือง<br><span style="color:#e63946; font-weight:bold;">💰 ค่าใช้จ่ายสถานที่: ฟรี</span></p></div></div>
-      <div class="item"><div class="time">14:00</div><div class="content"><h3><a class="loc-link" target="_blank" href="https://www.google.com/maps/search/?api=1&query=MINISO+LAND+Chongqing"><span class="pin">📍</span>MINISO LAND</a></h3><p>แวะช้อปปิ้งของฝาก<br><span style="color:#e63946; font-weight:bold;">💰 ค่าใช้จ่ายสถานที่: หักจากงบช้อปปิ้งและของฝาก (รวม 2,000 บาท)</span></p></div></div>
-      <div class="item"><div class="time">15:00</div><div class="content"><h3><a class="loc-link" target="_blank" href="https://www.google.com/maps/search/?api=1&query=BSF+Pastry+Chongqing"><span class="pin">📍</span>ร้านเค้กไก่หยอง (BSF Pastry)</a></h3><p>แวะต่อคิวซื้อเค้กไก่หยองร้านเด็ด เนื้อนุ่มอร่อยมาก ห้ามพลาด<br><span style="color:#e63946; font-weight:bold;">💰 ค่าใช้จ่ายสถานที่: เค้กไก่หยอง (รวมในงบอาหารฝั่งฉงชิ่ง)</span></p></div></div>
-      <div class="item"><div class="time">15:30</div><div class="content"><h3><a class="loc-link" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Chongqing+Art+Gallery"><span class="pin">📍</span>หอศิลป์ฉงชิ่ง (Chongqing Art Gallery)</a></h3><p>ถ่ายรูปกับตึกแท่งตะเกียบสีแดง<br><span style="color:#e63946; font-weight:bold;">💰 ค่าใช้จ่ายสถานที่: ถ่ายรูปฟรี</span></p></div></div>
-      <div class="item"><div class="time">16:00</div><div class="content"><h3><a class="loc-link" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Kuixing+Building+Chongqing"><span class="pin">📍</span>ตึกสุดแปลก (Kuixing Building)</a></h3><p>ตึกที่มีดีไซน์ไม่เหมือนใคร ด้านหลังเป็นสะพานสูงชั้น 22 แต่อีกด้านกลับเป็นทางเดินริมถนนใหญ่ที่อยู่ชั้น 1<br><span style="color:#e63946; font-weight:bold;">💰 ค่าใช้จ่ายสถานที่: เข้าชมฟรี</span></p></div></div>
-      <div class="item"><div class="time">17:00</div><div class="content"><h3><a class="loc-link" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Xiaobo+Tea+House+Chongqing"><span class="pin">📍</span>จิบชายามเย็น (Xiaobo Tea House)</a></h3><p>ร้านชาฟีลโรงเตี๊ยมจีนโบราณยุค 80 ซ่อนตัวอยู่ในตึกเก่า ทางเข้าค่อนข้างหายาก ให้ใช้ทางเข้าเดียวกับร้านบะหมี่ด้านหน้า<br><span style="color:#e63946; font-weight:bold;">💰 ค่าใช้จ่ายสถานที่: ชาโรงเตี๊ยม (รวมในงบอาหารฝั่งฉงชิ่ง)</span></p></div></div>
-      <div class="item"><div class="time">19:00</div><div class="content"><h3><a class="loc-link" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Hongyadong+Chongqing"><span class="pin">📍</span>ตึกหงหยาต้ง (Hongyadong)</a></h3><p>ชมตึกเปิดไฟอลังการ (คนจะเยอะและทางเดินในตึกซับซ้อนมาก)<br><span style="color:#e63946; font-weight:bold;">💰 ค่าใช้จ่ายสถานที่: ชมวิวฟรี</span></p></div></div>
-      <div class="item"><div class="time">20:00</div><div class="content"><h3><a class="loc-link" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Dadao+Zhang+Hot+Pot+Chongqing"><span class="pin">📍</span>หม่าล่าหม้อไฟ (Dadao Zhang Hot Pot)</a></h3><p>ร้านหม้อไฟใหญ่คนไม่เยอะ รสชาติเผ็ดชาสะใจ ให้นั่งริมกระจกเพื่อมองวิวสะพานและแม่น้ำ<br><span style="color:#e63946; font-weight:bold;">💰 ค่าใช้จ่ายสถานที่: หม่าล่าหม้อไฟ (รวมในงบอาหารฝั่งฉงชิ่ง)</span></p></div></div>
-      <div class="item"><div class="time">21:00</div><div class="content"><h3><a class="loc-link" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Chongqing+Grand+Theatre"><span class="pin">📍</span>ถ่ายรูปวิวสะพาน (Chongqing Grand Theatre)</a></h3><p>ข้ามฝั่งมาที่ลานกว้างริมน้ำ เพื่อถ่ายรูปตึกหงหยาต้งแบบมุมไกล เห็นทั้งสะพานและตึกเปิดไฟ (ถ่ายเปิดแฟลชปังมากและคนไม่เยอะ)<br><span style="color:#e63946; font-weight:bold;">💰 ค่าใช้จ่ายสถานที่: ถ่ายรูปฟรี</span></p></div></div>
-      <div class="item"><div class="time">22:00</div><div class="content"><h3><a class="loc-link" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Busy+For+You+Chongqing"><span class="pin">📍</span>ซื้อของฝาก (Busy For You)</a></h3><p>แวะร้านสีเหลือง ขนมเยอะและราคาถูกมาก<br><span style="color:#e63946; font-weight:bold;">💰 ค่าใช้จ่ายสถานที่: ขนมของฝาก (หักจากงบช้อปปิ้งและของฝาก 2,000 บาท)</span></p></div></div>
-      <div class="item"><div class="time">23:00</div><div class="content"><h3><a class="loc-link" target="_blank" href="https://www.google.com/maps/search/?api=1&query=9th+Street+Chongqing"><span class="pin">📍</span>นั่งชิลล์ย่าน 9th Street</a></h3><p>ย่านรวมร้านกลางคืนที่วัยรุ่นจีนนิยมมาแฮงเอาต์กัน ปิดทริปวันสุดท้ายแบบสมบูรณ์<br><span style="color:#e63946; font-weight:bold;">💰 ค่าใช้จ่ายสถานที่: หักจากงบอาหารฝั่งฉงชิ่ง หรือตามอัธยาศัย</span></p></div></div>
-      <div class="item">
-        <div class="time" style="font-size: 0.85rem;">เที่ยวบิน</div>
-        <div class="content"><p style="color:#e63946; font-weight:bold;">✈️ ค่าใช้จ่ายในการเดินทาง: ตั๋วเครื่องบินขากลับ ฉงชิ่ง → ดอนเมือง (AirAsia FD557) 3,230 บาท</p></div>
+    <!-- JAPAN DAY 3 -->
+    <section class="day-section day2" id="jp-day3">
+      <div class="day-header"><span class="day-badge">Day 3</span> โตเกียว มุ่งหน้าสู่ ฮาคุบะ (Hakuba)</div>
+      <div class="timeline">
+        <div class="item"><div class="time">เช้า</div><div class="content"><h3><a class="loc-link" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Nissan+Rent+a+Car+Ueno"><span class="pin">📍</span>รับรถเช่า Nissan Rent a Car Ueno</a></h3><p>ทำเรื่องรับรถเช่า (ได้รถรุ่น Nissan Note E-power)<br><span style="color:#e63946; font-weight:bold;">💰 ค่าใช้จ่ายสถานที่: งบเช่ารถตลอดทริป 4 วัน (ค่าเช่า ทางด่วน น้ำมัน) หารแล้วตก 6,952 บาท/คน</span></p></div></div>
+        <div class="item">
+          <div class="time" style="font-size: 0.85rem;">เดินทาง</div>
+          <div class="content"><p style="color:#e63946; font-weight:bold;">🚗 ค่าใช้จ่ายในการเดินทาง: ขับรถสู่เมืองฮาคุบะ ใช้เวลาเดินทางรวมแวะพักประมาณ 5 ชั่วโมง (ค่าทางด่วนและน้ำมันรวมในงบเช่ารถ 6,952 บาทแล้ว)</p></div>
+        </div>
+        <div class="item"><div class="time">ระหว่างทาง</div><div class="content"><h3><a class="loc-link" target="_blank" href="https://www.google.com/maps/search/?api=1&query=AO+Lakeside+Cafe+Japan"><span class="pin">📍</span>AO Lakeside Cafe</a></h3><p>คาเฟ่ริมทะเลสาบบรรยากาศดี แวะพักก่อนเข้าเมืองฮาคุบะ<br><span style="color:#e63946; font-weight:bold;">💰 ค่าใช้จ่ายสถานที่: ตามอัธยาศัย</span></p></div></div>
+        <div class="item">
+          <div class="time" style="font-size: 0.85rem;">เดินทาง</div>
+          <div class="content"><p style="color:#e63946; font-weight:bold;">🚗 ค่าใช้จ่ายในการเดินทาง: ขับรถต่อจากคาเฟ่ประมาณ 18 นาที</p></div>
+        </div>
+        <div class="item"><div class="time">บ่าย</div><div class="content"><h3><a class="loc-link" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Olde+Park+Hakuba"><span class="pin">📍</span>Olde Park</a></h3><p>แวะถ่ายรูปและพักผ่อน<br><span style="color:#e63946; font-weight:bold;">💰 ค่าใช้จ่ายสถานที่: เข้าชมฟรี</span></p></div></div>
+        <div class="item"><div class="time">เย็น</div><div class="content"><h3><a class="loc-link" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Hakuba+Hatago+Maruhachi"><span class="pin">📍</span>Check-in: Hakuba Hatago Maruhachi</a></h3><p>เช็คอินเข้าที่พักสไตล์ญี่ปุ่น (พักที่นี่ 2 คืน)<br><span style="color:#e63946; font-weight:bold;">💰 ค่าใช้จ่ายสถานที่: ค่าที่พัก 2 คืน 3,399 บาท/คน</span></p></div></div>
       </div>
-    </div>
+    </section>
 
-    <!-- HIGHLIGHT INFOGRAPHIC -->
-    <div class="highlight-box">
-      <div class="highlight-title accent">📊 สรุปไฮไลต์ Day 5</div>
-      <div class="stat-grid">
-        <div class="stat-card" style="border-top-color:#ee9b00;"><div class="icon">📍</div><div class="num">14</div><div class="label">จุดเช็คอิน (มากสุด!)</div></div>
-        <div class="stat-card" style="border-top-color:#ee9b00;"><div class="icon">🍲</div><div class="num">3</div><div class="label">มื้ออาหารหลัก</div></div>
-        <div class="stat-card" style="border-top-color:#ee9b00;"><div class="icon">🌉</div><div class="num">Hongyadong</div><div class="label">ไฮไลต์สุดท้าย</div></div>
-        <div class="stat-card" style="border-top-color:#ee9b00;"><div class="icon">🕐</div><div class="num">14 ชม.</div><div class="label">ยาวที่สุดในทริป</div></div>
+    <!-- JAPAN DAY 4 -->
+    <section class="day-section day3" id="jp-day4">
+      <div class="day-header"><span class="day-badge">Day 4</span> ลุยสโนว์บอร์ดที่ Hakuba</div>
+      <div class="timeline">
+        <div class="item"><div class="time">เช้า</div><div class="content"><h3><a class="loc-link" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Starbucks+Snow+Peak+Land+Station+Hakuba"><span class="pin">📍</span>Starbucks (Snow Peak Land Station)</a></h3><p>แวะจิบกาแฟและถ่ายรูปกับดีไซน์ร้านสุดสวยที่ออกแบบโดย Kengo Kuma<br><span style="color:#e63946; font-weight:bold;">💰 ค่าใช้จ่ายสถานที่: กาแฟ/เครื่องดื่มตามอัธยาศัย</span></p></div></div>
+        <div class="item">
+          <div class="time" style="font-size: 0.85rem;">เดินทาง</div>
+          <div class="content"><p style="color:#e63946; font-weight:bold;">🚗 ค่าใช้จ่ายในการเดินทาง: ขับรถไปร้านเช่าอุปกรณ์ (รวมในงบเช่ารถ)</p></div>
+        </div>
+        <div class="item"><div class="time">สาย</div><div class="content"><h3><a class="loc-link" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Woody+Rental+Happo+Shop"><span class="pin">📍</span>Woody Rental Happo Shop</a></h3><p>เช่าชุดและอุปกรณ์สโนว์บอร์ดเตรียมพร้อมสำหรับลุยหิมะ<br><span style="color:#e63946; font-weight:bold;">💰 ค่าใช้จ่ายสถานที่: ค่าเช่าอุปกรณ์ 1 วัน 2,500 บาท</span></p></div></div>
+        <div class="item">
+          <div class="time" style="font-size: 0.85rem;">เดินทาง</div>
+          <div class="content"><p style="color:#e63946; font-weight:bold;">🚗 ค่าใช้จ่ายในการเดินทาง: ขับรถไปลานสกี (รวมในงบเช่ารถ)</p></div>
+        </div>
+        <div class="item"><div class="time">บ่าย</div><div class="content"><h3><a class="loc-link" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Hakuba+Goryu+Snow+Resort"><span class="pin">📍</span>ลานสกี Hakuba Goryu Snow Resort</a></h3><p>เล่นสโนว์บอร์ดสนุกๆ ท่ามกลางหิมะ<br><span style="color:#e63946; font-weight:bold;">💰 ค่าใช้จ่ายสถานที่: ค่า One Day Pass 1,700 บาท</span></p></div></div>
       </div>
-      <div class="highlight-tags">
-        <span class="tag accent">☕ คาเฟ่ลับ</span>
-        <span class="tag accent">🛕 วัดกลางตึก</span>
-        <span class="tag accent">🎂 เค้กไก่หยอง</span>
-        <span class="tag accent">🏮 หงหยาต้ง</span>
-        <span class="tag accent">🍲 หม่าล่าหม้อไฟ</span>
+    </section>
+
+    <!-- JAPAN DAY 5 -->
+    <section class="day-section day4" id="jp-day5">
+      <div class="day-header"><span class="day-badge">Day 5</span> ฮาคุบะ - นากาโน่ - คาวากุจิโกะ</div>
+      <div class="timeline">
+        <div class="item">
+          <div class="time" style="font-size: 0.85rem;">เดินทาง</div>
+          <div class="content"><p style="color:#e63946; font-weight:bold;">🚗 ค่าใช้จ่ายในการเดินทาง: ขับรถออกจากฮาคุบะไปนากาโน่ (Nagano) ใช้เวลาเดินทาง 1 ชั่วโมง 30 นาที (รวมในงบเช่ารถ)</p></div>
+        </div>
+        <div class="item"><div class="time">เช้า</div><div class="content"><h3><a class="loc-link" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Togakushi+Shrine+Okusha"><span class="pin">📍</span>ศาลเจ้า Togakushi Shrine Okusha</a></h3><p>เดินป่าทามกลางหิมะแวะดูต้นสนซีดาร์ยักษ์อายุกว่า 400 ปี สองข้างทาง<br><span style="color:#e63946; font-weight:bold;">💰 ค่าใช้จ่ายสถานที่: เข้าชมฟรี</span></p></div></div>
+        <div class="item">
+          <div class="time" style="font-size: 0.85rem;">เดินทาง</div>
+          <div class="content"><p style="color:#e63946; font-weight:bold;">🚗 ค่าใช้จ่ายในการเดินทาง: ขับรถต่อไปยัง Fuji Kawaguchiko ใช้เวลาประมาณ 3 ชั่วโมง (รวมในงบเช่ารถ)</p></div>
+        </div>
+        <div class="item"><div class="time">เย็น</div><div class="content"><h3><a class="loc-link" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Saiko+nenba-hama"><span class="pin">📍</span>Saiko nenba-hama (ทะเลสาบไซโกะ)</a></h3><p>แวะดูวิวพระอาทิตย์ตก (Sunset) สวยๆ ริมทะเลสาบ<br><span style="color:#e63946; font-weight:bold;">💰 ค่าใช้จ่ายสถานที่: ชมวิวฟรี</span></p></div></div>
+        <div class="item"><div class="time">ค่ำ</div><div class="content"><h3><a class="loc-link" target="_blank" href="https://www.google.com/maps/search/?api=1&query=The+Noborisaka+Hotel"><span class="pin">📍</span>Check-in: The Noborisaka Hotel</a></h3><p>เข้าที่พักในคาวากุจิโกะ (พัก 1 คืน)<br><span style="color:#e63946; font-weight:bold;">💰 ค่าใช้จ่ายสถานที่: ค่าที่พัก 1 คืน 1,623 บาท/คน</span></p></div></div>
       </div>
-      <div class="must-try">
-        <h4>💡 ทริคสำคัญ</h4>
-        <ul>
-          <li>วัน Full Day ที่มีจุดเช็คอินเยอะสุด ควรออกเดินทางแต่เช้าตามแผน</li>
-          <li>ร้านชา Xiaobo Tea House ทางเข้าซ่อน ให้เดินผ่านร้านบะหมี่ด้านหน้า</li>
-          <li>ไป Hongyadong ช่วงหัวค่ำจะสวยสุดแต่คนเยอะ เตรียมใจเรื่องความแน่น</li>
-          <li>ถ่ายรูปหงหยาต้งมุมไกลที่ Chongqing Grand Theatre คนน้อยกว่าและเปิดแฟลชได้สวย</li>
-        </ul>
+    </section>
+
+    <!-- JAPAN DAY 6 -->
+    <section class="day-section day5" id="jp-day6">
+      <div class="day-header"><span class="day-badge">Day 6</span> ฟูจิ One Day Trip & กลับโตเกียว</div>
+      <div class="timeline">
+        <div class="item"><div class="time">ตลอดวัน</div><div class="content"><h3><a class="loc-link" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Fuji+Five+Lakes"><span class="pin">📍</span>เที่ยว Fuji One Day Trip (5 จุดหลัก)</a></h3>
+          <p>ขับรถตระเวนจุดถ่ายรูปวิวฟูจิ ได้แก่:<br>
+          1. <b>Lake Yamanaka</b><br>
+          2. <b>Hirano beach</b><br>
+          3. <b>Chureito pagoda</b> (เจดีย์แดง 5 ชั้น)<br>
+          4. <b>Ubuyagasaki</b><br>
+          5. ขับรถชมวิวระหว่างทางกลับ<br>
+          <span style="color:#e63946; font-weight:bold;">💰 ค่าใช้จ่ายสถานที่: ถ่ายรูปฟรี (อาจมีค่าจอดรถบางจุด)</span></p>
+        </div></div>
+        <div class="item">
+          <div class="time" style="font-size: 0.85rem;">เดินทาง</div>
+          <div class="content"><p style="color:#e63946; font-weight:bold;">🚗 ค่าใช้จ่ายในการเดินทาง: ขับรถกลับโตเกียว ใช้เวลาประมาณ 2 ชั่วโมง (รวมในงบเช่ารถ)</p></div>
+        </div>
+        <div class="item"><div class="time">เย็น</div><div class="content"><h3><a class="loc-link" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Nissan+Rent+a+Car+Ueno"><span class="pin">📍</span>คืนรถเช่า</a></h3><p>คืนรถเช่าในโตเกียว<br><span style="color:#e63946; font-weight:bold;">💰 ค่าใช้จ่ายสถานที่: ไม่มีค่าใช้จ่ายเพิ่ม</span></p></div></div>
+        <div class="item"><div class="time">ค่ำ</div><div class="content"><h3><a class="loc-link" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Hotel+Comfact+Tokyo"><span class="pin">📍</span>Check-in: Hotel Comfact</a></h3><p>กลับมานอนที่โรงแรมเดิม (พัก 1 คืนสุดท้าย)<br><span style="color:#e63946; font-weight:bold;">💰 ค่าใช้จ่ายสถานที่: ค่าที่พักคืนสุดท้าย 1,258 บาท/คน</span></p></div></div>
       </div>
-    </div>
+    </section>
 
-    <!-- MAP -->
-    <div class="map-box">
-      <div class="map-label accent-bg">🗺️ พื้นที่หลัก Day 5 — Hongyadong & Jiefangbei</div>
-      <iframe src="https://www.google.com/maps?q=Hongyadong,+Chongqing&output=embed" loading="lazy" allowfullscreen></iframe>
-    </div>
-  </section>
+    <!-- JAPAN DAY 7 -->
+    <section class="day-section day6" id="jp-day7">
+      <div class="day-header"><span class="day-badge">Day 7</span> เดินเล่นโตเกียว และ กลับบ้าน</div>
+      <div class="timeline">
+        <div class="item"><div class="time">เช้า-บ่าย</div><div class="content"><h3><a class="loc-link" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Jimbocho+Tokyo"><span class="pin">📍</span>ย่าน Jimbocho & Ginza</a></h3><p>เดินเล่นย่านจิมโบโจ (หนังสือเก่าและคาเฟ่) และย่านช้อปปิ้งหรูอย่างกินซ่า<br><span style="color:#e63946; font-weight:bold;">💰 ค่าใช้จ่ายสถานที่: ช้อปปิ้งตามอัธยาศัย</span></p></div></div>
+        <div class="item">
+          <div class="time" style="font-size: 0.85rem;">เดินทาง</div>
+          <div class="content"><p style="color:#e63946; font-weight:bold;">🚆 ค่าใช้จ่ายในการเดินทาง: นั่งรถไฟกลับสนามบิน (ใช้ตั๋ว Skyliner ไป-กลับ ที่รวมในงบ 923 บาทแล้ว)</p></div>
+        </div>
+        <div class="item"><div class="time">เย็น</div><div class="content"><h3><a class="loc-link" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Narita+International+Airport"><span class="pin">📍</span>สนามบินนาริตะ</a></h3><p>เดินทางกลับประเทศไทย<br><span style="color:#e63946; font-weight:bold;">💰 ค่าใช้จ่ายสถานที่: ฟรี</span></p></div></div>
+        <div class="item">
+          <div class="time" style="font-size: 0.85rem;">เที่ยวบิน</div>
+          <div class="content"><p style="color:#e63946; font-weight:bold;">✈️ ค่าใช้จ่ายในการเดินทาง: เครื่องบินขากลับ (รวมในงบ 15,000 บาทแล้ว)</p></div>
+        </div>
+      </div>
+    </section>
+  </div>
+</div>
 
-  <!-- TIPS -->
-  <section class="tips" id="tips">
-    <h2>⚠️ ข้อควรระวังและทริคสำหรับการเที่ยวฉงชิ่ง</h2>
-    <div class="tip-grid">
-      <div class="tip-card"><h4>🪜 บันไดเยอะมาก</h4><p>ฉงชิ่งเป็นเมืองภูเขา แนะนำให้เตรียมรองเท้าผ้าใบที่ใส่สบาย เพราะต้องเดินขึ้นลงบันไดตลอดเวลา</p></div>
-      <div class="tip-card"><h4>🗺️ แอปแผนที่อาจหลอกตา</h4><p>เนื่องจากเมืองเป็นแบบ 3 มิติ แผนที่อาจพาไปถูกพิกัดแต่ดันอยู่คนละชั้น หรือไปโผล่หลังตึก หากหาทางเข้าไม่เจอให้มองหาบันไดหรือลิฟต์</p></div>
-      <div class="tip-card"><h4>☕ การหาร้านลับ</h4><p>ร้านคาเฟ่หรือร้านชาในฉงชิ่งมักซ่อนอยู่ในตึกเก่า ควรหารีวิวพิกัดทางเข้าที่ชัดเจนมาก่อน</p></div>
-      <div class="tip-card"><h4>🚗 การเรียก DiDi</h4><p>ตรวจสอบระยะทางเดินเท้าก่อนเรียก DiDi เสมอ เพราะบางครั้งการเดิน 10 นาที อาจเร็วกว่าการนั่งรถที่ต้องไปอ้อมและรถติด</p></div>
-      <div class="tip-card"><h4>💰 เช็คราคาให้ละเอียด</h4><p>ควรถามราคาอาหารและบริการให้ชัดเจนว่าราคาที่แสดงคือ "ต่อคน" หรือ "ต่อชิ้น" หรือ "ต่อชุด" เพื่อป้องกันการเข้าใจผิดจากการสื่อสาร</p></div>
-    </div>
-  </section>
 
+<!-- ==================== OKINAWA PLAN ==================== -->
+<div id="okinawa-plan" class="tab-content oki-theme">
+  <div class="plan-title">
+    <h2>🎆 โอกินาว่า (เทศกาลดอกไม้ไฟ Ryukyu Kaiensai) 🌊</h2>
+    <div class="budget">💰 ค่าตั๋วเข้างานเทศกาล 785 บาท (ผ่าน Klook)</div>
+  </div>
+
+  <nav>
+    <a href="#oki-day1">วันงานเทศกาล (เมษายน)</a>
+  </nav>
+
+  <div class="container">
+    <section class="day-section day1" id="oki-day1">
+      <div class="day-header"><span class="day-badge">Event Day</span> เที่ยวงาน Ryukyu Kaiensai Fireworks Festival</div>
+      
+      <div class="timeline">
+        <div class="item">
+          <div class="time" style="font-size: 0.85rem;">เดินทาง</div>
+          <div class="content"><p style="color:#ff007f; font-weight:bold;">🚌 ค่าใช้จ่ายในการเดินทาง: ขึ้นรถบัสจาก Naha Bus Terminal (สาย 26, 43, 32, 55, 112 หรือ 99) ไปลงป้าย Okinawa Convention Center</p></div>
+        </div>
+        <div class="item"><div class="time">14:30</div><div class="content"><h3><a class="loc-link" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Naha+Bus+Terminal"><span class="pin">📍</span>ออกเดินทางจาก Naha Bus Terminal</a></h3><p>นั่งรถสาธารณะไปงานเทศกาล ใช้เวลาประมาณ 40-60 นาที เมื่อถึงป้ายแล้วสามารถเดินต่อเข้างานได้เลย<br><span style="color:#ff007f; font-weight:bold;">💰 ค่าใช้จ่ายสถานที่: ตามเรทค่าโดยสารรถบัสปกติ</span></p></div></div>
+        
+        <div class="item"><div class="time">15:30</div><div class="content"><h3><a class="loc-link" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Tropical+Beach+Okinawa"><span class="pin">📍</span>เข้าสู่งาน ณ Tropical Beach</a></h3><p>ประตูงานเปิดให้เข้า นำเสื่อมาปูจับจองที่นั่งได้เองตามอัธยาศัย (ตั๋วแบบไม่ระบุที่นั่ง) อากาศเดือนเมษายนเย็นสบาย ใส่เสื้อกันหนาวตัวเดียวเอาอยู่ และทะเลเปิดให้เล่นได้แล้วด้วย<br><span style="color:#ff007f; font-weight:bold;">💰 ค่าใช้จ่ายสถานที่: ค่าตั๋วเข้างาน 785 บาท (แนะนำให้ซื้อผ่าน Klook ล่วงหน้า)</span></p></div></div>
+        
+        <div class="item"><div class="time">16:00</div><div class="content"><h3><span class="pin">📍</span>เดินเล่นแผงลอยอาหารในงาน (Yatai)</h3><p>ซึมซับบรรยากาศเทศกาลเหมือนในอนิเมะ มีแผงขายอาหารมากมาย ทั้งทาโกะยากิ, ยากิโซบะ, น้ำแข็งใส, เบียร์, กล้วยชุบช็อกโกแลต ฯลฯ<br><span style="color:#ff007f; font-weight:bold;">💰 ค่าใช้จ่ายสถานที่: ราคาอาหารประมาณ 500-1,000 เยน/อย่าง</span></p></div></div>
+        
+        <div class="item"><div class="time">19:00</div><div class="content"><h3><span class="pin">📍</span>เริ่มการแสดงดอกไม้ไฟ 🎆</h3><p>เพลิดเพลินกับการแสดงพลุสุดอลังการริมชายหาดโอกินาว่า<br><span style="color:#ff007f; font-weight:bold;">💰 ค่าใช้จ่ายสถานที่: รวมในค่าตั๋วแล้ว</span></p></div></div>
+        
+        <div class="item"><div class="time">20:00</div><div class="content"><h3><span class="pin">📍</span>จบการแสดงดอกไม้ไฟ</h3><p>งานเลิกและเดินทางกลับเข้าเมืองนาฮะด้วยรถบัส<br><span style="color:#ff007f; font-weight:bold;">💰 ค่าใช้จ่ายสถานที่: ฟรี</span></p></div></div>
+      </div>
+
+      <!-- HIGHLIGHT INFOGRAPHIC -->
+      <div class="highlight-box">
+        <div class="highlight-title accent">📊 สรุปไฮไลต์ทริปดูพลุโอกินาว่า</div>
+        <div class="stat-grid">
+          <div class="stat-card" style="border-top-color:#ff007f;"><div class="icon">🎆</div><div class="num">1 ชม.</div><div class="label">เวลาแสดงพลุ</div></div>
+          <div class="stat-card" style="border-top-color:#ff007f;"><div class="icon">🚌</div><div class="num">40-60 นาที</div><div class="label">นั่งรถบัสจากนาฮะ</div></div>
+          <div class="stat-card" style="border-top-color:#ff007f;"><div class="icon">🎟️</div><div class="num">785฿</div><div class="label">ค่าตั๋ว Klook</div></div>
+          <div class="stat-card" style="border-top-color:#ff007f;"><div class="icon">🍢</div><div class="num">500-1000¥</div><div class="label">งบของกิน/ชิ้น</div></div>
+        </div>
+        <div class="highlight-tags">
+          <span class="tag accent">✨ อนิเมะฟีล</span>
+          <span class="tag accent">🎒 เที่ยวคนเดียวชิลๆ</span>
+          <span class="tag accent">❄️ อากาศเย็นสบาย</span>
+          <span class="tag accent">🏖️ ทะเลเปิดให้เล่นได้</span>
+        </div>
+        <div class="must-try">
+          <h4>💡 ทริคสำคัญ</h4>
+          <ul>
+            <li>ควรซื้อตั๋วล่วงหน้าผ่านแอป Klook หากอยากได้ที่นั่งระบุโซนต้องรีบจองเพราะหมดไว</li>
+            <li>ถ้าซื้อตั๋วราคา 785฿ เป็นแบบไม่ระบุที่นั่ง <b>ต้องเตรียมเสื่อไปปูเอง</b> เพื่อจับจองพื้นที่</li>
+            <li>อากาศช่วงเดือนเมษายน (สงกรานต์) กำลังเย็นสบาย พกเสื้อกันหนาวบางๆ ตัวเดียวก็พอ</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+  </div>
 </div>
 
 <footer>
-  🐼🌉 แพลนเที่ยวเฉิงตู - ฉงชิ่ง 5 วัน 5 คืน | งบประมาณรวมสุทธิ 20,236 บาท
+  🌍 Trip Planner | ออกแบบแพลนเดินทางเที่ยวจีน ญี่ปุ่น และเทศกาลดอกไม้ไฟโอกินาว่า
 </footer>
+
+<script>
+  function openTab(evt, tabName) {
+    var i, tabcontent, tablinks;
+    
+    // ซ่อนเนื้อหา Tab ทั้งหมด
+    tabcontent = document.getElementsByClassName("tab-content");
+    for (i = 0; i < tabcontent.length; i++) {
+      tabcontent[i].style.display = "none";
+      tabcontent[i].classList.remove("active");
+    }
+    
+    // เอาคลาส active ออกจากปุ่มทั้งหมด
+    tablinks = document.getElementsByClassName("tab-btn");
+    for (i = 0; i < tablinks.length; i++) {
+      tablinks[i].classList.remove("active");
+    }
+    
+    // แสดง Tab ที่เลือกและเพิ่มคลาส active ให้ปุ่ม
+    var activeTab = document.getElementById(tabName);
+    activeTab.style.display = "block";
+    
+    // รอเฟรมถัดไปเพื่อให้ animation ทำงาน
+    setTimeout(function() {
+      activeTab.classList.add("active");
+    }, 10);
+    
+    evt.currentTarget.classList.add("active");
+  }
+</script>
 
 </body>
 </html>
