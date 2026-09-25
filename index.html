@@ -68,15 +68,6 @@
     to { opacity: 1; transform: translateY(0); }
   }
 
-  /* ===== DAY ANIMATION ===== */
-  @keyframes slideFadeIn {
-    0% { opacity: 0; transform: translateY(30px); }
-    100% { opacity: 1; transform: translateY(0); }
-  }
-  .fadeInAnim {
-    animation: slideFadeIn 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-  }
-
   .plan-title {
     text-align: center;
     padding: 30px 20px 10px;
@@ -125,6 +116,15 @@
     color: #fff;
     box-shadow: 0 4px 8px rgba(247, 127, 0, 0.3);
     transform: scale(1.05);
+  }
+
+  /* ===== DAY ANIMATION ===== */
+  @keyframes slideFadeIn {
+    0% { opacity: 0; transform: translateY(30px); }
+    100% { opacity: 1; transform: translateY(0); }
+  }
+  .fadeInAnim {
+    animation: slideFadeIn 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
   }
 
   .container { max-width:1000px; margin:0 auto; padding:10px 20px 30px; }
@@ -221,6 +221,7 @@
   .timeline.theme-railway, .timeline.theme-road {
     position: relative;
   }
+  /* Railway Theme Background Line */
   .timeline.theme-railway::before {
     content: "";
     position: absolute;
@@ -233,6 +234,7 @@
     background: repeating-linear-gradient(to bottom, transparent, transparent 5px, #555 5px, #555 8px);
     z-index: 1;
   }
+  /* Road Trip Theme Background Line */
   .timeline.theme-road::before {
     content: "";
     position: absolute;
@@ -604,6 +606,14 @@
       <div class="day-header"><span class="day-badge">Day 1</span> เดินทางถึงโตเกียว & ไฮไลท์เทศกาลดอกไม้ไฟ</div>
       <div class="timeline theme-railway">
         <div class="item">
+          <div class="time" style="font-size: 0.85rem;">เที่ยวบินขาไป</div>
+          <div class="track-node">✈️</div>
+          <div class="content">
+            <p style="color:#e63946; font-weight:bold;">✈️ BKK ➔ HND (Thai Airways TG682)[cite: 2]</p>
+            <p style="font-size:0.85rem; color:#555;">ศ. 30 ก.ค. 2027 เวลา 22:45 (สุวรรณภูมิ) ➔ ถึง 31 ก.ค. 06:55 (ฮาเนดะ T3)[cite: 2] | เครื่อง Boeing 777-300ER ชั้นประหยัด (ใช้เวลา 6 ชม. 10 นาที)[cite: 2]</p>
+          </div>
+        </div>
+        <div class="item">
           <div class="time">เช้า-บ่าย</div>
           <div class="track-node">✈️</div>
           <div class="content"><h3><a class="loc-link" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Haneda+Airport"><span class="pin">📍</span>สนามบินฮาเนดะ (HND)</a></h3><p>เดินทางถึงสนามบินฮาเนดะ นั่งรถไฟเข้าเมืองแล้วนำสัมภาระไปฝากที่พัก<br><span class="station-label">(ขึ้นสถานี Haneda Airport Terminal ลงสถานี Ueno)</span><br><span style="color:#e63946; font-weight:bold;">💰 ค่าใช้จ่ายสถานที่: ค่าตั๋วรถไฟตามเรทปกติ</span></p></div>
@@ -620,7 +630,7 @@
             <h3><a class="loc-link" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Sumida+River+Fireworks+Festival"><span class="pin">📍</span>ชมเทศกาลดอกไม้ไฟแม่น้ำสุมิดะ</a></h3>
             <p>ท้องฟ้าจะสว่างไสวด้วยพลุนับพันดวง (งานจัดถึงเวลา 20.30 น.)</p>
             
-            <!-- จุดชมพลุยอดฮิต -->
+            <!-- จุดชมพลุยอดฮิต (เพิ่มลิงก์แผนที่) -->
             <div style="background:#fff3e0; padding:15px; border-radius:10px; margin-top:12px; border-left:4px solid #f77f00;">
               <h4 style="color:#e63946; margin-bottom:8px;">✨ จุดชมพลุยอดฮิต</h4>
               <ul style="list-style-type: none; margin-left: 0; font-size: 0.9rem; color: #555;">
@@ -739,12 +749,21 @@
         <div class="item">
           <div class="time">เย็น</div>
           <div class="track-node">🚉</div>
-          <div class="content"><h3><span class="pin">📍</span>เดินทางไปสนามบินฮาเนดะ</h3><p>นั่งรถไฟออกจากตัวเมืองไปยังสนามบินเพื่อเตรียมตัวเดินทางกลับ<br><span class="station-label">(ขึ้นสถานี Ueno ลงสถานี Haneda Airport)</span><br><span style="color:#e63946; font-weight:bold;">💰 ค่าใช้จ่ายสถานที่: ค่าตั๋วรถไฟตามเรทปกติ</span></p></div>
+          <div class="content"><h3><span class="pin">📍</span>เดินทางไปสนามบินฮาเนดะ</h3><p>นั่งรถไฟออกจากตัวเมืองไปยังสนามบินเพื่อเตรียมตัวเดินทางกลับ<br><span class="station-label">(ขึ้นสถานี Ueno ลงสถานี Haneda Airport Terminal)</span><br><span style="color:#e63946; font-weight:bold;">💰 ค่าใช้จ่ายสถานที่: ค่าตั๋วรถไฟตามเรทปกติ</span></p></div>
         </div>
         <div class="item">
           <div class="time">ค่ำ</div>
           <div class="track-node">✈️</div>
           <div class="content"><h3><span class="pin">📍</span>เดินทางกลับประเทศไทยอย่างสวัสดิภาพ</h3></div>
+        </div>
+        <div class="item">
+          <div class="time" style="font-size: 0.85rem;">เที่ยวบินขากลับ</div>
+          <div class="track-node">✈️</div>
+          <div class="content">
+            <p style="color:#e63946; font-weight:bold;">✈️ HND ➔ BKK (Thai Airways TG661)[cite: 2]</p>
+            <p style="font-size:0.85rem; color:#555;">พฤ. 5 ส.ค. 2027 เวลา 00:20 (ฮาเนดะ T3) ➔ ถึง 04:50 (สุวรรณภูมิ)[cite: 2] | เครื่อง Boeing 777-300ER ชั้นประหยัด (ใช้เวลา 6 ชม. 30 นาที)[cite: 2]<br>
+            <span style="color:#e63946; font-weight:bold;">⚠️ ข้อควรระวัง:</span> โปรดตรวจสอบวันออกเดินทางและไปถึงสนามบินล่วงหน้าในวันที่ พ. 4 ส.ค.[cite: 2]</p>
+          </div>
         </div>
       </div>
     </section>
@@ -775,24 +794,27 @@
       <div class="day-header"><span class="day-badge">Day 1 & 2</span> ชิลๆ ในโตเกียว (เดินทางด้วยรถไฟ)</div>
       <div class="timeline theme-road">
         <div class="item">
-          <div class="time" style="font-size: 0.85rem;">เที่ยวบิน</div>
+          <div class="time" style="font-size: 0.85rem;">เที่ยวบินขาไป</div>
           <div class="track-node">✈️</div>
-          <div class="content"><p style="color:#e63946; font-weight:bold;">✈️ ค่าใช้จ่ายในการเดินทาง: ตั๋วเครื่องบินไป-กลับ (AirAsia X) 15,000 บาท</p></div>
+          <div class="content">
+            <p style="color:#e63946; font-weight:bold;">✈️ BKK ➔ HND (Thai Airways TG682)[cite: 2]</p>
+            <p style="font-size:0.85rem; color:#555;">ศ. 30 ก.ค. 2027 เวลา 22:45 (สุวรรณภูมิ) ➔ ถึง 31 ก.ค. 06:55 (ฮาเนดะ T3)[cite: 2] | เครื่อง Boeing 777-300ER ชั้นประหยัด (ใช้เวลา 6 ชม. 10 นาที)[cite: 2]</p>
+          </div>
         </div>
         <div class="item">
           <div class="time">Day 1</div>
           <div class="track-node">🚶</div>
-          <div class="content"><h3><a class="loc-link" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Narita+International+Airport"><span class="pin">📍</span>สนามบินนาริตะ (Narita)</a></h3><p>เดินทางถึงประเทศญี่ปุ่น ผ่านตม.และรับกระเป๋า<br><span style="color:#e63946; font-weight:bold;">💰 ค่าใช้จ่ายสถานที่: ฟรี</span></p></div>
+          <div class="content"><h3><a class="loc-link" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Haneda+Airport"><span class="pin">📍</span>สนามบินฮาเนดะ (Haneda T3)</a></h3><p>เดินทางถึงประเทศญี่ปุ่น ผ่านตม.และรับกระเป๋า<br><span style="color:#e63946; font-weight:bold;">💰 ค่าใช้จ่ายสถานที่: ฟรี</span></p></div>
         </div>
         <div class="item">
           <div class="time" style="font-size: 0.85rem;">เดินทาง</div>
           <div class="track-node">🚆</div>
-          <div class="content"><p style="color:#e63946; font-weight:bold;">🚆 ค่าใช้จ่ายในการเดินทาง: รถไฟด่วน Skyliner เข้าโตเกียว (ไป-กลับรวม 923 บาท)<br><span class="station-label">(ขึ้นสถานี Narita Airport ลงสถานี Keisei Ueno)</span></p></div>
+          <div class="content"><p style="color:#e63946; font-weight:bold;">🚆 ค่าใช้จ่ายในการเดินทาง: รถไฟเข้าโตเกียว (รวมค่าเดินทาง 923 บาท)<br><span class="station-label">(ขึ้นสถานี Haneda Airport ลงสถานี Ueno)</span></p></div>
         </div>
         <div class="item">
           <div class="time">Check-in</div>
           <div class="track-node">🏨</div>
-          <div class="content"><h3><a class="loc-link" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Hotel+Comfact+Tokyo"><span class="pin">📍</span>Hotel Comfact (ใกล้ Ueno)</a></h3><p>เช็คอินเข้าที่พัก เดินจากสถานี Keisei Ueno ประมาณ 15 นาที<br><span style="color:#e63946; font-weight:bold;">💰 ค่าใช้จ่ายสถานที่: ค่าที่พัก 2 คืนแรก 3,342 บาท/คน</span></p></div>
+          <div class="content"><h3><a class="loc-link" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Hotel+Comfact+Tokyo"><span class="pin">📍</span>Hotel Comfact (ใกล้ Ueno)</a></h3><p>เช็คอินเข้าที่พัก เดินจากสถานี Ueno ประมาณ 15 นาที<br><span style="color:#e63946; font-weight:bold;">💰 ค่าใช้จ่ายสถานที่: ค่าที่พัก 2 คืนแรก 3,342 บาท/คน</span></p></div>
         </div>
         <div class="item">
           <div class="time">Day 1-2</div>
@@ -804,7 +826,7 @@
             - หาของกินที่ตลาดปลา <b>Tsukiji</b><br>
             - เดินเล่นย่าน <b>Shibuya</b><br>
             - ถ่ายรูปมุมรถไฟที่ต้องใช้ดวงที่สถานี <b>Yoyogi Sendagaya</b><br>
-            <span class="station-label">(เดินทางภายในโตเกียวโดยขึ้น-ลงสถานีรถไฟต่างๆ เช่น Ueno, Shibuya, Yoyogi)</span><br>
+            <span class="station-label">(เดินทางภายในโตเกียวโดยขึ้น-ลงสถานีรถไฟต่างๆ เช่น สถานี Ueno, Shibuya, Yoyogi Sendagaya ฯลฯ)</span><br>
             <span style="color:#e63946; font-weight:bold;">💰 ค่าใช้จ่ายสถานที่: ตามอัธยาศัย</span></p>
           </div>
         </div>
@@ -954,12 +976,21 @@
         <div class="item">
           <div class="time" style="font-size: 0.85rem;">เดินทาง</div>
           <div class="track-node">🚆</div>
-          <div class="content"><p style="color:#e63946; font-weight:bold;">🚆 ค่าใช้จ่ายในการเดินทาง: นั่งรถไฟกลับสนามบิน (ใช้ตั๋ว Skyliner ไป-กลับ ที่รวมในงบ 923 บาทแล้ว)<br><span class="station-label">(ขึ้นสถานี Keisei Ueno ลงสถานี Narita Airport)</span></p></div>
+          <div class="content"><p style="color:#e63946; font-weight:bold;">🚆 ค่าใช้จ่ายในการเดินทาง: นั่งรถไฟกลับสนามบินฮาเนดะ<br><span class="station-label">(ขึ้นสถานี Ueno ลงสถานี Haneda Airport Terminal)</span></p></div>
         </div>
         <div class="item">
           <div class="time">เย็น</div>
           <div class="track-node">✈️</div>
-          <div class="content"><h3><a class="loc-link" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Narita+International+Airport"><span class="pin">📍</span>สนามบินนาริตะ (Narita)</a></h3><p>เดินทางกลับประเทศไทย<br><span style="color:#e63946; font-weight:bold;">💰 ค่าใช้จ่ายสถานที่: ฟรี</span></p></div>
+          <div class="content"><h3><a class="loc-link" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Haneda+Airport"><span class="pin">📍</span>สนามบินฮาเนดะ (Haneda T3)</a></h3><p>เดินทางกลับประเทศไทย<br><span style="color:#e63946; font-weight:bold;">💰 ค่าใช้จ่ายสถานที่: ฟรี</span></p></div>
+        </div>
+        <div class="item">
+          <div class="time" style="font-size: 0.85rem;">เที่ยวบินขากลับ</div>
+          <div class="track-node">✈️</div>
+          <div class="content">
+            <p style="color:#e63946; font-weight:bold;">✈️ HND ➔ BKK (Thai Airways TG661)[cite: 2]</p>
+            <p style="font-size:0.85rem; color:#555;">พฤ. 5 ส.ค. 2027 เวลา 00:20 (ฮาเนดะ T3) ➔ ถึง 04:50 (สุวรรณภูมิ)[cite: 2] | เครื่อง Boeing 777-300ER ชั้นประหยัด (ใช้เวลา 6 ชม. 30 นาที)[cite: 2]<br>
+            <span style="color:#e63946; font-weight:bold;">⚠️ ข้อควรระวัง:</span> โปรดตรวจสอบวันออกเดินทางและไปถึงสนามบินล่วงหน้าในวันที่ พ. 4 ส.ค.[cite: 2]</p>
+          </div>
         </div>
       </div>
     </section>
