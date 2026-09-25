@@ -68,6 +68,15 @@
     to { opacity: 1; transform: translateY(0); }
   }
 
+  /* ===== DAY ANIMATION ===== */
+  @keyframes slideFadeIn {
+    0% { opacity: 0; transform: translateY(30px); }
+    100% { opacity: 1; transform: translateY(0); }
+  }
+  .fadeInAnim {
+    animation: slideFadeIn 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+
   .plan-title {
     text-align: center;
     padding: 30px 20px 10px;
@@ -84,6 +93,7 @@
     box-shadow:0 4px 10px rgba(0,0,0,0.08);
   }
 
+  /* ===== SUB-TABS (DAY NAV) ===== */
   nav {
     display:flex;
     flex-wrap:wrap;
@@ -91,6 +101,7 @@
     gap:10px;
     background:transparent;
     padding:15px;
+    margin-bottom: 20px;
   }
   nav a {
     text-decoration:none;
@@ -102,8 +113,19 @@
     font-size:0.9rem;
     border:2px solid #f77f00;
     transition:0.3s;
+    cursor: pointer;
+    user-select: none;
   }
-  nav a:hover { background:#f77f00; color:#fff; }
+  nav a:hover { 
+    background:#f77f00; 
+    color:#fff; 
+  }
+  nav a.active {
+    background: #f77f00;
+    color: #fff;
+    box-shadow: 0 4px 8px rgba(247, 127, 0, 0.3);
+    transform: scale(1.05);
+  }
 
   .container { max-width:1000px; margin:0 auto; padding:10px 20px 30px; }
 
@@ -113,7 +135,6 @@
     box-shadow:0 6px 20px rgba(0,0,0,0.08);
     margin-bottom:40px;
     overflow:hidden;
-    scroll-margin-top:140px;
   }
   .day-header {
     color:#fff;
@@ -200,7 +221,6 @@
   .timeline.theme-railway, .timeline.theme-road {
     position: relative;
   }
-  /* Railway Theme Background Line */
   .timeline.theme-railway::before {
     content: "";
     position: absolute;
@@ -213,7 +233,6 @@
     background: repeating-linear-gradient(to bottom, transparent, transparent 5px, #555 5px, #555 8px);
     z-index: 1;
   }
-  /* Road Trip Theme Background Line */
   .timeline.theme-road::before {
     content: "";
     position: absolute;
@@ -305,33 +324,12 @@
     font-weight:600;
   }
 
-  .must-try {
-    background:#fff;
-    border-radius:12px;
-    padding:14px 16px;
-    box-shadow:0 3px 8px rgba(0,0,0,0.06);
-  }
-  .must-try h4 { font-size:0.9rem; margin-bottom:8px; color:#444; }
-  .must-try ul { list-style:none; padding:0; margin:0; }
-  .must-try li {
-    font-size:0.85rem;
-    color:#555;
-    padding:4px 0 4px 20px;
-    position:relative;
-  }
-  .must-try li::before {
-    content:"🔥";
-    position:absolute;
-    left:0;
-  }
-
   .tips {
     background:#fff8e1;
     border-radius:16px;
     padding:25px;
     margin-bottom:40px;
     box-shadow:0 6px 20px rgba(0,0,0,0.08);
-    scroll-margin-top:140px;
   }
   .tips h2 {
     color:#e65100;
@@ -377,9 +375,9 @@
 </header>
 
 <div class="tab-container">
-  <button class="tab-btn active" onclick="openTab(event, 'china-plan')">เฉิงตู - ฉงชิ่ง 5 วัน 5 คืน</button>
-  <button class="tab-btn" onclick="openTab(event, 'japan-train')">โตเกียวหน้าร้อน & พลุสุมิดะ 5 วัน 4 คืน</button>
-  <button class="tab-btn" onclick="openTab(event, 'japan-road')">โตเกียว - ฮาคุบะ - ฟูจิ 7 วัน 6 คืน</button>
+  <button class="tab-btn active" onclick="openMainTab(event, 'china-plan')">เฉิงตู - ฉงชิ่ง 5 วัน 5 คืน</button>
+  <button class="tab-btn" onclick="openMainTab(event, 'japan-train')">โตเกียวหน้าร้อน & พลุสุมิดะ 5 วัน 4 คืน</button>
+  <button class="tab-btn" onclick="openMainTab(event, 'japan-road')">โตเกียว - ฮาคุบะ - ฟูจิ 7 วัน 6 คืน</button>
 </div>
 
 <!-- ==================== CHINA PLAN ==================== -->
@@ -390,17 +388,17 @@
   </div>
 
   <nav>
-    <a href="#day1">Day 1</a>
-    <a href="#day2">Day 2</a>
-    <a href="#day3">Day 3</a>
-    <a href="#day4">Day 4</a>
-    <a href="#day5">Day 5</a>
-    <a href="#tips">ทริค & ข้อควรระวัง</a>
+    <a class="active" onclick="filterDay(this, 'china-plan', 'all')">ดูทั้งหมด</a>
+    <a onclick="filterDay(this, 'china-plan', 'china-day1')">Day 1</a>
+    <a onclick="filterDay(this, 'china-plan', 'china-day2')">Day 2</a>
+    <a onclick="filterDay(this, 'china-plan', 'china-day3')">Day 3</a>
+    <a onclick="filterDay(this, 'china-plan', 'china-day4')">Day 4</a>
+    <a onclick="filterDay(this, 'china-plan', 'china-day5')">Day 5</a>
   </nav>
 
   <div class="container">
     <!-- CHINA DAY 1 -->
-    <section class="day-section day1" id="day1">
+    <section class="day-section day1" id="china-day1">
       <div class="day-header"><span class="day-badge">Day 1</span> ตะลุยเมืองเฉิงตู (Chengdu)</div>
       <div class="timeline">
         <div class="item">
@@ -415,7 +413,7 @@
         <div class="item"><div class="time">04:00</div><div class="content"><h3><a class="loc-link" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Meihao+R+Hotel+Chengdu"><span class="pin">📍</span>Check-in โรงแรม</a></h3><p>พักที่ Meihao R Hotel (หรือ R Royalss Hotel) ทำเลดีใกล้ถนนชุนซีและรถไฟใต้ดิน<br><span style="color:#e63946; font-weight:bold;">💰 ค่าใช้จ่ายสถานที่: ค่าที่พักเฉิงตู 4 คืน คนละ 2,384 บาท</span></p></div></div>
         <div class="item">
           <div class="time" style="font-size: 0.85rem;">เดินทาง</div>
-          <div class="content"><p style="color:#e63946; font-weight:bold;">🚇 ค่าใช้จ่ายในการเดินทาง: รถไฟใต้ดิน และ DiDi ในเมืองเฉิงตูตลอดทริป<br><span class="station-label">(ขึ้น-ลง สถานีรถไฟใต้ดินต่างๆ ในเฉิงตู เช่น สถานี Chunxi Road สำหรับที่พัก)</span></p></div>
+          <div class="content"><p style="color:#e63946; font-weight:bold;">🚇 ค่าใช้จ่ายในการเดินทาง: รถไฟใต้ดิน และ DiDi (หักจากงบ Metro 80 บาท และ DiDi 240 บาท/คน ตลอดทริปในเฉิงตู)<br><span class="station-label">(ขึ้น-ลง สถานีรถไฟใต้ดินต่างๆ ในเฉิงตู เช่น สถานี Chunxi Road สำหรับที่พัก)</span></p></div>
         </div>
         <div class="item"><div class="time">12:00</div><div class="content"><h3><a class="loc-link" target="_blank" href="https://maps.app.goo.gl/NMBJMDrop7gi97iYA"><span class="pin">📍</span>มื้อเที่ยงที่ Taode Casserole (Yingmenkou Branch)</a></h3><p>ร้านอาหารเสฉวนยอดฮิตที่ห้าง Taikoo Li แนะนำให้ไปช่วง 11:00 น. ก่อนคนจะเยอะ เมนูห้ามพลาดคือ กุ้งกระเทียมอบวุ้นเส้น (56 หยวน) และปลาต้มผักกาดดอง (41 หยวน) สั่งอาหารง่ายๆ ผ่านการสแกน QR Code<br><span style="color:#e63946; font-weight:bold;">💰 ค่าใช้จ่ายสถานที่: ค่าอาหารเฉลี่ยคนละ ~200 บาท</span></p></div></div>
         <div class="item"><div class="time">13:00</div><div class="content"><h3><a class="loc-link" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Daci+Temple+Chengdu"><span class="pin">📍</span>วัดต้าสือ (Daci Temple)</a></h3><p>วัดเก่าแก่ใจกลางเมือง เข้าฟรี บรรยากาศร่มรื่น แวะขอพรเรื่องโชคลาภ<br><span style="color:#e63946; font-weight:bold;">💰 ค่าใช้จ่ายสถานที่: เข้าชมฟรี</span></p></div></div>
@@ -430,10 +428,25 @@
         </div>
         <div class="item"><div class="time">20:00</div><div class="content"><h3><a class="loc-link" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Fuqin+Night+Market+Chengdu"><span class="pin">📍</span>ตลาดกลางคืน Fuqin Night Market</a></h3><p>นั่ง DiDi ไปกินสตรีทฟู้ดโลคอล ราคาไม่แพง มีของกินให้เลือกเยอะมาก<br><span style="color:#e63946; font-weight:bold;">💰 ค่าใช้จ่ายสถานที่: อาหารสตรีทฟู้ดตามอัธยาศัย</span></p></div></div>
       </div>
+      <div class="highlight-box">
+        <div class="highlight-title accent">📊 สรุปไฮไลต์ Day 1</div>
+        <div class="stat-grid">
+          <div class="stat-card" style="border-top-color:#e63946;"><div class="icon">📍</div><div class="num">10</div><div class="label">จุดเช็คอิน</div></div>
+          <div class="stat-card" style="border-top-color:#e63946;"><div class="icon">🍜</div><div class="num">3</div><div class="label">มื้ออาหาร/ของกิน</div></div>
+          <div class="stat-card" style="border-top-color:#e63946;"><div class="icon">🚌</div><div class="num">Bus+เดิน</div><div class="label">การเดินทางหลัก</div></div>
+          <div class="stat-card" style="border-top-color:#e63946;"><div class="icon">⏱️</div><div class="num">~18 ชม.</div><div class="label">ระยะเวลารวม</div></div>
+        </div>
+        <div class="highlight-tags">
+          <span class="tag accent">🐼 แพนด้ายักษ์ IFS</span>
+          <span class="tag accent">🍲 เสฉวนแท้</span>
+          <span class="tag accent">🏮 ซอยกว้างซอยแคบ</span>
+          <span class="tag accent">🌃 ตลาดกลางคืน</span>
+        </div>
+      </div>
     </section>
 
     <!-- CHINA DAY 2 -->
-    <section class="day-section day2" id="day2">
+    <section class="day-section day2" id="china-day2">
       <div class="day-header"><span class="day-badge">Day 2</span> One Day Trip อุทยานปี้เผิงโกว (Bipenggou)</div>
       <div class="timeline">
         <div class="item"><div class="time">07:00</div><div class="content"><h3 class="no-link">ออกจากโรงแรม</h3><p>เดินไปขึ้นรถบัสที่จุดนัดพบ<br><span style="color:#e63946; font-weight:bold;">💰 ค่าใช้จ่ายสถานที่: วันเดย์ทริปอุทยานปี้เผิงโกว 2,272 บาท/คน (รวมค่าเข้า+รถรับส่ง+รถบัส+รถกอล์ฟ+อาหาร/ของใช้)</span></p></div></div>
@@ -461,7 +474,7 @@
     </section>
 
     <!-- CHINA DAY 3 -->
-    <section class="day-section day3" id="day3">
+    <section class="day-section day3" id="china-day3">
       <div class="day-header"><span class="day-badge">Day 3</span> ตูเจียงเยี่ยน (Dujiangyan)</div>
       <div class="timeline">
         <div class="item">
@@ -482,13 +495,13 @@
           <div class="time" style="font-size: 0.85rem;">เดินทาง</div>
           <div class="content"><p style="color:#e63946; font-weight:bold;">🚄 ค่าใช้จ่ายในการเดินทาง: นั่งรถไฟความเร็วสูงกลับไปสถานี Xipu ราคา 10 หยวน<br><span class="station-label">(ขึ้นสถานี Dujiangyan ลงสถานี Xipu)</span></p></div>
         </div>
-        <div class="item"><div class="time">19:30</div><div class="content"><h3><a class="loc-link" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Chengdu+SKP"><span class="pin">📍</span>เดินทางกลับ</a></h3><p>แนะนำให้จองตั๋วล่วงหน้าเพราะขากลับคนเยอะมาก<br><span style="color:#e63946; font-weight:bold;">💰 ค่าใช้จ่ายสถานที่: ตั๋วรถไฟขากลับ 10 หยวน</span></p></div></div>
+        <div class="item"><div class="time">19:30</div><div class="content"><h3><a class="loc-link" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Chengdu+SKP"><span class="pin">📍</span>เดินทางกลับ</a></h3><p>นั่งรถไฟความเร็วสูงกลับไปสถานี Xipu (แนะนำให้จองตั๋วล่วงหน้าเพราะขากลับคนเยอะมาก)<br><span style="color:#e63946; font-weight:bold;">💰 ค่าใช้จ่ายสถานที่: ตั๋วรถไฟขากลับ 10 หยวน</span></p></div></div>
         <div class="item"><div class="time">20:30</div><div class="content"><h3><a class="loc-link" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Chengdu+SKP"><span class="pin">📍</span>จุดเช็คอินน้ำพุไม้ไผ่ (Chengdu SKP)</a></h3><p>ไปดูโชว์ไฟและน้ำพุที่ห้าง SKP<br><span style="color:#e63946; font-weight:bold;">💰 ค่าใช้จ่ายสถานที่: ชมฟรี</span></p></div></div>
       </div>
     </section>
 
     <!-- CHINA DAY 4 -->
-    <section class="day-section day4" id="day4">
+    <section class="day-section day4" id="china-day4">
       <div class="day-header"><span class="day-badge">Day 4</span> เดินทางสู่ฉงชิ่ง (Chongqing)</div>
       <div class="timeline">
         <div class="item">
@@ -514,7 +527,7 @@
     </section>
 
     <!-- CHINA DAY 5 -->
-    <section class="day-section day5" id="day5">
+    <section class="day-section day5" id="china-day5">
       <div class="day-header"><span class="day-badge">Day 5</span> เก็บตกลานด์มาร์กฉงชิ่ง</div>
       <div class="timeline">
         <div class="item"><div class="time">09:00</div><div class="content"><h3><a class="loc-link" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Chadianxia+Coffee+Chongqing"><span class="pin">📍</span>คาเฟ่วิวกระเช้า (Chadianxia Coffee)</a></h3><p>คาเฟ่ซ่อนตัวอยู่ชั้น 15 ของตึกเก่า (ตึกไป๋เซียงจวี) นั่งจิบกาแฟชมวิวกระเช้าลอยฟ้าข้ามแม่น้ำแยงซีเกียง<br><span style="color:#e63946; font-weight:bold;">💰 ค่าใช้จ่ายสถานที่: กาแฟคาเฟ่ (รวมในงบอาหารฝั่งฉงชิ่ง)</span></p></div></div>
@@ -534,6 +547,22 @@
         <div class="item">
           <div class="time" style="font-size: 0.85rem;">เที่ยวบิน</div>
           <div class="content"><p style="color:#e63946; font-weight:bold;">✈️ ค่าใช้จ่ายในการเดินทาง: ตั๋วเครื่องบินขากลับ ฉงชิ่ง → ดอนเมือง (AirAsia FD557) 3,230 บาท</p></div>
+        </div>
+      </div>
+      <div class="highlight-box">
+        <div class="highlight-title accent">📊 สรุปไฮไลต์ Day 5</div>
+        <div class="stat-grid">
+          <div class="stat-card" style="border-top-color:#ee9b00;"><div class="icon">📍</div><div class="num">14</div><div class="label">จุดเช็คอิน (มากสุด!)</div></div>
+          <div class="stat-card" style="border-top-color:#ee9b00;"><div class="icon">🍲</div><div class="num">3</div><div class="label">มื้ออาหารหลัก</div></div>
+          <div class="stat-card" style="border-top-color:#ee9b00;"><div class="icon">🌉</div><div class="num">Hongyadong</div><div class="label">ไฮไลต์สุดท้าย</div></div>
+          <div class="stat-card" style="border-top-color:#ee9b00;"><div class="icon">🕐</div><div class="num">14 ชม.</div><div class="label">ยาวที่สุดในทริป</div></div>
+        </div>
+        <div class="highlight-tags">
+          <span class="tag accent">☕ คาเฟ่ลับ</span>
+          <span class="tag accent">🛕 วัดกลางตึก</span>
+          <span class="tag accent">🎂 เค้กไก่หยอง</span>
+          <span class="tag accent">🏮 หงหยาต้ง</span>
+          <span class="tag accent">🍲 หม่าล่าหม้อไฟ</span>
         </div>
       </div>
     </section>
@@ -561,11 +590,12 @@
   </div>
 
   <nav>
-    <a href="#train-day1">Day 1</a>
-    <a href="#train-day2">Day 2</a>
-    <a href="#train-day3">Day 3</a>
-    <a href="#train-day4">Day 4</a>
-    <a href="#train-day5">Day 5</a>
+    <a class="active" onclick="filterDay(this, 'japan-train', 'all')">ดูทั้งหมด</a>
+    <a onclick="filterDay(this, 'japan-train', 'train-day1')">Day 1</a>
+    <a onclick="filterDay(this, 'japan-train', 'train-day2')">Day 2</a>
+    <a onclick="filterDay(this, 'japan-train', 'train-day3')">Day 3</a>
+    <a onclick="filterDay(this, 'japan-train', 'train-day4')">Day 4</a>
+    <a onclick="filterDay(this, 'japan-train', 'train-day5')">Day 5</a>
   </nav>
 
   <div class="container">
@@ -590,7 +620,7 @@
             <h3><a class="loc-link" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Sumida+River+Fireworks+Festival"><span class="pin">📍</span>ชมเทศกาลดอกไม้ไฟแม่น้ำสุมิดะ</a></h3>
             <p>ท้องฟ้าจะสว่างไสวด้วยพลุนับพันดวง (งานจัดถึงเวลา 20.30 น.)</p>
             
-            <!-- จุดชมพลุยอดฮิต (เพิ่มลิงก์แผนที่) -->
+            <!-- จุดชมพลุยอดฮิต -->
             <div style="background:#fff3e0; padding:15px; border-radius:10px; margin-top:12px; border-left:4px solid #f77f00;">
               <h4 style="color:#e63946; margin-bottom:8px;">✨ จุดชมพลุยอดฮิต</h4>
               <ul style="list-style-type: none; margin-left: 0; font-size: 0.9rem; color: #555;">
@@ -730,12 +760,13 @@
   </div>
 
   <nav>
-    <a href="#road-day12">Day 1-2</a>
-    <a href="#road-day3">Day 3</a>
-    <a href="#road-day4">Day 4</a>
-    <a href="#road-day5">Day 5</a>
-    <a href="#road-day6">Day 6</a>
-    <a href="#road-day7">Day 7</a>
+    <a class="active" onclick="filterDay(this, 'japan-road', 'all')">ดูทั้งหมด</a>
+    <a onclick="filterDay(this, 'japan-road', 'road-day12')">Day 1-2</a>
+    <a onclick="filterDay(this, 'japan-road', 'road-day3')">Day 3</a>
+    <a onclick="filterDay(this, 'japan-road', 'road-day4')">Day 4</a>
+    <a onclick="filterDay(this, 'japan-road', 'road-day5')">Day 5</a>
+    <a onclick="filterDay(this, 'japan-road', 'road-day6')">Day 6</a>
+    <a onclick="filterDay(this, 'japan-road', 'road-day7')">Day 7</a>
   </nav>
 
   <div class="container">
@@ -773,6 +804,7 @@
             - หาของกินที่ตลาดปลา <b>Tsukiji</b><br>
             - เดินเล่นย่าน <b>Shibuya</b><br>
             - ถ่ายรูปมุมรถไฟที่ต้องใช้ดวงที่สถานี <b>Yoyogi Sendagaya</b><br>
+            <span class="station-label">(เดินทางภายในโตเกียวโดยขึ้น-ลงสถานีรถไฟต่างๆ เช่น Ueno, Shibuya, Yoyogi)</span><br>
             <span style="color:#e63946; font-weight:bold;">💰 ค่าใช้จ่ายสถานที่: ตามอัธยาศัย</span></p>
           </div>
         </div>
@@ -940,7 +972,7 @@
 </footer>
 
 <script>
-  function openTab(evt, tabName) {
+  function openMainTab(evt, tabName) {
     var i, tabcontent, tablinks;
     tabcontent = document.getElementsByClassName("tab-content");
     for (i = 0; i < tabcontent.length; i++) {
@@ -957,6 +989,38 @@
       activeTab.classList.add("active");
     }, 10);
     evt.currentTarget.classList.add("active");
+  }
+
+  function filterDay(element, planContainerId, dayId) {
+    const container = document.getElementById(planContainerId);
+    
+    // อัปเดตปุ่มที่ถูกกดให้เป็น Active
+    const links = container.querySelectorAll('nav a');
+    links.forEach(link => link.classList.remove('active'));
+    element.classList.add('active');
+    
+    // ซ่อน Day ทั้งหมด และลบ class แอนิเมชันออกก่อน
+    const sections = container.querySelectorAll('.day-section');
+    sections.forEach(sec => {
+      sec.style.display = 'none';
+      sec.classList.remove('fadeInAnim');
+    });
+    
+    // โชว์เนื้อหาที่เลือกพร้อมใส่ แอนิเมชัน
+    if(dayId === 'all') {
+      sections.forEach(sec => {
+        sec.style.display = 'block';
+        void sec.offsetWidth; // บังคับให้เบราว์เซอร์ reflow เพื่อให้แอนิเมชันเล่นใหม่
+        sec.classList.add('fadeInAnim');
+      });
+    } else {
+      const target = document.getElementById(dayId);
+      if(target) {
+        target.style.display = 'block';
+        void target.offsetWidth; // บังคับ reflow
+        target.classList.add('fadeInAnim');
+      }
+    }
   }
 </script>
 
