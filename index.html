@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>แพลนท่องเที่ยว 3 สไตล์: จีน | ญี่ปุ่น | โอกินาว่า</title>
+<title>แพลนท่องเที่ยว 4 สไตล์: จีน | ญี่ปุ่น (รถไฟ/โรดทริป) | โอกินาว่า</title>
 <style>
   * { margin:0; padding:0; box-sizing:border-box; }
   body {
@@ -130,6 +130,7 @@
   .day4 .day-header { background:linear-gradient(90deg,#7209b7,#b5179e); }
   .day5 .day-header { background:linear-gradient(90deg,#f4a261,#ee9b00); }
   .day6 .day-header { background:linear-gradient(90deg,#0077b6,#00b4d8); }
+  .day7 .day-header { background:linear-gradient(90deg,#9d4edd,#e0aaff); }
   .oki-theme .day-header { background:linear-gradient(90deg,#ff007f,#ff758c); }
 
   .day1 .accent { color:#e63946; border-color:#e63946; }
@@ -177,6 +178,57 @@
   }
   .content p { font-size:0.92rem; color:#555; }
 
+  /* ===== THEMED TRACKS (Railway & Road) ===== */
+  .track-node {
+    flex: 0 0 24px;
+    display: flex;
+    justify-content: center;
+    padding-top: 2px;
+    font-size: 1.25rem;
+    background: #fff;
+    z-index: 3;
+    position: relative;
+  }
+  .timeline.theme-railway, .timeline.theme-road {
+    position: relative;
+  }
+  /* Railway Theme Background Line */
+  .timeline.theme-railway::before {
+    content: "";
+    position: absolute;
+    left: 115px; /* Aligns with center of track-node (25 + 65 + 18 + 12 = 120) */
+    top: 45px;
+    bottom: 45px;
+    width: 10px;
+    border-left: 2px solid #555;
+    border-right: 2px solid #555;
+    background: repeating-linear-gradient(to bottom, transparent, transparent 5px, #555 5px, #555 8px);
+    z-index: 1;
+  }
+  /* Road Trip Theme Background Line */
+  .timeline.theme-road::before {
+    content: "";
+    position: absolute;
+    left: 113px; 
+    top: 45px;
+    bottom: 45px;
+    width: 14px;
+    background: #444;
+    border-radius: 4px;
+    z-index: 1;
+  }
+  .timeline.theme-road::after {
+    content: "";
+    position: absolute;
+    left: 119px;
+    top: 45px;
+    bottom: 45px;
+    width: 2px;
+    background: repeating-linear-gradient(to bottom, #fff, #fff 8px, transparent 8px, transparent 16px);
+    z-index: 2;
+  }
+  .theme-railway .item, .theme-road .item { border-bottom: none; padding-bottom: 20px; }
+
   /* ===== CLICKABLE LOCATION LINK ===== */
   .loc-link {
     color:#1a73e8;
@@ -194,9 +246,7 @@
     background:#e8f0fe;
   }
   .loc-link .pin { font-size:0.95rem; }
-  .no-link {
-    color:#222;
-  }
+  .no-link { color:#222; }
 
   /* ===== HIGHLIGHT INFOGRAPHIC CARD ===== */
   .highlight-box {
@@ -267,29 +317,6 @@
     left:0;
   }
 
-  /* ===== MAP ===== */
-  .map-box {
-    margin:0 25px 25px;
-    border-radius:14px;
-    overflow:hidden;
-    box-shadow:0 4px 12px rgba(0,0,0,0.1);
-  }
-  .map-box .map-label {
-    padding:10px 16px;
-    color:#fff;
-    font-size:0.9rem;
-    font-weight:600;
-    display:flex;
-    align-items:center;
-    gap:6px;
-  }
-  .map-box iframe {
-    width:100%;
-    height:280px;
-    border:0;
-    display:block;
-  }
-
   .tips {
     background:#fff8e1;
     border-radius:16px;
@@ -329,7 +356,7 @@
     .day-header{font-size:1.15rem;}
     .tab-btn { font-size: 0.95rem; padding: 10px 20px; width: 100%; }
     nav a{font-size:0.8rem;padding:6px 12px;}
-    .highlight-box, .map-box { margin-left:15px; margin-right:15px; }
+    .highlight-box { margin-left:15px; margin-right:15px; }
   }
 </style>
 </head>
@@ -342,10 +369,12 @@
 </header>
 
 <div class="tab-container">
-  <button class="tab-btn active" onclick="openTab(event, 'china-plan')">🇨🇳 จีน (เฉิงตู - ฉงชิ่ง)</button>
-  <button class="tab-btn" onclick="openTab(event, 'japan-plan')">🇯🇵 ญี่ปุ่น (โตเกียว - ฮาคุบะ)</button>
-  <button class="tab-btn" onclick="openTab(event, 'okinawa-plan')">🎆 โอกินาว่า (เทศกาลดอกไม้ไฟ)</button>
+  <button class="tab-btn active" onclick="openTab(event, 'china-plan')">🇨🇳 จีน (เฉิงตู-ฉงชิ่ง)</button>
+  <button class="tab-btn" onclick="openTab(event, 'japan-train')">🇯🇵 ญี่ปุ่น (นั่งรถไฟ)</button>
+  <button class="tab-btn" onclick="openTab(event, 'japan-road')">🚙 ญี่ปุ่น (โรดทริป)</button>
+  <button class="tab-btn" onclick="openTab(event, 'okinawa-plan')">🎆 โอกินาว่า (พลุ)</button>
 </div>
+
 
 <!-- ==================== CHINA PLAN ==================== -->
 <div id="china-plan" class="tab-content active">
@@ -518,138 +547,344 @@
 </div>
 
 
-<!-- ==================== JAPAN PLAN ==================== -->
-<div id="japan-plan" class="tab-content">
+<!-- ==================== JAPAN TRAIN PLAN ==================== -->
+<div id="japan-train" class="tab-content">
   <div class="plan-title">
-    <h2>🗻 ญี่ปุ่น (โตเกียว - ฮาคุบะ - คาวากุจิโกะ) 7 วัน 6 คืน 🗼</h2>
+    <h2>🎆 ญี่ปุ่น (โตเกียวหน้าร้อน & ชมพลุสุมิดะ) 5 วัน 4 คืน 🚆</h2>
+    <div class="budget">💰 งบประมาณ: ตามอัธยาศัย / เน้นเดินทางด้วยรถไฟ</div>
+  </div>
+
+  <nav>
+    <a href="#train-day1">Day 1</a>
+    <a href="#train-day2">Day 2</a>
+    <a href="#train-day3">Day 3</a>
+    <a href="#train-day4">Day 4</a>
+    <a href="#train-day5">Day 5</a>
+  </nav>
+
+  <div class="container">
+    <section class="day-section day1" id="train-day1">
+      <div class="day-header"><span class="day-badge">Day 1</span> เดินทางถึงโตเกียว & ไฮไลท์เทศกาลดอกไม้ไฟ</div>
+      <div class="timeline theme-railway">
+        <div class="item">
+          <div class="time">เช้า-บ่าย</div>
+          <div class="track-node">✈️</div>
+          <div class="content"><h3><a class="loc-link" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Haneda+Airport"><span class="pin">📍</span>สนามบินฮาเนดะ (HND)</a></h3><p>เดินทางถึงสนามบินฮาเนดะ นั่งรถไฟเข้าเมืองแล้วนำสัมภาระไปฝากที่พัก<br><span style="color:#e63946; font-weight:bold;">💰 ค่าใช้จ่ายสถานที่: ค่าตั๋วรถไฟตามเรทปกติ</span></p></div>
+        </div>
+        <div class="item">
+          <div class="time">เย็น</div>
+          <div class="track-node">🚉</div>
+          <div class="content"><h3><a class="loc-link" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Asakusa+Station"><span class="pin">📍</span>เตรียมตัวดูพลุที่ สถานี Asakusa</a></h3><p>เดินทางมายังสถานี Asakusa ตอบโจทย์คนที่อยากดูพลุ "สนามที่ 1" สามารถแวะเที่ยววัดเซ็นโซจิหรือเดินเล่นย่านนี้ก่อนเริ่มงานได้ จะเจอแผงลอยขายอาหารสไตล์งานวัดญี่ปุ่น และผู้คนใส่ชุดยูกาตะเต็มไปหมด<br><span style="color:#e63946; font-weight:bold;">💰 ค่าใช้จ่ายสถานที่: อาหารแผงลอยตามอัธยาศัย</span></p></div>
+        </div>
+        <div class="item">
+          <div class="time">19:00</div>
+          <div class="track-node">🎆</div>
+          <div class="content"><h3><a class="loc-link" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Sumida+River+Fireworks+Festival"><span class="pin">📍</span>ชมเทศกาลดอกไม้ไฟแม่น้ำสุมิดะ</a></h3><p>ท้องฟ้าจะสว่างไสวด้วยพลุนับพันดวง (งานจัดถึงเวลา 20.30 น.) <br><span style="color:#e63946; font-weight:bold;">⚠️ ข้อควรระวัง:</span> คนจะแน่นและเยอะที่สุด นัดจุดนัดพบกับเพื่อนให้ชัดเจนก่อนออกไปดู เพราะอาจมีการปิดถนนและปรับทางเข้า-ออกสถานีชั่วคราว ขากลับให้เผื่อเวลาเดินและรอรถไฟไว้เยอะๆ</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="day-section day2" id="train-day2">
+      <div class="day-header"><span class="day-badge">Day 2</span> ฟูจิ คาวากุจิโกะ (Fuji Kawaguchiko)</div>
+      <div class="timeline theme-railway">
+        <div class="item">
+          <div class="time">เช้า</div>
+          <div class="track-node">🚉</div>
+          <div class="content"><h3><a class="loc-link" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Fuji+Kawaguchiko"><span class="pin">📍</span>เดินทางไป Fuji Kawaguchiko</a></h3><p>นั่งรถไฟไปชมภูเขาไฟฟูจิและทะเลสาบ<br><span style="color:#e63946; font-weight:bold;">💰 ค่าใช้จ่ายสถานที่: ค่าตั๋วรถไฟตามเรทปกติ</span></p></div>
+        </div>
+        <div class="item">
+          <div class="time">ทั้งวัน</div>
+          <div class="track-node">📸</div>
+          <div class="content"><h3><span class="pin">📍</span>ถ่ายรูปวิวฟูจิ & เดินเล่นหมู่บ้าน</h3><p><b>ทริค:</b> ฟูจิช่วงฤดูร้อนอาจจะไม่มีหมวกหิมะสีขาวบนยอด แต่จะได้ความสวยงามของต้นไม้สีเขียวขจีและฟ้าใสๆ แทน<br><span style="color:#e63946; font-weight:bold;">💰 ค่าใช้จ่ายสถานที่: เข้าชมฟรี</span></p></div>
+        </div>
+        <div class="item">
+          <div class="time">เย็น</div>
+          <div class="track-node">🚋</div>
+          <div class="content"><h3><span class="pin">📍</span>เดินทางกลับเข้าโตเกียว</h3><p>นั่งรถไฟกลับมาพักผ่อนที่โรงแรมในเมืองโตเกียว<br><span style="color:#e63946; font-weight:bold;">💰 ค่าใช้จ่ายสถานที่: ค่าตั๋วรถไฟตามเรทปกติ</span></p></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="day-section day3" id="train-day3">
+      <div class="day-header"><span class="day-badge">Day 3</span> กิจกรรมฤดูร้อนที่ กาล่า ยูซาว่า (Niigata)</div>
+      <div class="timeline theme-railway">
+        <div class="item">
+          <div class="time">เช้า</div>
+          <div class="track-node">🚄</div>
+          <div class="content"><h3><a class="loc-link" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Gala+Yuzawa+Station"><span class="pin">📍</span>นั่งชินคันเซ็นสู่ Niigata</a></h3><p>มุ่งหน้าสู่ลานกาล่ายูซาว่า (Gala Yuzawa)<br><span style="color:#e63946; font-weight:bold;">💰 ค่าใช้จ่ายสถานที่: ค่าตั๋วรถไฟ Shinkansen ตามเรทปกติ</span></p></div>
+        </div>
+        <div class="item">
+          <div class="time">ทั้งวัน</div>
+          <div class="track-node">🚠</div>
+          <div class="content"><h3><a class="loc-link" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Gala+Yuzawa+Snow+Resort"><span class="pin">📍</span>GALA Summer Park</a></h3><p>เปลี่ยนจากลานสกีหิมะ เป็นการเสพวิวภูเขาสีเขียวขจี สามารถนั่งกระเช้า (Gondola) ขึ้นไปชมวิวพาโนรามา หรือเล่นกิจกรรมแอดเวนเจอร์หน้าร้อน เช่น ขับรถบัคกี้ (Active Buggy) หรือรถลากภูเขา (Mountaincart)<br><span style="color:#e63946; font-weight:bold;">💰 ค่าใช้จ่ายสถานที่: ค่าตั๋วเครื่องเล่นตามอัธยาศัย</span></p></div>
+        </div>
+        <div class="item">
+          <div class="time">เย็น</div>
+          <div class="track-node">🚄</div>
+          <div class="content"><h3><span class="pin">📍</span>นั่งชินคันเซ็นกลับโตเกียว</h3><p>เดินทางกลับเข้าโตเกียวด้วยรถไฟความเร็วสูง</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="day-section day4" id="train-day4">
+      <div class="day-header"><span class="day-badge">Day 4</span> สโลว์ไลฟ์ที่ คามาคุระ & แสงสีที่ ชินจูกุ</div>
+      <div class="timeline theme-railway">
+        <div class="item">
+          <div class="time">เช้า</div>
+          <div class="track-node">🚉</div>
+          <div class="content"><h3><a class="loc-link" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Kamakura"><span class="pin">📍</span>เดินทางไปเมืองคามาคุระ (Kamakura)</a></h3><p>สัมผัสบรรยากาศเมืองริมทะเลสไตล์สโลว์ไลฟ์ที่เหมาะกับหน้าร้อนมากๆ<br><span style="color:#e63946; font-weight:bold;">💰 ค่าใช้จ่ายสถานที่: ค่าตั๋วรถไฟตามเรทปกติ</span></p></div>
+        </div>
+        <div class="item">
+          <div class="time">สาย</div>
+          <div class="track-node">🚋</div>
+          <div class="content"><h3><span class="pin">📍</span>นั่งรถไฟสาย Enoden & พระใหญ่ไดบุตสึ</h3><p>นั่งรถไฟสุดคลาสสิก แวะสักการะพระใหญ่ไดบุตสึ (Kamakura Daibutsu) และถ่ายรูปริมทะเล (ถ้าอากาศเคลียร์สามารถมองเห็นภูเขาไฟฟูจิจากจุดนี้ได้ด้วย)<br><span style="color:#e63946; font-weight:bold;">💰 ค่าใช้จ่ายสถานที่: ค่าเข้าสักการะพระใหญ่เล็กน้อย</span></p></div>
+        </div>
+        <div class="item">
+          <div class="time">เย็น-ค่ำ</div>
+          <div class="track-node">🌃</div>
+          <div class="content"><h3><a class="loc-link" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Shinjuku"><span class="pin">📍</span>เดินเล่นย่านชินจูกุ (Shinjuku)</a></h3><p>กลับเข้าเมืองมาเดินเล่นชมแสงสียามค่ำคืน<br><span style="color:#e63946; font-weight:bold;">💰 ค่าใช้จ่ายสถานที่: ตามอัธยาศัย</span></p></div>
+        </div>
+        <div class="item">
+          <div class="time">ค่ำ</div>
+          <div class="track-node">⛩️</div>
+          <div class="content"><h3><a class="loc-link" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Hanazono+Shrine+Shinjuku"><span class="pin">📍</span>ศาลเจ้าฮาโซโนจินจา (Hanazono Shrine)</a></h3><p>แวะขอพรที่ศาลเจ้าที่ขึ้นชื่อเรื่องความศักดิ์สิทธิ์และปังมากใจกลางชินจูกุ<br><span style="color:#e63946; font-weight:bold;">💰 ค่าใช้จ่ายสถานที่: เข้าชมฟรี</span></p></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="day-section day5" id="train-day5">
+      <div class="day-header"><span class="day-badge">Day 5</span> ช้อปปิ้งละลายเงินเยน & เดินทางกลับ</div>
+      <div class="timeline theme-railway">
+        <div class="item">
+          <div class="time">เช้า-บ่าย</div>
+          <div class="track-node">🛍️</div>
+          <div class="content"><h3><a class="loc-link" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Ueno+Ameyoko"><span class="pin">📍</span>ช้อปปิ้งย่านอุเอโนะ (Ueno)</a></h3><p>แวะละลายเงินเยนและซื้อของฝากก่อนกลับ (เช่น ขนมคุกกี้ D'asses รสชาเขียว) แวะกินของอร่อยแถวตลาดอเมโยโกะ (Ameyoko)<br><span style="color:#e63946; font-weight:bold;">💰 ค่าใช้จ่ายสถานที่: ช้อปปิ้งตามอัธยาศัย</span></p></div>
+        </div>
+        <div class="item">
+          <div class="time">เย็น</div>
+          <div class="track-node">🚉</div>
+          <div class="content"><h3><span class="pin">📍</span>เดินทางไปสนามบินฮาเนดะ</h3><p>นั่งรถไฟออกจากตัวเมืองไปยังสนามบินเพื่อเตรียมตัวเดินทางกลับ<br><span style="color:#e63946; font-weight:bold;">💰 ค่าใช้จ่ายสถานที่: ค่าตั๋วรถไฟตามเรทปกติ</span></p></div>
+        </div>
+        <div class="item">
+          <div class="time">ค่ำ</div>
+          <div class="track-node">✈️</div>
+          <div class="content"><h3><span class="pin">📍</span>เดินทางกลับประเทศไทยอย่างสวัสดิภาพ</h3></div>
+        </div>
+      </div>
+    </section>
+  </div>
+</div>
+
+
+<!-- ==================== JAPAN ROAD TRIP PLAN ==================== -->
+<div id="japan-road" class="tab-content">
+  <div class="plan-title">
+    <h2>🚙 ญี่ปุ่น (โตเกียว - ฮาคุบะ - ฟูจิ) 7 วัน 6 คืน 🗻</h2>
     <div class="budget">💰 งบประมาณรวมสุทธิ 36,398 บาท / ท่าน</div>
   </div>
 
   <nav>
-    <a href="#jp-day12">Day 1-2</a>
-    <a href="#jp-day3">Day 3</a>
-    <a href="#jp-day4">Day 4</a>
-    <a href="#jp-day5">Day 5</a>
-    <a href="#jp-day6">Day 6</a>
-    <a href="#jp-day7">Day 7</a>
+    <a href="#road-day12">Day 1-2</a>
+    <a href="#road-day3">Day 3</a>
+    <a href="#road-day4">Day 4</a>
+    <a href="#road-day5">Day 5</a>
+    <a href="#road-day6">Day 6</a>
+    <a href="#road-day7">Day 7</a>
   </nav>
 
   <div class="container">
-    <!-- JAPAN DAY 1 & 2 -->
-    <section class="day-section day1" id="jp-day12">
-      <div class="day-header"><span class="day-badge">Day 1 & 2</span> โตเกียว (Tokyo) เที่ยวในเมือง</div>
-      <div class="timeline">
+    <section class="day-section day1" id="road-day12">
+      <div class="day-header"><span class="day-badge">Day 1 & 2</span> ชิลๆ ในโตเกียว (เดินทางด้วยรถไฟ)</div>
+      <div class="timeline theme-road">
         <div class="item">
           <div class="time" style="font-size: 0.85rem;">เที่ยวบิน</div>
+          <div class="track-node">✈️</div>
           <div class="content"><p style="color:#e63946; font-weight:bold;">✈️ ค่าใช้จ่ายในการเดินทาง: ตั๋วเครื่องบินไป-กลับ (AirAsia X) 15,000 บาท</p></div>
         </div>
-        <div class="item"><div class="time">Day 1</div><div class="content"><h3><a class="loc-link" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Narita+International+Airport"><span class="pin">📍</span>สนามบินนาริตะ (Narita)</a></h3><p>เดินทางถึงประเทศญี่ปุ่น ผ่านตม.และรับกระเป๋า<br><span style="color:#e63946; font-weight:bold;">💰 ค่าใช้จ่ายสถานที่: ฟรี</span></p></div></div>
+        <div class="item">
+          <div class="time">Day 1</div>
+          <div class="track-node">🚶</div>
+          <div class="content"><h3><a class="loc-link" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Narita+International+Airport"><span class="pin">📍</span>สนามบินนาริตะ (Narita)</a></h3><p>เดินทางถึงประเทศญี่ปุ่น ผ่านตม.และรับกระเป๋า<br><span style="color:#e63946; font-weight:bold;">💰 ค่าใช้จ่ายสถานที่: ฟรี</span></p></div>
+        </div>
         <div class="item">
           <div class="time" style="font-size: 0.85rem;">เดินทาง</div>
+          <div class="track-node">🚆</div>
           <div class="content"><p style="color:#e63946; font-weight:bold;">🚆 ค่าใช้จ่ายในการเดินทาง: รถไฟด่วน Skyliner เข้าโตเกียว (ไป-กลับรวม 923 บาท)</p></div>
         </div>
-        <div class="item"><div class="time">Check-in</div><div class="content"><h3><a class="loc-link" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Hotel+Comfact+Tokyo"><span class="pin">📍</span>Hotel Comfact (ใกล้ Ueno)</a></h3><p>เช็คอินเข้าที่พัก เดินจากสถานี Ueno ประมาณ 15 นาที<br><span style="color:#e63946; font-weight:bold;">💰 ค่าใช้จ่ายสถานที่: ค่าที่พัก 2 คืนแรก 3,342 บาท/คน</span></p></div></div>
-        <div class="item"><div class="time">Day 1-2</div><div class="content"><h3><a class="loc-link" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Ueno+Tokyo"><span class="pin">📍</span>ย่าน Ueno</a></h3><p>เดินเล่นหาของกินและช้อปปิ้งย่านอุเอโนะ<br><span style="color:#e63946; font-weight:bold;">💰 ค่าใช้จ่ายสถานที่: ตามอัธยาศัย</span></p></div></div>
-        <div class="item"><div class="time">Day 1-2</div><div class="content"><h3><a class="loc-link" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Meiji+Jingu+Gaien+Christmas+Market"><span class="pin">📍</span>ตลาดคริสต์มาส (Meiji Jingu Gaien)</a></h3><p>เดินเล่นสัมผัสบรรยากาศคริสต์มาสที่ตลาด<br><span style="color:#e63946; font-weight:bold;">💰 ค่าใช้จ่ายสถานที่: ตามอัธยาศัย</span></p></div></div>
-        <div class="item"><div class="time">Day 1-2</div><div class="content"><h3><a class="loc-link" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Tsukiji+Fish+Market"><span class="pin">📍</span>ตลาดปลาซึกิจิ (Fish Market Tsukiji)</a></h3><p>แวะกินอาหารทะเลสดๆ และสตรีทฟู้ด<br><span style="color:#e63946; font-weight:bold;">💰 ค่าใช้จ่ายสถานที่: ตามอัธยาศัย</span></p></div></div>
-        <div class="item"><div class="time">Day 1-2</div><div class="content"><h3><a class="loc-link" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Shibuya+Tokyo"><span class="pin">📍</span>ย่านชิบูย่า (Shibuya)</a></h3><p>เดินเล่นย่านวัยรุ่นและห้าแยกชิบูย่าอันโด่งดัง<br><span style="color:#e63946; font-weight:bold;">💰 ค่าใช้จ่ายสถานที่: ตามอัธยาศัย</span></p></div></div>
-        <div class="item"><div class="time">Day 1-2</div><div class="content"><h3><a class="loc-link" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Yoyogi+Sendagaya"><span class="pin">📍</span>ถ่ายรูปมุมรถไฟ Yoyogi Sendagaya</a></h3><p>มุมถ่ายรูปสุดฮิตกับขบวนรถไฟที่วิ่งผ่าน (ต้องใช้ดวงกะจังหวะให้พอดี)<br><span style="color:#e63946; font-weight:bold;">💰 ค่าใช้จ่ายสถานที่: ถ่ายรูปฟรี</span></p></div></div>
+        <div class="item">
+          <div class="time">Check-in</div>
+          <div class="track-node">🏨</div>
+          <div class="content"><h3><a class="loc-link" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Hotel+Comfact+Tokyo"><span class="pin">📍</span>Hotel Comfact (ใกล้ Ueno)</a></h3><p>เช็คอินเข้าที่พัก เดินจากสถานี Ueno ประมาณ 15 นาที<br><span style="color:#e63946; font-weight:bold;">💰 ค่าใช้จ่ายสถานที่: ค่าที่พัก 2 คืนแรก 3,342 บาท/คน</span></p></div>
+        </div>
+        <div class="item">
+          <div class="time">Day 1-2</div>
+          <div class="track-node">🛍️</div>
+          <div class="content"><h3><span class="pin">📍</span>เดินเที่ยวในเมืองเป็นหลัก</h3>
+            <p>2 วันแรกเน้นเดินทางด้วยรถไฟและเดินเที่ยว ได้แก่:<br>
+            - เดินช้อปปิ้งย่าน <b>Ueno</b><br>
+            - เที่ยวตลาดคริสต์มาส <b>Meiji Jingu Gaien</b><br>
+            - หาของกินที่ตลาดปลา <b>Tsukiji</b><br>
+            - เดินเล่นย่าน <b>Shibuya</b><br>
+            - ถ่ายรูปมุมรถไฟที่ต้องใช้ดวงที่สถานี <b>Yoyogi Sendagaya</b><br>
+            <span style="color:#e63946; font-weight:bold;">💰 ค่าใช้จ่ายสถานที่: ตามอัธยาศัย</span></p>
+          </div>
+        </div>
       </div>
     </section>
 
-    <!-- JAPAN DAY 3 -->
-    <section class="day-section day2" id="jp-day3">
-      <div class="day-header"><span class="day-badge">Day 3</span> โตเกียว มุ่งหน้าสู่ ฮาคุบะ (Hakuba)</div>
-      <div class="timeline">
-        <div class="item"><div class="time">เช้า</div><div class="content"><h3><a class="loc-link" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Nissan+Rent+a+Car+Ueno"><span class="pin">📍</span>รับรถเช่า Nissan Rent a Car Ueno</a></h3><p>ทำเรื่องรับรถเช่า (ได้รถรุ่น Nissan Note E-power)<br><span style="color:#e63946; font-weight:bold;">💰 ค่าใช้จ่ายสถานที่: งบเช่ารถตลอดทริป 4 วัน (ค่าเช่า ทางด่วน น้ำมัน) หารแล้วตก 6,952 บาท/คน</span></p></div></div>
+    <section class="day-section day2" id="road-day3">
+      <div class="day-header"><span class="day-badge">Day 3</span> รับรถเช่า มุ่งหน้าสู่เมืองหิมะ Hakuba</div>
+      <div class="timeline theme-road">
         <div class="item">
-          <div class="time" style="font-size: 0.85rem;">เดินทาง</div>
-          <div class="content"><p style="color:#e63946; font-weight:bold;">🚗 ค่าใช้จ่ายในการเดินทาง: ขับรถสู่เมืองฮาคุบะ ใช้เวลาเดินทางรวมแวะพักประมาณ 5 ชั่วโมง (ค่าทางด่วนและน้ำมันรวมในงบเช่ารถ 6,952 บาทแล้ว)</p></div>
+          <div class="time">เช้า</div>
+          <div class="track-node">🚗</div>
+          <div class="content"><h3><a class="loc-link" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Nissan+Rent+a+Car+Ueno"><span class="pin">📍</span>รับรถเช่า Nissan Rent a Car สาขา Ueno</a></h3><p>ทำเรื่องรับรถเช่า (ได้รถรุ่น Nissan Note E-power)<br><span style="color:#e63946; font-weight:bold;">💰 ค่าใช้จ่ายสถานที่: งบเช่ารถตลอดทริป 4 วัน หาร 2 แล้วตก 6,952 บาท/คน (รวมค่าเช่า 9,865 บ. + ทางด่วน 2,540 บ. + น้ำมัน 1,500 บ.)</span></p></div>
         </div>
-        <div class="item"><div class="time">ระหว่างทาง</div><div class="content"><h3><a class="loc-link" target="_blank" href="https://www.google.com/maps/search/?api=1&query=AO+Lakeside+Cafe+Japan"><span class="pin">📍</span>AO Lakeside Cafe</a></h3><p>คาเฟ่ริมทะเลสาบบรรยากาศดี แวะพักก่อนเข้าเมืองฮาคุบะ<br><span style="color:#e63946; font-weight:bold;">💰 ค่าใช้จ่ายสถานที่: ตามอัธยาศัย</span></p></div></div>
         <div class="item">
           <div class="time" style="font-size: 0.85rem;">เดินทาง</div>
+          <div class="track-node">🛣️</div>
+          <div class="content"><p style="color:#e63946; font-weight:bold;">🚗 ค่าใช้จ่ายในการเดินทาง: ขับรถสู่เมืองฮาคุบะ ใช้เวลาเดินทางรวมแวะพักประมาณ 5 ชั่วโมง (รวมในงบเช่ารถ)</p></div>
+        </div>
+        <div class="item">
+          <div class="time">ระหว่างทาง</div>
+          <div class="track-node">☕</div>
+          <div class="content"><h3><a class="loc-link" target="_blank" href="https://www.google.com/maps/search/?api=1&query=AO+Lakeside+Cafe+Japan"><span class="pin">📍</span>AO Lakeside Cafe</a></h3><p>คาเฟ่ริมทะเลสาบ แวะพักก่อนเข้าเมือง<br><span style="color:#e63946; font-weight:bold;">💰 ค่าใช้จ่ายสถานที่: ตามอัธยาศัย</span></p></div>
+        </div>
+        <div class="item">
+          <div class="time" style="font-size: 0.85rem;">เดินทาง</div>
+          <div class="track-node">🛣️</div>
           <div class="content"><p style="color:#e63946; font-weight:bold;">🚗 ค่าใช้จ่ายในการเดินทาง: ขับรถต่อจากคาเฟ่ประมาณ 18 นาที</p></div>
         </div>
-        <div class="item"><div class="time">บ่าย</div><div class="content"><h3><a class="loc-link" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Olde+Park+Hakuba"><span class="pin">📍</span>Olde Park</a></h3><p>แวะถ่ายรูปและพักผ่อน<br><span style="color:#e63946; font-weight:bold;">💰 ค่าใช้จ่ายสถานที่: เข้าชมฟรี</span></p></div></div>
-        <div class="item"><div class="time">เย็น</div><div class="content"><h3><a class="loc-link" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Hakuba+Hatago+Maruhachi"><span class="pin">📍</span>Check-in: Hakuba Hatago Maruhachi</a></h3><p>เช็คอินเข้าที่พักสไตล์ญี่ปุ่น (พักที่นี่ 2 คืน)<br><span style="color:#e63946; font-weight:bold;">💰 ค่าใช้จ่ายสถานที่: ค่าที่พัก 2 คืน 3,399 บาท/คน</span></p></div></div>
+        <div class="item">
+          <div class="time">บ่าย</div>
+          <div class="track-node">🌲</div>
+          <div class="content"><h3><a class="loc-link" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Olde+Park+Hakuba"><span class="pin">📍</span>Olde Park</a></h3><p>แวะถ่ายรูปและพักผ่อน<br><span style="color:#e63946; font-weight:bold;">💰 ค่าใช้จ่ายสถานที่: เข้าชมฟรี</span></p></div>
+        </div>
+        <div class="item">
+          <div class="time">เย็น</div>
+          <div class="track-node">🏨</div>
+          <div class="content"><h3><a class="loc-link" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Hakuba+Hatago+Maruhachi"><span class="pin">📍</span>Check-in: Hakuba Hatago Maruhachi</a></h3><p>เข้าที่พักสไตล์ญี่ปุ่น (จองผ่าน Booking พักที่นี่ 2 คืน)<br><span style="color:#e63946; font-weight:bold;">💰 ค่าใช้จ่ายสถานที่: ค่าที่พัก 2 คืน 3,399 บาท/คน</span></p></div>
+        </div>
       </div>
     </section>
 
-    <!-- JAPAN DAY 4 -->
-    <section class="day-section day3" id="jp-day4">
-      <div class="day-header"><span class="day-badge">Day 4</span> ลุยสโนว์บอร์ดที่ Hakuba</div>
-      <div class="timeline">
-        <div class="item"><div class="time">เช้า</div><div class="content"><h3><a class="loc-link" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Starbucks+Snow+Peak+Land+Station+Hakuba"><span class="pin">📍</span>Starbucks (Snow Peak Land Station)</a></h3><p>แวะจิบกาแฟและถ่ายรูปกับดีไซน์ร้านสุดสวยที่ออกแบบโดย Kengo Kuma<br><span style="color:#e63946; font-weight:bold;">💰 ค่าใช้จ่ายสถานที่: กาแฟ/เครื่องดื่มตามอัธยาศัย</span></p></div></div>
+    <section class="day-section day3" id="road-day4">
+      <div class="day-header"><span class="day-badge">Day 4</span> วันแห่งการลุยหิมะและสโนว์บอร์ด</div>
+      <div class="timeline theme-road">
+        <div class="item">
+          <div class="time">เช้า</div>
+          <div class="track-node">☕</div>
+          <div class="content"><h3><a class="loc-link" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Starbucks+Snow+Peak+Land+Station+Hakuba"><span class="pin">📍</span>Starbucks (Snow Peak Land Station)</a></h3><p>ก่อนไปลานสกี แวะดื่มกาแฟและถ่ายรูปกับดีไซน์ร้านสุดสวย<br><span style="color:#e63946; font-weight:bold;">💰 ค่าใช้จ่ายสถานที่: ตามอัธยาศัย</span></p></div>
+        </div>
         <div class="item">
           <div class="time" style="font-size: 0.85rem;">เดินทาง</div>
+          <div class="track-node">🛣️</div>
           <div class="content"><p style="color:#e63946; font-weight:bold;">🚗 ค่าใช้จ่ายในการเดินทาง: ขับรถไปร้านเช่าอุปกรณ์ (รวมในงบเช่ารถ)</p></div>
         </div>
-        <div class="item"><div class="time">สาย</div><div class="content"><h3><a class="loc-link" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Woody+Rental+Happo+Shop"><span class="pin">📍</span>Woody Rental Happo Shop</a></h3><p>เช่าชุดและอุปกรณ์สโนว์บอร์ดเตรียมพร้อมสำหรับลุยหิมะ<br><span style="color:#e63946; font-weight:bold;">💰 ค่าใช้จ่ายสถานที่: ค่าเช่าอุปกรณ์ 1 วัน 2,500 บาท</span></p></div></div>
+        <div class="item">
+          <div class="time">สาย</div>
+          <div class="track-node">🏂</div>
+          <div class="content"><h3><a class="loc-link" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Woody+Rental+Happo+Shop"><span class="pin">📍</span>Woody Rental Happo Shop</a></h3><p>เช่าชุดและอุปกรณ์สโนว์บอร์ดเตรียมพร้อม<br><span style="color:#e63946; font-weight:bold;">💰 ค่าใช้จ่ายสถานที่: ค่าเช่าอุปกรณ์สโนว์บอร์ด 1 วัน 2,500 บาท</span></p></div>
+        </div>
         <div class="item">
           <div class="time" style="font-size: 0.85rem;">เดินทาง</div>
+          <div class="track-node">🛣️</div>
           <div class="content"><p style="color:#e63946; font-weight:bold;">🚗 ค่าใช้จ่ายในการเดินทาง: ขับรถไปลานสกี (รวมในงบเช่ารถ)</p></div>
         </div>
-        <div class="item"><div class="time">บ่าย</div><div class="content"><h3><a class="loc-link" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Hakuba+Goryu+Snow+Resort"><span class="pin">📍</span>ลานสกี Hakuba Goryu Snow Resort</a></h3><p>เล่นสโนว์บอร์ดสนุกๆ ท่ามกลางหิมะ<br><span style="color:#e63946; font-weight:bold;">💰 ค่าใช้จ่ายสถานที่: ค่า One Day Pass 1,700 บาท</span></p></div></div>
+        <div class="item">
+          <div class="time">บ่าย</div>
+          <div class="track-node">🎿</div>
+          <div class="content"><h3><a class="loc-link" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Hakuba+Goryu+Snow+Resort"><span class="pin">📍</span>ลานสกี Hakuba Goryu Snow Resort</a></h3><p>เล่นสโนว์บอร์ดอย่างเต็มอิ่ม<br><span style="color:#e63946; font-weight:bold;">💰 ค่าใช้จ่ายสถานที่: ค่าบัตร 1 Day Pass (Snow Resort) 1,700 บาท</span></p></div>
+        </div>
       </div>
     </section>
 
-    <!-- JAPAN DAY 5 -->
-    <section class="day-section day4" id="jp-day5">
-      <div class="day-header"><span class="day-badge">Day 5</span> ฮาคุบะ - นากาโน่ - คาวากุจิโกะ</div>
-      <div class="timeline">
+    <section class="day-section day4" id="road-day5">
+      <div class="day-header"><span class="day-badge">Day 5</span> อำลาฮาคุบะ มุ่งหน้าสู่ฟูจิ (Kawaguchiko)</div>
+      <div class="timeline theme-road">
         <div class="item">
           <div class="time" style="font-size: 0.85rem;">เดินทาง</div>
-          <div class="content"><p style="color:#e63946; font-weight:bold;">🚗 ค่าใช้จ่ายในการเดินทาง: ขับรถออกจากฮาคุบะไปนากาโน่ (Nagano) ใช้เวลาเดินทาง 1 ชั่วโมง 30 นาที (รวมในงบเช่ารถ)</p></div>
+          <div class="track-node">🛣️</div>
+          <div class="content"><p style="color:#e63946; font-weight:bold;">🚗 ค่าใช้จ่ายในการเดินทาง: ขับรถออกจากฮาคุบะไปนากาโน่ (Nagano) ใช้เวลา 1 ชั่วโมง 30 นาที</p></div>
         </div>
-        <div class="item"><div class="time">เช้า</div><div class="content"><h3><a class="loc-link" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Togakushi+Shrine+Okusha"><span class="pin">📍</span>ศาลเจ้า Togakushi Shrine Okusha</a></h3><p>เดินป่าทามกลางหิมะแวะดูต้นสนซีดาร์ยักษ์อายุกว่า 400 ปี สองข้างทาง<br><span style="color:#e63946; font-weight:bold;">💰 ค่าใช้จ่ายสถานที่: เข้าชมฟรี</span></p></div></div>
+        <div class="item">
+          <div class="time">เช้า</div>
+          <div class="track-node">⛩️</div>
+          <div class="content"><h3><a class="loc-link" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Togakushi+Shrine+Okusha"><span class="pin">📍</span>ศาลเจ้า Togakushi Shrine Okusha</a></h3><p>เดินชมความอลังการของต้นสนซีดาร์ยักษ์ที่มีอายุมากกว่า 400 ปี<br><span style="color:#e63946; font-weight:bold;">💰 ค่าใช้จ่ายสถานที่: เข้าชมฟรี</span></p></div>
+        </div>
         <div class="item">
           <div class="time" style="font-size: 0.85rem;">เดินทาง</div>
-          <div class="content"><p style="color:#e63946; font-weight:bold;">🚗 ค่าใช้จ่ายในการเดินทาง: ขับรถต่อไปยัง Fuji Kawaguchiko ใช้เวลาประมาณ 3 ชั่วโมง (รวมในงบเช่ารถ)</p></div>
+          <div class="track-node">🛣️</div>
+          <div class="content"><p style="color:#e63946; font-weight:bold;">🚗 ค่าใช้จ่ายในการเดินทาง: ขับรถยิงยาวต่อไปยัง Fuji Kawaguchiko ใช้เวลาเดินทางอีก 3 ชั่วโมง</p></div>
         </div>
-        <div class="item"><div class="time">เย็น</div><div class="content"><h3><a class="loc-link" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Saiko+nenba-hama"><span class="pin">📍</span>Saiko nenba-hama (ทะเลสาบไซโกะ)</a></h3><p>แวะดูวิวพระอาทิตย์ตก (Sunset) สวยๆ ริมทะเลสาบ<br><span style="color:#e63946; font-weight:bold;">💰 ค่าใช้จ่ายสถานที่: ชมวิวฟรี</span></p></div></div>
-        <div class="item"><div class="time">ค่ำ</div><div class="content"><h3><a class="loc-link" target="_blank" href="https://www.google.com/maps/search/?api=1&query=The+Noborisaka+Hotel"><span class="pin">📍</span>Check-in: The Noborisaka Hotel</a></h3><p>เข้าที่พักในคาวากุจิโกะ (พัก 1 คืน)<br><span style="color:#e63946; font-weight:bold;">💰 ค่าใช้จ่ายสถานที่: ค่าที่พัก 1 คืน 1,623 บาท/คน</span></p></div></div>
+        <div class="item">
+          <div class="time">เย็น</div>
+          <div class="track-node">🌅</div>
+          <div class="content"><h3><a class="loc-link" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Saiko+nenba-hama"><span class="pin">📍</span>Saiko nenba-hama</a></h3><p>แวะดูวิวพระอาทิตย์ตกริมทะเลสาบ (แม้ในคลิปจะไปไม่ทันก็ตาม)<br><span style="color:#e63946; font-weight:bold;">💰 ค่าใช้จ่ายสถานที่: ชมวิวฟรี</span></p></div>
+        </div>
+        <div class="item">
+          <div class="time">ค่ำ</div>
+          <div class="track-node">🏨</div>
+          <div class="content"><h3><a class="loc-link" target="_blank" href="https://www.google.com/maps/search/?api=1&query=The+Noborisaka+Hotel"><span class="pin">📍</span>Check-in: The Noborisaka Hotel</a></h3><p>เข้าพักในย่านคาวากุจิโกะ (พัก 1 คืน)<br><span style="color:#e63946; font-weight:bold;">💰 ค่าใช้จ่ายสถานที่: ค่าที่พัก 1 คืน 1,623 บาท/คน</span></p></div>
+        </div>
       </div>
     </section>
 
-    <!-- JAPAN DAY 6 -->
-    <section class="day-section day5" id="jp-day6">
-      <div class="day-header"><span class="day-badge">Day 6</span> ฟูจิ One Day Trip & กลับโตเกียว</div>
-      <div class="timeline">
-        <div class="item"><div class="time">ตลอดวัน</div><div class="content"><h3><a class="loc-link" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Fuji+Five+Lakes"><span class="pin">📍</span>เที่ยว Fuji One Day Trip (5 จุดหลัก)</a></h3>
-          <p>ขับรถตระเวนจุดถ่ายรูปวิวฟูจิ ได้แก่:<br>
-          1. <b>Lake Yamanaka</b><br>
-          2. <b>Hirano beach</b><br>
-          3. <b>Chureito pagoda</b> (เจดีย์แดง 5 ชั้น)<br>
-          4. <b>Ubuyagasaki</b><br>
-          5. ขับรถชมวิวระหว่างทางกลับ<br>
-          <span style="color:#e63946; font-weight:bold;">💰 ค่าใช้จ่ายสถานที่: ถ่ายรูปฟรี (อาจมีค่าจอดรถบางจุด)</span></p>
-        </div></div>
+    <section class="day-section day5" id="road-day6">
+      <div class="day-header"><span class="day-badge">Day 6</span> ขับรถเที่ยวรอบฟูจิ & กลับโตเกียว</div>
+      <div class="timeline theme-road">
+        <div class="item">
+          <div class="time">ตลอดวัน</div>
+          <div class="track-node">📸</div>
+          <div class="content"><h3><a class="loc-link" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Fuji+Five+Lakes"><span class="pin">📍</span>ขับรถเที่ยว Fuji One Day Trip (5 จุดหลัก)</a></h3>
+            <p>ขับรถแวะถ่ายรูปจุดไฮไลท์ ได้แก่:<br>
+            1. <b>Lake Yamanaka</b><br>
+            2. <b>Hirano beach</b><br>
+            3. <b>Chureito pagoda</b> (เจดีย์แดง)<br>
+            4. <b>Ubuyagasaki</b><br>
+            5. ชมวิวระหว่างขับรถกลับ<br>
+            <span style="color:#e63946; font-weight:bold;">💰 ค่าใช้จ่ายสถานที่: ถ่ายรูปฟรี (อาจมีค่าจอดรถบางจุด)</span></p>
+          </div>
+        </div>
         <div class="item">
           <div class="time" style="font-size: 0.85rem;">เดินทาง</div>
-          <div class="content"><p style="color:#e63946; font-weight:bold;">🚗 ค่าใช้จ่ายในการเดินทาง: ขับรถกลับโตเกียว ใช้เวลาประมาณ 2 ชั่วโมง (รวมในงบเช่ารถ)</p></div>
+          <div class="track-node">🛣️</div>
+          <div class="content"><p style="color:#e63946; font-weight:bold;">🚗 ค่าใช้จ่ายในการเดินทาง: ขับรถกลับโตเกียว ใช้เวลา 2 ชั่วโมง</p></div>
         </div>
-        <div class="item"><div class="time">เย็น</div><div class="content"><h3><a class="loc-link" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Nissan+Rent+a+Car+Ueno"><span class="pin">📍</span>คืนรถเช่า</a></h3><p>คืนรถเช่าในโตเกียว<br><span style="color:#e63946; font-weight:bold;">💰 ค่าใช้จ่ายสถานที่: ไม่มีค่าใช้จ่ายเพิ่ม</span></p></div></div>
-        <div class="item"><div class="time">ค่ำ</div><div class="content"><h3><a class="loc-link" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Hotel+Comfact+Tokyo"><span class="pin">📍</span>Check-in: Hotel Comfact</a></h3><p>กลับมานอนที่โรงแรมเดิม (พัก 1 คืนสุดท้าย)<br><span style="color:#e63946; font-weight:bold;">💰 ค่าใช้จ่ายสถานที่: ค่าที่พักคืนสุดท้าย 1,258 บาท/คน</span></p></div></div>
+        <div class="item">
+          <div class="time">เย็น</div>
+          <div class="track-node">🔑</div>
+          <div class="content"><h3><a class="loc-link" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Nissan+Rent+a+Car+Ueno"><span class="pin">📍</span>คืนรถเช่า</a></h3><p>นำรถมาคืนที่โตเกียว<br><span style="color:#e63946; font-weight:bold;">💰 ค่าใช้จ่ายสถานที่: ไม่มีค่าใช้จ่ายเพิ่ม</span></p></div>
+        </div>
+        <div class="item">
+          <div class="time">ค่ำ</div>
+          <div class="track-node">🏨</div>
+          <div class="content"><h3><a class="loc-link" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Hotel+Comfact+Tokyo"><span class="pin">📍</span>Check-in: Hotel Comfact</a></h3><p>กลับมานอนที่โรงแรมเดิม (พักคืนสุดท้าย)<br><span style="color:#e63946; font-weight:bold;">💰 ค่าใช้จ่ายสถานที่: ค่าที่พักคืนสุดท้าย 1,258 บาท/คน</span></p></div>
+        </div>
       </div>
     </section>
 
-    <!-- JAPAN DAY 7 -->
-    <section class="day-section day6" id="jp-day7">
-      <div class="day-header"><span class="day-badge">Day 7</span> เดินเล่นโตเกียว และ กลับบ้าน</div>
-      <div class="timeline">
-        <div class="item"><div class="time">เช้า-บ่าย</div><div class="content"><h3><a class="loc-link" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Jimbocho+Tokyo"><span class="pin">📍</span>ย่าน Jimbocho & Ginza</a></h3><p>เดินเล่นย่านจิมโบโจ (หนังสือเก่าและคาเฟ่) และย่านช้อปปิ้งหรูอย่างกินซ่า<br><span style="color:#e63946; font-weight:bold;">💰 ค่าใช้จ่ายสถานที่: ช้อปปิ้งตามอัธยาศัย</span></p></div></div>
+    <section class="day-section day6" id="road-day7">
+      <div class="day-header"><span class="day-badge">Day 7</span> เดินเล่นส่งท้าย ก่อนกลับไทย</div>
+      <div class="timeline theme-road">
+        <div class="item">
+          <div class="time">เช้า-บ่าย</div>
+          <div class="track-node">🚶</div>
+          <div class="content"><h3><a class="loc-link" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Jimbocho+Tokyo"><span class="pin">📍</span>ย่าน Jimbocho & Ginza</a></h3><p>เดินเล่นชิลๆ ถ่ายรูปและช้อปปิ้งส่งท้าย<br><span style="color:#e63946; font-weight:bold;">💰 ค่าใช้จ่ายสถานที่: ช้อปปิ้งตามอัธยาศัย</span></p></div>
+        </div>
         <div class="item">
           <div class="time" style="font-size: 0.85rem;">เดินทาง</div>
+          <div class="track-node">🚆</div>
           <div class="content"><p style="color:#e63946; font-weight:bold;">🚆 ค่าใช้จ่ายในการเดินทาง: นั่งรถไฟกลับสนามบิน (ใช้ตั๋ว Skyliner ไป-กลับ ที่รวมในงบ 923 บาทแล้ว)</p></div>
         </div>
-        <div class="item"><div class="time">เย็น</div><div class="content"><h3><a class="loc-link" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Narita+International+Airport"><span class="pin">📍</span>สนามบินนาริตะ</a></h3><p>เดินทางกลับประเทศไทย<br><span style="color:#e63946; font-weight:bold;">💰 ค่าใช้จ่ายสถานที่: ฟรี</span></p></div></div>
         <div class="item">
-          <div class="time" style="font-size: 0.85rem;">เที่ยวบิน</div>
-          <div class="content"><p style="color:#e63946; font-weight:bold;">✈️ ค่าใช้จ่ายในการเดินทาง: เครื่องบินขากลับ (รวมในงบ 15,000 บาทแล้ว)</p></div>
+          <div class="time">เย็น</div>
+          <div class="track-node">✈️</div>
+          <div class="content"><h3><a class="loc-link" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Narita+International+Airport"><span class="pin">📍</span>สนามบินนาริตะ (Narita)</a></h3><p>เดินทางกลับประเทศไทย<br><span style="color:#e63946; font-weight:bold;">💰 ค่าใช้จ่ายสถานที่: ฟรี</span></p></div>
         </div>
       </div>
     </section>
+
   </div>
 </div>
 
@@ -668,20 +903,15 @@
   <div class="container">
     <section class="day-section day1" id="oki-day1">
       <div class="day-header"><span class="day-badge">Event Day</span> เที่ยวงาน Ryukyu Kaiensai Fireworks Festival</div>
-      
       <div class="timeline">
         <div class="item">
           <div class="time" style="font-size: 0.85rem;">เดินทาง</div>
           <div class="content"><p style="color:#ff007f; font-weight:bold;">🚌 ค่าใช้จ่ายในการเดินทาง: ขึ้นรถบัสจาก Naha Bus Terminal (สาย 26, 43, 32, 55, 112 หรือ 99) ไปลงป้าย Okinawa Convention Center</p></div>
         </div>
         <div class="item"><div class="time">14:30</div><div class="content"><h3><a class="loc-link" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Naha+Bus+Terminal"><span class="pin">📍</span>ออกเดินทางจาก Naha Bus Terminal</a></h3><p>นั่งรถสาธารณะไปงานเทศกาล ใช้เวลาประมาณ 40-60 นาที เมื่อถึงป้ายแล้วสามารถเดินต่อเข้างานได้เลย<br><span style="color:#ff007f; font-weight:bold;">💰 ค่าใช้จ่ายสถานที่: ตามเรทค่าโดยสารรถบัสปกติ</span></p></div></div>
-        
         <div class="item"><div class="time">15:30</div><div class="content"><h3><a class="loc-link" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Tropical+Beach+Okinawa"><span class="pin">📍</span>เข้าสู่งาน ณ Tropical Beach</a></h3><p>ประตูงานเปิดให้เข้า นำเสื่อมาปูจับจองที่นั่งได้เองตามอัธยาศัย (ตั๋วแบบไม่ระบุที่นั่ง) อากาศเดือนเมษายนเย็นสบาย ใส่เสื้อกันหนาวตัวเดียวเอาอยู่ และทะเลเปิดให้เล่นได้แล้วด้วย<br><span style="color:#ff007f; font-weight:bold;">💰 ค่าใช้จ่ายสถานที่: ค่าตั๋วเข้างาน 785 บาท (แนะนำให้ซื้อผ่าน Klook ล่วงหน้า)</span></p></div></div>
-        
         <div class="item"><div class="time">16:00</div><div class="content"><h3><span class="pin">📍</span>เดินเล่นแผงลอยอาหารในงาน (Yatai)</h3><p>ซึมซับบรรยากาศเทศกาลเหมือนในอนิเมะ มีแผงขายอาหารมากมาย ทั้งทาโกะยากิ, ยากิโซบะ, น้ำแข็งใส, เบียร์, กล้วยชุบช็อกโกแลต ฯลฯ<br><span style="color:#ff007f; font-weight:bold;">💰 ค่าใช้จ่ายสถานที่: ราคาอาหารประมาณ 500-1,000 เยน/อย่าง</span></p></div></div>
-        
         <div class="item"><div class="time">19:00</div><div class="content"><h3><span class="pin">📍</span>เริ่มการแสดงดอกไม้ไฟ 🎆</h3><p>เพลิดเพลินกับการแสดงพลุสุดอลังการริมชายหาดโอกินาว่า<br><span style="color:#ff007f; font-weight:bold;">💰 ค่าใช้จ่ายสถานที่: รวมในค่าตั๋วแล้ว</span></p></div></div>
-        
         <div class="item"><div class="time">20:00</div><div class="content"><h3><span class="pin">📍</span>จบการแสดงดอกไม้ไฟ</h3><p>งานเลิกและเดินทางกลับเข้าเมืองนาฮะด้วยรถบัส<br><span style="color:#ff007f; font-weight:bold;">💰 ค่าใช้จ่ายสถานที่: ฟรี</span></p></div></div>
       </div>
 
@@ -710,12 +940,11 @@
         </div>
       </div>
     </section>
-
   </div>
 </div>
 
 <footer>
-  🌍 Trip Planner | ออกแบบแพลนเดินทางเที่ยวจีน ญี่ปุ่น และเทศกาลดอกไม้ไฟโอกินาว่า
+  🌍 Trip Planner | ออกแบบแพลนเดินทางเที่ยวจีน โอกินาว่า และญี่ปุ่น (ฉบับรถไฟ & โรดทริป)
 </footer>
 
 <script>
